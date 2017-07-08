@@ -1,5 +1,10 @@
-$color: blue;
+$color: lemonchiffon;
 
 html, body {
     background-color: $color;
+    width: 100%;
+}
+
+.panel-block {
+    color: white;
 }

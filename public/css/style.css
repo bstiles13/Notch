@@ -1,2 +1,6 @@
 html, body {
-  background-color: blue; }
+  background-color: lemonchiffon;
+  width: 100%; }
+
+.panel-block {
+  color: white; }
