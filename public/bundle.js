@@ -22476,66 +22476,81 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Sidebar = function (_React$Component) {
     _inherits(Sidebar, _React$Component);
 
-    function Sidebar() {
+    _createClass(Sidebar, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'aside',
+                { className: 'menu', style: style.barStyle },
+                this.options()
+            );
+        }
+    }]);
+
+    function Sidebar(props) {
         _classCallCheck(this, Sidebar);
 
-        return _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
+
+        _this.state = {
+            category: 'categories'
+        };
+        _this.options = _this.options.bind(_this);
+        return _this;
     }
 
     _createClass(Sidebar, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "nav",
-                { className: "panel", style: style.barStyle },
-                _react2.default.createElement(
-                    "p",
-                    { className: "panel-heading" },
-                    "Categories"
-                ),
-                _react2.default.createElement(
-                    "a",
-                    { className: "panel-block" },
+        key: 'options',
+        value: function options() {
+            return Object.keys(categories).map(function (key) {
+                var array = categories[key].map(function (index) {
+                    return _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                            'a',
+                            null,
+                            index
+                        )
+                    );
+                });
+                return _react2.default.createElement(
+                    'div',
+                    null,
                     _react2.default.createElement(
-                        "span",
-                        { className: "panel-icon" },
-                        _react2.default.createElement("i", { className: "fa fa-book" })
+                        'p',
+                        { className: 'menu-label' },
+                        key
                     ),
-                    "Outdoors"
-                ),
-                _react2.default.createElement(
-                    "a",
-                    { className: "panel-block" },
                     _react2.default.createElement(
-                        "span",
-                        { className: "panel-icon" },
-                        _react2.default.createElement("i", { className: "fa fa-book" })
+                        'ul',
+                        { className: 'menu-list' },
+                        array
                     ),
-                    "Sports"
-                ),
-                _react2.default.createElement(
-                    "a",
-                    { className: "panel-block" },
-                    _react2.default.createElement(
-                        "span",
-                        { className: "panel-icon" },
-                        _react2.default.createElement("i", { className: "fa fa-book" })
-                    ),
-                    "Shows"
-                )
-            );
+                    _react2.default.createElement('br', null)
+                );
+            });
         }
     }]);
 
     return Sidebar;
 }(_react2.default.Component);
 
+var categories = {
+    Outdoors: ['Hiking', 'Surfing', 'Boating', 'Skiing', 'Other'],
+    Sports: ['Recreational', 'Professional', 'Other'],
+    Shows: ['Broadway', 'Comedy', 'Other'],
+    Art: ['Museum', 'Gala', 'Other'],
+    Animals: ['Zoo', 'Aquarium', 'Nature Watching', 'Other']
+};
+
 var style = {
     barStyle: {
         'position': 'fixed',
         'width': '15%',
         'height': '100%',
-        'backgroundColor': 'dimgray'
+        'backgroundColor': 'dimgray',
+        'overflow': 'scroll'
     }
 };
 
