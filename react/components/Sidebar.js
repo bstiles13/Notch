@@ -16,6 +16,7 @@ class Sidebar extends React.Component {
         this.options = this.options.bind(this);
     }
     options() {
+        var categories = this.props.categories;
         return Object.keys(categories).map(function(key) {
             var array = categories[key].map(function(index) {
                 return <li><a>{index}</a></li>;
@@ -26,14 +27,6 @@ class Sidebar extends React.Component {
             </ul><br/></div>;
         });
     }
-}
-
-var categories = {
-    Outdoors: ['Hiking', 'Surfing', 'Boating', 'Skiing', 'Other'],
-    Sports: ['Recreational', 'Professional', 'Other'],
-    Shows: ['Broadway', 'Comedy', 'Other'],
-    Art: ['Museum', 'Gala', 'Other'],
-    Animals: ['Zoo', 'Aquarium', 'Nature Watching', 'Other']
 }
 
 var style = {

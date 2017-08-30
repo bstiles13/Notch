@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
 var port = process.ENV || 8080;
 
@@ -12,5 +13,5 @@ app.listen(port, function() {
 })
 
 app.get('/', function(req, res) {
-    res.send('./public/index.html');
+    res.send(path.join(__dirname + './public/index.html'));
 })

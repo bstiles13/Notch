@@ -15,6 +15,7 @@ html, body {
 
 #main-container {
     display: flex;
+    justify-content: space-around;
     height: 100%;
     width: 100%;
     padding-left: 300px;
@@ -23,4 +24,9 @@ html, body {
 #mapid {
     height: 500px;
     width: 500px;
+}
+
+#map-container, #form-container {
+    flex: 1;
+    padding: 20px;
 }
