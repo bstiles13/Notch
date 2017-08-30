@@ -7,7 +7,7 @@ class Sidebar extends React.Component {
         this.state = {
             category: 'categories'
         };
-        this.options = this.options.bind(this);
+        this.showMenu = this.showMenu.bind(this);
     }
 
     showMenu() {

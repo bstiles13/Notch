@@ -8,11 +8,27 @@ class Main extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {message: 'Hello'};
+        this.state = {
+            notch: {
+                lat: -0.777259,
+                lng: -91.142578
+            }
+        };
     }
-    
-    componentDidMount() {
-        this.setState({message: 'Bye'});
+
+    componentDidMount() {}
+
+    componentDidUpdate() {
+        console.log(this.state.notch);
+    }
+
+    createNotch(lat, lng) {
+        this.setState({
+            notch: {
+                lat: lat,
+                lng: lng
+            }
+        })
     }
 
     render() {
@@ -21,11 +37,10 @@ class Main extends React.Component {
                 <Sidebar categories={categories} />
                 <div id='main-container'>
                     <div id='map-container'>
-                        <Map />
+                        <Map createNotch={this.createNotch.bind(this)}/>
                     </div>
                     <div id='form-container'>
-                        <Form categories={categories} />
-                        <h1>{this.state.message} world!</h1>
+                        <Form categories={categories} notch={this.state.notch}/>
                     </div>
                 </div>
             </div>

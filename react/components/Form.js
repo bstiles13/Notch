@@ -9,8 +9,8 @@ class Form extends React.Component {
 
     options() {
         var categories = this.props.categories;
-        return Object.keys(categories).map(function(key) {
-            return categories[key].map(function(index) {
+        return Object.keys(categories).map(function (key) {
+            return categories[key].map(function (index) {
                 return <option>{key} | {index}</option>;
             })
         });
@@ -20,40 +20,30 @@ class Form extends React.Component {
         return (
             <div>
                 <h2>Add a notch</h2>
-                <div className="field">
-                <label className="label">Category</label>
-                <p className="control">
-                    <span className="select">
-                    <select>
-                        <option>Select dropdown</option>
+                <div className="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input type="text" className="form-control" id="latitude" value={this.props.notch.lat} disabled/>
+                </div>
+                <div className="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input type="text" className="form-control" id="longitude" value={this.props.notch.lng} disabled/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="exampleSelect1">Category</label>
+                    <select className="form-control" id="exampleSelect1">
+                        <option> Choose </option>
                         {this.options()}
                     </select>
-                    </span>
-                </p>
                 </div>
-
-                <div className="field">
-                <label className="label">Headline</label>
-                <p className="control">
-                    <input className="input" type="text" placeholder="Text input" />
-                </p>
+                <div className="form-group">
+                    <label for="headline">Headline</label>
+                    <input type="text" className="form-control" id="headline" placeholder="Title" />
                 </div>
-
-                <div className="field">
-                <label className="label">The experience</label>
-                <p className="control">
-                    <textarea className="textarea" placeholder="Textarea"></textarea>
-                </p>
+                <div className="form-group">
+                    <label for="summary">The experience</label>
+                    <textarea className="form-control" id="summary" rows="3"></textarea>
                 </div>
-
-                <div className="field is-grouped">
-                <p className="control">
-                    <button className="button is-primary">Submit</button>
-                </p>
-                <p className="control">
-                    <button className="button is-link">Cancel</button>
-                </p>
-                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </div>
         )
     }

@@ -22446,14 +22446,32 @@ var Main = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-        _this.state = { message: 'Hello' };
+        _this.state = {
+            notch: {
+                lat: -0.777259,
+                lng: -91.142578
+            }
+        };
         return _this;
     }
 
     _createClass(Main, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.setState({ message: 'Bye' });
+        value: function componentDidMount() {}
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+            console.log(this.state.notch);
+        }
+    }, {
+        key: 'createNotch',
+        value: function createNotch(lat, lng) {
+            this.setState({
+                notch: {
+                    lat: lat,
+                    lng: lng
+                }
+            });
         }
     }, {
         key: 'render',
@@ -22468,18 +22486,12 @@ var Main = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { id: 'map-container' },
-                        _react2.default.createElement(_Map2.default, null)
+                        _react2.default.createElement(_Map2.default, { createNotch: this.createNotch.bind(this) })
                     ),
                     _react2.default.createElement(
                         'div',
                         { id: 'form-container' },
-                        _react2.default.createElement(_Form2.default, { categories: categories }),
-                        _react2.default.createElement(
-                            'h1',
-                            null,
-                            this.state.message,
-                            ' world!'
-                        )
+                        _react2.default.createElement(_Form2.default, { categories: categories, notch: this.state.notch })
                     )
                 )
             );
@@ -22528,17 +22540,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Sidebar = function (_React$Component) {
     _inherits(Sidebar, _React$Component);
 
-    _createClass(Sidebar, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'aside',
-                { className: 'menu', style: style.barStyle },
-                this.options()
-            );
-        }
-    }]);
-
     function Sidebar(props) {
         _classCallCheck(this, Sidebar);
 
@@ -22547,13 +22548,13 @@ var Sidebar = function (_React$Component) {
         _this.state = {
             category: 'categories'
         };
-        _this.options = _this.options.bind(_this);
+        _this.showMenu = _this.showMenu.bind(_this);
         return _this;
     }
 
     _createClass(Sidebar, [{
-        key: 'options',
-        value: function options() {
+        key: 'showMenu',
+        value: function showMenu() {
             var categories = this.props.categories;
             return Object.keys(categories).map(function (key) {
                 var array = categories[key].map(function (index) {
@@ -22583,6 +22584,15 @@ var Sidebar = function (_React$Component) {
                     _react2.default.createElement('br', null)
                 );
             });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'aside',
+                { className: 'menu', style: style.barStyle },
+                this.showMenu()
+            );
         }
     }]);
 
@@ -22636,9 +22646,7 @@ var Map = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 
-        _this.state = {
-            map: null
-        };
+        _this.state = {};
         _this.onMapClick = _this.onMapClick.bind(_this);
         return _this;
     }
@@ -22646,23 +22654,24 @@ var Map = function (_React$Component) {
     _createClass(Map, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            mymap = L.map('mapid').setView([51.505, -0.09], 13);
+            mymap = L.map('mapid').setView([-0.777259, -91.142578], 8);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18,
                 id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1IjoiYnN0aWxlczEzIiwiYSI6ImNqNHZ4bnMweDBzN20ycXA4MGJodXltcjIifQ.mA6saUO0Ucgx9aOWYRaxqQ'
             }).addTo(mymap);
-            var marker = L.marker([51.5, -0.09]).addTo(mymap);
+            var marker = L.marker([-0.777259, -91.142578]).addTo(mymap);
             mymap.on('dblclick', this.onMapClick);
         }
     }, {
         key: 'onMapClick',
         value: function onMapClick(e) {
             // alert("You clicked the map at " + e.latlng);
-            var popup = L.popup();
             var lat = e.latlng.lat;
             var lng = e.latlng.lng;
+            this.props.createNotch(lat, lng);
+            var popup = L.popup();
             popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() + "<br/><button data-lat=" + lat + " data-lng=" + lng + ">Save</button>").openOn(mymap);
         }
     }, {
@@ -22705,98 +22714,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Form = function (_React$Component) {
     _inherits(Form, _React$Component);
 
-    _createClass(Form, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "div",
-                null,
-                _react2.default.createElement(
-                    "h2",
-                    null,
-                    "Add a notch"
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "field" },
-                    _react2.default.createElement(
-                        "label",
-                        { className: "label" },
-                        "Category"
-                    ),
-                    _react2.default.createElement(
-                        "p",
-                        { className: "control" },
-                        _react2.default.createElement(
-                            "span",
-                            { className: "select" },
-                            _react2.default.createElement(
-                                "select",
-                                null,
-                                _react2.default.createElement(
-                                    "option",
-                                    null,
-                                    "Select dropdown"
-                                ),
-                                this.options()
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "field" },
-                    _react2.default.createElement(
-                        "label",
-                        { className: "label" },
-                        "Headline"
-                    ),
-                    _react2.default.createElement(
-                        "p",
-                        { className: "control" },
-                        _react2.default.createElement("input", { className: "input", type: "text", placeholder: "Text input" })
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "field" },
-                    _react2.default.createElement(
-                        "label",
-                        { className: "label" },
-                        "The experience"
-                    ),
-                    _react2.default.createElement(
-                        "p",
-                        { className: "control" },
-                        _react2.default.createElement("textarea", { className: "textarea", placeholder: "Textarea" })
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "field is-grouped" },
-                    _react2.default.createElement(
-                        "p",
-                        { className: "control" },
-                        _react2.default.createElement(
-                            "button",
-                            { className: "button is-primary" },
-                            "Submit"
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "p",
-                        { className: "control" },
-                        _react2.default.createElement(
-                            "button",
-                            { className: "button is-link" },
-                            "Cancel"
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
     function Form(props) {
         _classCallCheck(this, Form);
 
@@ -22821,6 +22738,83 @@ var Form = function (_React$Component) {
                     );
                 });
             });
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "h2",
+                    null,
+                    "Add a notch"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "form-group" },
+                    _react2.default.createElement(
+                        "label",
+                        { "for": "latitude" },
+                        "Latitude"
+                    ),
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "latitude", value: this.props.notch.lat, disabled: true })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "form-group" },
+                    _react2.default.createElement(
+                        "label",
+                        { "for": "longitude" },
+                        "Longitude"
+                    ),
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "longitude", value: this.props.notch.lng, disabled: true })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "form-group" },
+                    _react2.default.createElement(
+                        "label",
+                        { htmlFor: "exampleSelect1" },
+                        "Category"
+                    ),
+                    _react2.default.createElement(
+                        "select",
+                        { className: "form-control", id: "exampleSelect1" },
+                        _react2.default.createElement(
+                            "option",
+                            null,
+                            " Choose "
+                        ),
+                        this.options()
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "form-group" },
+                    _react2.default.createElement(
+                        "label",
+                        { "for": "headline" },
+                        "Headline"
+                    ),
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "headline", placeholder: "Title" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "form-group" },
+                    _react2.default.createElement(
+                        "label",
+                        { "for": "summary" },
+                        "The experience"
+                    ),
+                    _react2.default.createElement("textarea", { className: "form-control", id: "summary", rows: "3" })
+                ),
+                _react2.default.createElement(
+                    "button",
+                    { type: "submit", className: "btn btn-primary" },
+                    "Submit"
+                )
+            );
         }
     }]);
 
