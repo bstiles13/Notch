@@ -1,13 +1,7 @@
 import React from 'react';
 
 class Sidebar extends React.Component {
-    render() {
-        return (
-            <aside className="menu" style={style.barStyle}>
-                {this.options()}
-            </aside>
-        )
-    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +9,8 @@ class Sidebar extends React.Component {
         };
         this.options = this.options.bind(this);
     }
-    options() {
+
+    showMenu() {
         var categories = this.props.categories;
         return Object.keys(categories).map(function(key) {
             var array = categories[key].map(function(index) {
@@ -26,6 +21,14 @@ class Sidebar extends React.Component {
                 {array}
             </ul><br/></div>;
         });
+    }
+
+    render() {
+        return (
+            <aside className="menu" style={style.barStyle}>
+                {this.showMenu()}
+            </aside>
+        )
     }
 }
 

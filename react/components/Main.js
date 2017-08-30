@@ -10,6 +10,7 @@ class Main extends React.Component {
         super(props);
         this.state = {message: 'Hello'};
     }
+    
     componentDidMount() {
         this.setState({message: 'Bye'});
     }

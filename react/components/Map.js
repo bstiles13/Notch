@@ -3,6 +3,7 @@ import React from 'react';
 var mymap;
 
 class Map extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +23,7 @@ class Map extends React.Component {
         var marker = L.marker([51.5, -0.09]).addTo(mymap);
         mymap.on('dblclick', this.onMapClick);
     }
+    
     onMapClick(e) {
         // alert("You clicked the map at " + e.latlng);
         var popup = L.popup();

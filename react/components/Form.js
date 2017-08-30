@@ -1,6 +1,21 @@
 import React from 'react';
 
 class Form extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.options = this.options.bind(this);
+    }
+
+    options() {
+        var categories = this.props.categories;
+        return Object.keys(categories).map(function(key) {
+            return categories[key].map(function(index) {
+                return <option>{key} | {index}</option>;
+            })
+        });
+    }
+
     render() {
         return (
             <div>
@@ -41,20 +56,6 @@ class Form extends React.Component {
                 </div>
             </div>
         )
-    }
-
-    constructor(props) {
-        super(props);
-        this.options = this.options.bind(this);
-    }
-
-    options() {
-        var categories = this.props.categories;
-        return Object.keys(categories).map(function(key) {
-            return categories[key].map(function(index) {
-                return <option>{key} | {index}</option>;
-            })
-        });
     }
 }
 
