@@ -21,27 +21,27 @@ class Form extends React.Component {
             <div>
                 <h2>Add a notch</h2>
                 <div className="form-group">
-                    <label for="latitude">Latitude</label>
-                    <input type="text" className="form-control" id="latitude" value={this.props.notch.lat} disabled/>
+                    <label htmlFor="latitude">Latitude</label>
+                    <input type="text" className="form-control" id="latitude" value={this.props.latlng.lat} disabled/>
                 </div>
                 <div className="form-group">
-                    <label for="longitude">Longitude</label>
-                    <input type="text" className="form-control" id="longitude" value={this.props.notch.lng} disabled/>
+                    <label htmlFor="longitude">Longitude</label>
+                    <input type="text" className="form-control" id="longitude" value={this.props.latlng.lng} disabled/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleSelect1">Category</label>
-                    <select className="form-control" id="exampleSelect1">
+                    <select className="form-control" id="exampleSelect1" name="newCategory" onChange={this.props.setNotch}>
                         <option> Choose </option>
                         {this.options()}
                     </select>
                 </div>
                 <div className="form-group">
-                    <label for="headline">Headline</label>
-                    <input type="text" className="form-control" id="headline" placeholder="Title" />
+                    <label htmlFor="headline">Headline</label>
+                    <input type="text" className="form-control" id="headline" placeholder="Title" name="newTitle" onChange={this.props.setNotch}/>
                 </div>
                 <div className="form-group">
-                    <label for="summary">The experience</label>
-                    <textarea className="form-control" id="summary" rows="3"></textarea>
+                    <label htmlFor="summary">The experience</label>
+                    <textarea className="form-control" id="summary" rows="3" name="newSummary" onChange={this.props.setNotch}></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </div>

@@ -9,25 +9,42 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            notch: {
+            latlng: {
                 lat: -0.777259,
-                lng: -91.142578
-            }
+                lng: -91.142578,
+            },
+            newCategory: '',
+            newTitle: '',
+            newSummary: ''
+
         };
+        this.setTitle = this.setTitle.bind(this);
     }
 
-    componentDidMount() {}
+    componentDidMount() { }
 
     componentDidUpdate() {
-        console.log(this.state.notch);
+        console.log(this.state);
     }
 
-    createNotch(lat, lng) {
+    setLocation(lat, lng) {
         this.setState({
-            notch: {
+            latlng: {
                 lat: lat,
                 lng: lng
             }
+        })
+    }
+
+    setNotch(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    setTitle(event) {
+        this.setState({
+            newTitle: event.target.value
         })
     }
 
@@ -37,10 +54,10 @@ class Main extends React.Component {
                 <Sidebar categories={categories} />
                 <div id='main-container'>
                     <div id='map-container'>
-                        <Map createNotch={this.createNotch.bind(this)}/>
+                        <Map setLocation={this.setLocation.bind(this)} />
                     </div>
                     <div id='form-container'>
-                        <Form categories={categories} notch={this.state.notch}/>
+                        <Form categories={categories} latlng={this.state.latlng} setNotch={this.setNotch.bind(this)} setTitle={this.setTitle.bind(this)} />
                     </div>
                 </div>
             </div>

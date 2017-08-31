@@ -8,9 +8,26 @@ class Map extends React.Component {
         super(props);
         this.state = {};
         this.onMapClick = this.onMapClick.bind(this);
+        // this.makeMap = this.makeMap.bind(this);
     }
 
     componentDidMount() {
+        this.makeMap();
+    }
+
+    onMapClick(e) {
+        // alert("You clicked the map at " + e.latlng);
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;        
+        this.props.setLocation(lat, lng);        
+        var popup = L.popup();
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString() + "<br/><button data-lat=" + lat + " data-lng=" + lng + ">Save</button>")
+            .openOn(mymap);
+    }
+
+    makeMap() {
         mymap = L.map('mapid').setView([-0.777259, -91.142578], 8);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -20,18 +37,6 @@ class Map extends React.Component {
         }).addTo(mymap);
         var marker = L.marker([-0.777259, -91.142578]).addTo(mymap);
         mymap.on('dblclick', this.onMapClick);
-    }
-
-    onMapClick(e) {
-        // alert("You clicked the map at " + e.latlng);
-        var lat = e.latlng.lat;
-        var lng = e.latlng.lng;        
-        this.props.createNotch(lat, lng);        
-        var popup = L.popup();
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString() + "<br/><button data-lat=" + lat + " data-lng=" + lng + ">Save</button>")
-            .openOn(mymap);
     }
 
     render() {

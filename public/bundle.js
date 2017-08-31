@@ -22432,6 +22432,8 @@ var _Form2 = _interopRequireDefault(_Form);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -22447,11 +22449,16 @@ var Main = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
         _this.state = {
-            notch: {
+            latlng: {
                 lat: -0.777259,
                 lng: -91.142578
-            }
+            },
+            newCategory: '',
+            newTitle: '',
+            newSummary: ''
+
         };
+        _this.setTitle = _this.setTitle.bind(_this);
         return _this;
     }
 
@@ -22461,16 +22468,28 @@ var Main = function (_React$Component) {
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
-            console.log(this.state.notch);
+            console.log(this.state);
         }
     }, {
-        key: 'createNotch',
-        value: function createNotch(lat, lng) {
+        key: 'setLocation',
+        value: function setLocation(lat, lng) {
             this.setState({
-                notch: {
+                latlng: {
                     lat: lat,
                     lng: lng
                 }
+            });
+        }
+    }, {
+        key: 'setNotch',
+        value: function setNotch(event) {
+            this.setState(_defineProperty({}, event.target.name, event.target.value));
+        }
+    }, {
+        key: 'setTitle',
+        value: function setTitle(event) {
+            this.setState({
+                newTitle: event.target.value
             });
         }
     }, {
@@ -22486,12 +22505,12 @@ var Main = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { id: 'map-container' },
-                        _react2.default.createElement(_Map2.default, { createNotch: this.createNotch.bind(this) })
+                        _react2.default.createElement(_Map2.default, { setLocation: this.setLocation.bind(this) })
                     ),
                     _react2.default.createElement(
                         'div',
                         { id: 'form-container' },
-                        _react2.default.createElement(_Form2.default, { categories: categories, notch: this.state.notch })
+                        _react2.default.createElement(_Form2.default, { categories: categories, latlng: this.state.latlng, setNotch: this.setNotch.bind(this), setTitle: this.setTitle.bind(this) })
                     )
                 )
             );
@@ -22648,12 +22667,28 @@ var Map = function (_React$Component) {
 
         _this.state = {};
         _this.onMapClick = _this.onMapClick.bind(_this);
+        // this.makeMap = this.makeMap.bind(this);
         return _this;
     }
 
     _createClass(Map, [{
-        key: 'componentDidMount',
+        key: "componentDidMount",
         value: function componentDidMount() {
+            this.makeMap();
+        }
+    }, {
+        key: "onMapClick",
+        value: function onMapClick(e) {
+            // alert("You clicked the map at " + e.latlng);
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+            this.props.setLocation(lat, lng);
+            var popup = L.popup();
+            popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() + "<br/><button data-lat=" + lat + " data-lng=" + lng + ">Save</button>").openOn(mymap);
+        }
+    }, {
+        key: "makeMap",
+        value: function makeMap() {
             mymap = L.map('mapid').setView([-0.777259, -91.142578], 8);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -22665,19 +22700,9 @@ var Map = function (_React$Component) {
             mymap.on('dblclick', this.onMapClick);
         }
     }, {
-        key: 'onMapClick',
-        value: function onMapClick(e) {
-            // alert("You clicked the map at " + e.latlng);
-            var lat = e.latlng.lat;
-            var lng = e.latlng.lng;
-            this.props.createNotch(lat, lng);
-            var popup = L.popup();
-            popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() + "<br/><button data-lat=" + lat + " data-lng=" + lng + ">Save</button>").openOn(mymap);
-        }
-    }, {
-        key: 'render',
+        key: "render",
         value: function render() {
-            return _react2.default.createElement('div', { id: 'mapid' });
+            return _react2.default.createElement("div", { id: "mapid" });
         }
     }]);
 
@@ -22755,20 +22780,20 @@ var Form = function (_React$Component) {
                     { className: "form-group" },
                     _react2.default.createElement(
                         "label",
-                        { "for": "latitude" },
+                        { htmlFor: "latitude" },
                         "Latitude"
                     ),
-                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "latitude", value: this.props.notch.lat, disabled: true })
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "latitude", value: this.props.latlng.lat, disabled: true })
                 ),
                 _react2.default.createElement(
                     "div",
                     { className: "form-group" },
                     _react2.default.createElement(
                         "label",
-                        { "for": "longitude" },
+                        { htmlFor: "longitude" },
                         "Longitude"
                     ),
-                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "longitude", value: this.props.notch.lng, disabled: true })
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "longitude", value: this.props.latlng.lng, disabled: true })
                 ),
                 _react2.default.createElement(
                     "div",
@@ -22780,7 +22805,7 @@ var Form = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         "select",
-                        { className: "form-control", id: "exampleSelect1" },
+                        { className: "form-control", id: "exampleSelect1", name: "newCategory", onChange: this.props.setNotch },
                         _react2.default.createElement(
                             "option",
                             null,
@@ -22794,20 +22819,20 @@ var Form = function (_React$Component) {
                     { className: "form-group" },
                     _react2.default.createElement(
                         "label",
-                        { "for": "headline" },
+                        { htmlFor: "headline" },
                         "Headline"
                     ),
-                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "headline", placeholder: "Title" })
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "headline", placeholder: "Title", name: "newTitle", onChange: this.props.setNotch })
                 ),
                 _react2.default.createElement(
                     "div",
                     { className: "form-group" },
                     _react2.default.createElement(
                         "label",
-                        { "for": "summary" },
+                        { htmlFor: "summary" },
                         "The experience"
                     ),
-                    _react2.default.createElement("textarea", { className: "form-control", id: "summary", rows: "3" })
+                    _react2.default.createElement("textarea", { className: "form-control", id: "summary", rows: "3", name: "newSummary", onChange: this.props.setNotch })
                 ),
                 _react2.default.createElement(
                     "button",
