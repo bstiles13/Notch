@@ -20,6 +20,8 @@ class Main extends React.Component {
 
         };
         this.setTitle = this.setTitle.bind(this);
+        this.setLocation = this.setLocation.bind(this);
+        this.setMarker = this.setMarker.bind(this);
     }
 
     componentDidMount() { }
@@ -29,6 +31,7 @@ class Main extends React.Component {
     }
 
     setLocation(lat, lng) {
+        console.log('setting location');
         this.setState({
             latlng: {
                 lat: lat,
@@ -49,14 +52,24 @@ class Main extends React.Component {
         })
     }
 
+    setMarker(lat, lng) {
+        console.log('set marker');
+        this.setState({
+            latlng: {
+                lat: lat,
+                lng: lng
+            }
+        })
+    }
+
     render() {
         return (
             <div>
                 <Sidebar categories={categories} />
                 <div id='main-container'>
                     <div id='map-container'>
-                        <Map setLocation={this.setLocation.bind(this)} />
-                        <Google />
+                        <Map setLocation={this.setLocation} latlng={this.state.latlng}/>
+                        <Google setLocation={this.setLocation} setMarker={this.setMarker.bind(this)} />
                     </div>
                     <div id='form-container'>
                         <Form categories={categories} latlng={this.state.latlng} setNotch={this.setNotch.bind(this)} setTitle={this.setTitle.bind(this)} />

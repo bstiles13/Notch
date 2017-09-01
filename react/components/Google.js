@@ -84,7 +84,15 @@ class Google extends React.Component {
         let results = this.state.results;
         return results.map(place => {
             if (place.name) {
-                return (<div> {place.name} </div>)
+                return (
+                    <li className="list-group-item list-group-item-action flex-column align-items-start">
+                        <div className="d-flex w-100 justify-content-between">
+                            <h5 className="mb-1">{place.name}</h5>
+                            <button value={place.place_id} className="btn btn-sm" onClick={this.sendToMap.bind(this)}>Select</button>
+                        </div>
+                        <small>{place.vicinity ? place.vicinity : place.types[0].replace("_", " ")}</small>
+                    </li>
+                )
             } else {
                 return (<div> {place} </div>)
             }
@@ -97,7 +105,7 @@ class Google extends React.Component {
         return autocomplete.map(city => {
             if (city.description) {
                 return (
-                    <option id={city.place_id}> {city.description} </option>
+                    <option> {city.description} </option>
                 )
             } else {
                 return (
@@ -107,19 +115,28 @@ class Google extends React.Component {
         })
     }
 
-    getLatLng(event) {
+    sendToMap(event) {
         console.log(event.target.value);
+        let id = event.target.value;
+        axios.post('/placedetails', {id: id}).then(data => {
+            let location = data.data.result.geometry.location;
+            let lat = location.lat;
+            let lng = location.lng;
+            console.log(lat);
+            console.log(lng);
+            this.props.setLocation(lat, lng);
+        })
     }
 
     render() {
         return (
             <div>
                 <div id='search'>
-                    <div className="form-group">
+                    <div className="form-group search-child">
                         <label htmlFor="keyword">Keyword</label>
                         <input type="text" className="form-control" id="keyword" placeholder="Find a place" onKeyPress={this.changePlace} />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group search-child">
                         <label htmlFor="autocomplete">City</label>
                         <input className="form-control" id="autocomplete" list="browsers" name="myBrowser" placeholder='South Park, CO, United States' onChange={this.changeCity} />
                         <datalist id="browsers">
@@ -127,9 +144,9 @@ class Google extends React.Component {
                         </datalist>
                     </div>
                 </div>
-                <div id='results'>
+                <ul className='list-group' id='results'>
                     {this.showResults()}
-                </div>
+                </ul>
             </div>
         )
     }

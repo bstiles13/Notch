@@ -23142,6 +23142,8 @@ var Main = function (_React$Component) {
 
         };
         _this.setTitle = _this.setTitle.bind(_this);
+        _this.setLocation = _this.setLocation.bind(_this);
+        _this.setMarker = _this.setMarker.bind(_this);
         return _this;
     }
 
@@ -23156,6 +23158,7 @@ var Main = function (_React$Component) {
     }, {
         key: 'setLocation',
         value: function setLocation(lat, lng) {
+            console.log('setting location');
             this.setState({
                 latlng: {
                     lat: lat,
@@ -23176,6 +23179,17 @@ var Main = function (_React$Component) {
             });
         }
     }, {
+        key: 'setMarker',
+        value: function setMarker(lat, lng) {
+            console.log('set marker');
+            this.setState({
+                latlng: {
+                    lat: lat,
+                    lng: lng
+                }
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -23188,8 +23202,8 @@ var Main = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { id: 'map-container' },
-                        _react2.default.createElement(_Map2.default, { setLocation: this.setLocation.bind(this) }),
-                        _react2.default.createElement(_Google2.default, null)
+                        _react2.default.createElement(_Map2.default, { setLocation: this.setLocation, latlng: this.state.latlng }),
+                        _react2.default.createElement(_Google2.default, { setLocation: this.setLocation, setMarker: this.setMarker.bind(this) })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -23351,7 +23365,7 @@ var Map = function (_React$Component) {
 
         _this.state = {};
         _this.onMapClick = _this.onMapClick.bind(_this);
-        // this.makeMap = this.makeMap.bind(this);
+        _this.makeMap = _this.makeMap.bind(_this);
         return _this;
     }
 
@@ -23361,6 +23375,15 @@ var Map = function (_React$Component) {
             this.makeMap();
         }
     }, {
+        key: "componentDidUpdate",
+        value: function componentDidUpdate() {
+            var newLat = this.props.latlng.lat;
+            var newLng = this.props.latlng.lng;
+            mymap.panTo(new L.LatLng(newLat, newLng));
+            mymap.removeLayer(marker);
+            marker = L.marker([newLat, newLng]).addTo(mymap);
+        }
+    }, {
         key: "onMapClick",
         value: function onMapClick(e) {
             // alert("You clicked the map at " + e.latlng);
@@ -23368,19 +23391,29 @@ var Map = function (_React$Component) {
             var lng = e.latlng.lng;
             this.props.setLocation(lat, lng);
             var popup = L.popup();
-            popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() + "<br/><button data-lat=" + lat + " data-lng=" + lng + ">Save</button>").openOn(mymap);
+            popup.setLatLng({ lat: lat + 0.01, lng: lng }).setContent("You clicked the map at " + e.latlng.toString() + "<br/><button data-lat=" + lat + " data-lng=" + lng + ">Save</button>").openOn(mymap);
         }
     }, {
         key: "makeMap",
         value: function makeMap() {
-            mymap = L.map('mapid').setView([-0.777259, -91.142578], 8);
+            console.log('Prop' + this.props.latlng.lat);
+            console.log('Prop' + this.props.latlng.lng);
+            var lat = this.props.latlng.lat;
+            var lng = this.props.latlng.lng;
+            mymap = new L.map('mapid').setView([lat, lng], 8);
+            mymap.doubleClickZoom.disable();
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18,
-                id: 'mapbox.streets',
+                id: 'mapbox.emerald',
                 accessToken: 'pk.eyJ1IjoiYnN0aWxlczEzIiwiYSI6ImNqNHZ4bnMweDBzN20ycXA4MGJodXltcjIifQ.mA6saUO0Ucgx9aOWYRaxqQ'
             }).addTo(mymap);
-            var marker = L.marker([-0.777259, -91.142578]).addTo(mymap);
+            marker = L.marker([-0.777259, -91.142578]).addTo(mymap);
+            // var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
+            //     denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
+            //     aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
+            //     golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+            //     var cities = L.layerGroup([littleton, denver, aurora, golden]).addTo(mymap);
             mymap.on('dblclick', this.onMapClick);
         }
     }, {
@@ -23392,6 +23425,8 @@ var Map = function (_React$Component) {
 
     return Map;
 }(_react2.default.Component);
+
+var marker;
 
 exports.default = Map;
 
@@ -23433,99 +23468,99 @@ var Form = function (_React$Component) {
     }
 
     _createClass(Form, [{
-        key: 'options',
+        key: "options",
         value: function options() {
             var categories = this.props.categories;
             return Object.keys(categories).map(function (key) {
                 return categories[key].map(function (index) {
                     return _react2.default.createElement(
-                        'option',
+                        "option",
                         null,
                         key,
-                        ' | ',
+                        " | ",
                         index
                     );
                 });
             });
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(
-                    'h2',
+                    "h2",
                     null,
-                    'Add a notch'
+                    "Add a notch"
                 ),
                 _react2.default.createElement(
-                    'div',
-                    { id: 'location' },
+                    "div",
+                    { className: "form-group" },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'form-group' },
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'latitude' },
-                            'Latitude'
-                        ),
-                        _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'latitude', value: this.props.latlng.lat, disabled: true })
+                        "label",
+                        { htmlFor: "exampleSelect1" },
+                        "Category"
                     ),
                     _react2.default.createElement(
-                        'div',
-                        { className: 'form-group' },
+                        "select",
+                        { className: "form-control", id: "exampleSelect1", name: "newCategory", onChange: this.props.setNotch },
                         _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'longitude' },
-                            'Longitude'
-                        ),
-                        _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'longitude', value: this.props.latlng.lng, disabled: true })
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
-                    _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'exampleSelect1' },
-                        'Category'
-                    ),
-                    _react2.default.createElement(
-                        'select',
-                        { className: 'form-control', id: 'exampleSelect1', name: 'newCategory', onChange: this.props.setNotch },
-                        _react2.default.createElement(
-                            'option',
+                            "option",
                             null,
-                            ' Choose '
+                            " Choose "
                         ),
                         this.options()
                     )
                 ),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
+                    "div",
+                    { className: "form-group" },
                     _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'title' },
-                        'Headline'
+                        "label",
+                        { htmlFor: "title" },
+                        "Headline"
                     ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'title', placeholder: 'Title', name: 'newTitle', onChange: this.props.setNotch })
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "title", placeholder: "Title", name: "newTitle", onChange: this.props.setNotch })
                 ),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
+                    "div",
+                    { className: "form-group" },
                     _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'summary' },
-                        'The experience'
+                        "label",
+                        { htmlFor: "summary" },
+                        "The experience"
                     ),
-                    _react2.default.createElement('textarea', { className: 'form-control', id: 'summary', rows: '3', name: 'newSummary', onChange: this.props.setNotch })
+                    _react2.default.createElement("textarea", { className: "form-control", id: "summary", rows: "3", name: "newSummary", onChange: this.props.setNotch })
                 ),
                 _react2.default.createElement(
-                    'button',
-                    { type: 'submit', className: 'btn btn-primary' },
-                    'Submit'
+                    "div",
+                    { id: "location" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "form-group" },
+                        _react2.default.createElement(
+                            "label",
+                            { htmlFor: "latitude" },
+                            "Latitude"
+                        ),
+                        _react2.default.createElement("input", { type: "text", className: "form-control", id: "latitude", value: this.props.latlng.lat, disabled: true })
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "form-group" },
+                        _react2.default.createElement(
+                            "label",
+                            { htmlFor: "longitude" },
+                            "Longitude"
+                        ),
+                        _react2.default.createElement("input", { type: "text", className: "form-control", id: "longitude", value: this.props.latlng.lng, disabled: true })
+                    )
+                ),
+                _react2.default.createElement(
+                    "button",
+                    { type: "submit", className: "btn btn-primary" },
+                    "Submit"
                 )
             );
         }
@@ -23661,16 +23696,34 @@ var Google = function (_React$Component) {
     }, {
         key: 'showResults',
         value: function showResults() {
+            var _this4 = this;
+
             console.log(this.state.results);
             var results = this.state.results;
             return results.map(function (place) {
                 if (place.name) {
                     return _react2.default.createElement(
-                        'div',
-                        null,
-                        ' ',
-                        place.name,
-                        ' '
+                        'li',
+                        { className: 'list-group-item list-group-item-action flex-column align-items-start' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'd-flex w-100 justify-content-between' },
+                            _react2.default.createElement(
+                                'h5',
+                                { className: 'mb-1' },
+                                place.name
+                            ),
+                            _react2.default.createElement(
+                                'button',
+                                { value: place.place_id, className: 'btn btn-sm', onClick: _this4.sendToMap.bind(_this4) },
+                                'Select'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'small',
+                            null,
+                            place.vicinity ? place.vicinity : place.types[0].replace("_", " ")
+                        )
                     );
                 } else {
                     return _react2.default.createElement(
@@ -23691,7 +23744,7 @@ var Google = function (_React$Component) {
                 if (city.description) {
                     return _react2.default.createElement(
                         'option',
-                        { id: city.place_id },
+                        null,
                         ' ',
                         city.description,
                         ' '
@@ -23708,9 +23761,20 @@ var Google = function (_React$Component) {
             });
         }
     }, {
-        key: 'getLatLng',
-        value: function getLatLng(event) {
+        key: 'sendToMap',
+        value: function sendToMap(event) {
+            var _this5 = this;
+
             console.log(event.target.value);
+            var id = event.target.value;
+            _axios2.default.post('/placedetails', { id: id }).then(function (data) {
+                var location = data.data.result.geometry.location;
+                var lat = location.lat;
+                var lng = location.lng;
+                console.log(lat);
+                console.log(lng);
+                _this5.props.setLocation(lat, lng);
+            });
         }
     }, {
         key: 'render',
@@ -23723,7 +23787,7 @@ var Google = function (_React$Component) {
                     { id: 'search' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'form-group' },
+                        { className: 'form-group search-child' },
                         _react2.default.createElement(
                             'label',
                             { htmlFor: 'keyword' },
@@ -23733,7 +23797,7 @@ var Google = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'form-group' },
+                        { className: 'form-group search-child' },
                         _react2.default.createElement(
                             'label',
                             { htmlFor: 'autocomplete' },
@@ -23748,8 +23812,8 @@ var Google = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement(
-                    'div',
-                    { id: 'results' },
+                    'ul',
+                    { className: 'list-group', id: 'results' },
                     this.showResults()
                 )
             );

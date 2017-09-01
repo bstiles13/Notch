@@ -21,9 +21,13 @@ html, body {
     padding-left: 300px;
 }
 
+#form-container {
+    background-color: mintcream;
+}
+
 #mapid {
     height: 500px;
-    width: 500px;
+    width: 700px;
 }
 
 #map-container, #form-container {
@@ -34,6 +38,11 @@ html, body {
 #search {
     margin: 10px;
     display: flex;
+}
+
+.search-child {
+    margin-right: 10px;
+    flex: 1;
 }
 
 #location {

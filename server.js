@@ -52,3 +52,13 @@ app.post('/googleplaces', function (req, res) {
         res.send(data.data);
     });
 })
+
+app.post('/placedetails', function(req, res) {
+    console.log(req.body);
+    let id = req.body.id;
+    let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + id + '&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
+    axios.get(url).then(data => {
+        console.log(data.data);
+        res.send(data.data);
+    })
+})
