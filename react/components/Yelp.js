@@ -7,8 +7,9 @@ class Yelp extends React.Component {
         this.state = {
             search: '',
             results: ['No results'],
-            place: '',
-            autocomplete: ['South Park, CO, United States']
+            city: '',
+            autocomplete: ['South Park, CO, United States'],
+            cityId: null
         }
         this.changePlace = this.changePlace.bind(this);
         this.changeCity = this.changeCity.bind(this);        
@@ -19,7 +20,8 @@ class Yelp extends React.Component {
 
     componentDidUpdate() {
         console.log(this.state.search);
-        console.log(this.state.place);
+        console.log(this.state.city);
+        console.log(this.state.cityId);
     }
 
     changePlace(event) {
@@ -32,16 +34,19 @@ class Yelp extends React.Component {
     }
 
     changeCity(event) {
-        let place = event.target.value;
+        let value = event.target.value;
         this.setState({
-            place: place
+            city: value
         }, () => {
-            let place = this.state.place;
-            axios.post('/autocomplete', { place: place }).then(data => {
-                console.log(data.data);
+            let city = this.state.city;
+            axios.post('/autocomplete', { city: city }).then(data => {
+                // console.log(data.data);
+                // console.log(data.data[0].place_id);
                 let autocomplete = data.data;
+                let cityId = data.data[0].place_id;
                 this.setState({
-                    autocomplete: autocomplete
+                    autocomplete: autocomplete,
+                    cityId: cityId
                 })
             })
         })
@@ -73,14 +78,14 @@ class Yelp extends React.Component {
 
     showAutocomplete() {
         let autocomplete = this.state.autocomplete;
-        return autocomplete.map(place => {
-            if (place.description) {
+        return autocomplete.map(city => {
+            if (city.description) {
                 return (
-                    <option id={place.place_id}> {place.description} </option>
+                    <option id={city.place_id}> {city.description} </option>
                 )
             } else {
                 return (
-                    <option> {place} </option>
+                    <option> {city} </option>
                 )
             }
         })

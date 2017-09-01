@@ -30,8 +30,8 @@ app.post('/yelp', function (req, res) {
 
 app.post('/autocomplete', function (req, res) {
     console.log(req.body);
-    let place = req.body.place;
-    let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + place + '&types=(cities)&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
+    let city = req.body.city;
+    let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + city + '&types=(cities)&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
     // let url = 'https://api.yelp.com/v3/businesses/search?term=' + req.body + '&location=estes+park&Authorization=Bearer ubaFEKFibK6WH876p2V7lk4nQW8vx9_B6HZPSbrlflrSOsoJb-iR47o5G_psT7xeCtqYVI-Y1OHiv4DNgl59oZpUYEG_eTh_j2PjyfTvdkxg_ixl8jltKBzx5CmoWXYx';
     console.log(url);
     axios.get(url).then(data => {

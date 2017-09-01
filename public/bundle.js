@@ -23576,14 +23576,15 @@ var Yelp = function (_React$Component) {
         _this.state = {
             search: '',
             results: ['No results'],
-            place: '',
-            autocomplete: ['South Park, CO, United States']
+            city: '',
+            autocomplete: ['South Park, CO, United States'],
+            cityId: null
         };
+        _this.changePlace = _this.changePlace.bind(_this);
+        _this.changeCity = _this.changeCity.bind(_this);
+        _this.googleResults = _this.googleResults.bind(_this);
         _this.showResults = _this.showResults.bind(_this);
-        _this.search = _this.search.bind(_this);
-        _this.askGoogle = _this.askGoogle.bind(_this);
-        _this.setPlace = _this.setPlace.bind(_this);
-        _this.autocomplete = _this.autocomplete.bind(_this);
+        _this.showAutocomplete = _this.showAutocomplete.bind(_this);
         return _this;
     }
 
@@ -23591,7 +23592,54 @@ var Yelp = function (_React$Component) {
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
             console.log(this.state.search);
-            console.log(this.state.place);
+            console.log(this.state.city);
+            console.log(this.state.cityId);
+        }
+    }, {
+        key: 'changePlace',
+        value: function changePlace(event) {
+            if (event.key == 'Enter') {
+                var search = event.target.value;
+                this.setState({
+                    search: search
+                }, this.googleResults);
+            }
+        }
+    }, {
+        key: 'changeCity',
+        value: function changeCity(event) {
+            var _this2 = this;
+
+            var value = event.target.value;
+            this.setState({
+                city: value
+            }, function () {
+                var city = _this2.state.city;
+                _axios2.default.post('/autocomplete', { city: city }).then(function (data) {
+                    // console.log(data.data);
+                    // console.log(data.data[0].place_id);
+                    var autocomplete = data.data;
+                    var cityId = data.data[0].place_id;
+                    _this2.setState({
+                        autocomplete: autocomplete,
+                        cityId: cityId
+                    });
+                });
+            });
+        }
+    }, {
+        key: 'googleResults',
+        value: function googleResults() {
+            var _this3 = this;
+
+            _axios2.default.post('/yelp', this.state).then(function (data) {
+                console.log(data.data);
+                var results = data.data.businesses;
+                _this3.setState({
+                    results: results
+                });
+                console.log('success');
+            });
         }
     }, {
         key: 'showResults',
@@ -23619,59 +23667,16 @@ var Yelp = function (_React$Component) {
             });
         }
     }, {
-        key: 'search',
-        value: function search(event) {
-            if (event.key == 'Enter') {
-                var search = event.target.value;
-                this.setState({
-                    search: search
-                }, this.askGoogle);
-            }
-        }
-    }, {
-        key: 'askGoogle',
-        value: function askGoogle() {
-            var _this2 = this;
-
-            _axios2.default.post('/yelp', this.state).then(function (data) {
-                console.log(data.data);
-                var results = data.data.businesses;
-                _this2.setState({
-                    results: results
-                });
-                console.log('success');
-            });
-        }
-    }, {
-        key: 'setPlace',
-        value: function setPlace(event) {
-            var _this3 = this;
-
-            var place = event.target.value;
-            this.setState({
-                place: place
-            }, function () {
-                var place = _this3.state.place;
-                _axios2.default.post('/autocomplete', { place: place }).then(function (data) {
-                    console.log(data.data);
-                    var autocomplete = data.data;
-                    _this3.setState({
-                        autocomplete: autocomplete
-                    });
-                });
-            });
-        }
-    }, {
-        key: 'autocomplete',
-        value: function autocomplete() {
+        key: 'showAutocomplete',
+        value: function showAutocomplete() {
             var autocomplete = this.state.autocomplete;
-            return autocomplete.map(function (place) {
-                if (place.description) {
+            return autocomplete.map(function (city) {
+                if (city.description) {
                     return _react2.default.createElement(
                         'option',
-                        { id: place.place_id },
+                        { id: city.place_id },
                         ' ',
-                        place.description,
+                        city.description,
                         ' '
                     );
                 } else {
@@ -23679,7 +23684,7 @@ var Yelp = function (_React$Component) {
                         'option',
                         null,
                         ' ',
-                        place,
+                        city,
                         ' '
                     );
                 }
@@ -23707,7 +23712,7 @@ var Yelp = function (_React$Component) {
                             { htmlFor: 'keyword' },
                             'Keyword'
                         ),
-                        _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'keyword', placeholder: 'Find a place', onKeyPress: this.search })
+                        _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'keyword', placeholder: 'Find a place', onKeyPress: this.changePlace })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -23717,11 +23722,11 @@ var Yelp = function (_React$Component) {
                             { htmlFor: 'autocomplete' },
                             'City'
                         ),
-                        _react2.default.createElement('input', { className: 'form-control', id: 'autocomplete', list: 'browsers', name: 'myBrowser', placeholder: 'South Park, CO, United States', onChange: this.setPlace }),
+                        _react2.default.createElement('input', { className: 'form-control', id: 'autocomplete', list: 'browsers', name: 'myBrowser', placeholder: 'South Park, CO, United States', onChange: this.changeCity }),
                         _react2.default.createElement(
                             'datalist',
                             { id: 'browsers' },
-                            this.autocomplete()
+                            this.showAutocomplete()
                         )
                     )
                 ),
