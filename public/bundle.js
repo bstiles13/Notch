@@ -23109,9 +23109,9 @@ var _Form = __webpack_require__(194);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Yelp = __webpack_require__(195);
+var _Google = __webpack_require__(195);
 
-var _Yelp2 = _interopRequireDefault(_Yelp);
+var _Google2 = _interopRequireDefault(_Google);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23189,7 +23189,7 @@ var Main = function (_React$Component) {
                         'div',
                         { id: 'map-container' },
                         _react2.default.createElement(_Map2.default, { setLocation: this.setLocation.bind(this) }),
-                        _react2.default.createElement(_Yelp2.default, null)
+                        _react2.default.createElement(_Google2.default, null)
                     ),
                     _react2.default.createElement(
                         'div',
@@ -23559,27 +23559,30 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Yelp = function (_React$Component) {
-    _inherits(Yelp, _React$Component);
+var Google = function (_React$Component) {
+    _inherits(Google, _React$Component);
 
-    function Yelp(props) {
-        _classCallCheck(this, Yelp);
+    function Google(props) {
+        _classCallCheck(this, Google);
 
-        var _this = _possibleConstructorReturn(this, (Yelp.__proto__ || Object.getPrototypeOf(Yelp)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Google.__proto__ || Object.getPrototypeOf(Google)).call(this, props));
 
-        _this.state = {
-            search: '',
+        _this.state = _defineProperty({
+            searchTerm: '',
             results: ['No results'],
             city: '',
+            cityId: null,
             autocomplete: ['South Park, CO, United States'],
-            cityId: null
-        };
+            latitude: null
+        }, 'latitude', null);
         _this.changePlace = _this.changePlace.bind(_this);
         _this.changeCity = _this.changeCity.bind(_this);
         _this.googleResults = _this.googleResults.bind(_this);
@@ -23588,20 +23591,22 @@ var Yelp = function (_React$Component) {
         return _this;
     }
 
-    _createClass(Yelp, [{
+    _createClass(Google, [{
         key: 'componentDidUpdate',
         value: function componentDidUpdate() {
-            console.log(this.state.search);
+            console.log(this.state.searchTerm);
             console.log(this.state.city);
             console.log(this.state.cityId);
+            console.log(this.state.longitude);
+            console.log(this.state.latitude);
         }
     }, {
         key: 'changePlace',
         value: function changePlace(event) {
             if (event.key == 'Enter') {
-                var search = event.target.value;
+                var searchTerm = event.target.value;
                 this.setState({
-                    search: search
+                    searchTerm: searchTerm
                 }, this.googleResults);
             }
         }
@@ -23632,13 +23637,25 @@ var Yelp = function (_React$Component) {
         value: function googleResults() {
             var _this3 = this;
 
-            _axios2.default.post('/yelp', this.state).then(function (data) {
-                console.log(data.data);
-                var results = data.data.businesses;
+            var id = this.state.cityId;
+            _axios2.default.post('/getcoordinates', { id: id }).then(function (data) {
+                var lat = data.data.lat;
+                var lng = data.data.lng;
+                console.log(lat + " " + lng);
                 _this3.setState({
-                    results: results
+                    latitude: lat,
+                    longitude: lng
+                }, function () {
+                    _axios2.default.post('/googleplaces', _this3.state).then(function (data) {
+                        // console.log(data.data);
+                        var results = data.data.results;
+                        console.log(results);
+                        _this3.setState({
+                            results: results
+                        });
+                        console.log('success');
+                    });
                 });
-                console.log('success');
             });
         }
     }, {
@@ -23646,13 +23663,13 @@ var Yelp = function (_React$Component) {
         value: function showResults() {
             console.log(this.state.results);
             var results = this.state.results;
-            return results.map(function (name) {
-                if (name.name) {
+            return results.map(function (place) {
+                if (place.name) {
                     return _react2.default.createElement(
                         'div',
                         null,
                         ' ',
-                        name.name,
+                        place.name,
                         ' '
                     );
                 } else {
@@ -23660,7 +23677,7 @@ var Yelp = function (_React$Component) {
                         'div',
                         null,
                         ' ',
-                        name,
+                        place,
                         ' '
                     );
                 }
@@ -23739,10 +23756,10 @@ var Yelp = function (_React$Component) {
         }
     }]);
 
-    return Yelp;
+    return Google;
 }(_react2.default.Component);
 
-exports.default = Yelp;
+exports.default = Google;
 
 /***/ }),
 /* 196 */

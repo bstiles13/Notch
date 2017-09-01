@@ -1,34 +1,38 @@
 import React from 'react';
 import axios from 'axios';
 
-class Yelp extends React.Component {
+class Google extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: '',
+            searchTerm: '',
             results: ['No results'],
             city: '',
+            cityId: null,
             autocomplete: ['South Park, CO, United States'],
-            cityId: null
+            latitude: null,
+            latitude: null
         }
         this.changePlace = this.changePlace.bind(this);
-        this.changeCity = this.changeCity.bind(this);        
+        this.changeCity = this.changeCity.bind(this);
         this.googleResults = this.googleResults.bind(this);
-        this.showResults = this.showResults.bind(this);        
+        this.showResults = this.showResults.bind(this);
         this.showAutocomplete = this.showAutocomplete.bind(this);
     }
 
     componentDidUpdate() {
-        console.log(this.state.search);
+        console.log(this.state.searchTerm);
         console.log(this.state.city);
         console.log(this.state.cityId);
+        console.log(this.state.longitude);
+        console.log(this.state.latitude);
     }
 
     changePlace(event) {
         if (event.key == 'Enter') {
-            let search = event.target.value;
+            let searchTerm = event.target.value;
             this.setState({
-                search: search
+                searchTerm: searchTerm
             }, this.googleResults)
         }
     }
@@ -53,24 +57,36 @@ class Yelp extends React.Component {
     }
 
     googleResults() {
-        axios.post('/yelp', this.state).then(data => {
-            console.log(data.data);
-            let results = data.data.businesses;
+        let id = this.state.cityId;
+        axios.post('/getcoordinates', { id: id }).then(data => {
+            let lat = data.data.lat;
+            let lng = data.data.lng;
+            console.log(lat + " " + lng);
             this.setState({
-                results: results
+                latitude: lat,
+                longitude: lng
+            }, () => {
+                axios.post('/googleplaces', this.state).then(data => {
+                    // console.log(data.data);
+                    let results = data.data.results;
+                    console.log(results);
+                    this.setState({
+                        results: results
+                    })
+                    console.log('success');
+                })
             })
-            console.log('success');
         })
     }
 
     showResults() {
         console.log(this.state.results);
         let results = this.state.results;
-        return results.map(name => {
-            if (name.name) {
-                return ( <div> {name.name} </div> )
+        return results.map(place => {
+            if (place.name) {
+                return (<div> {place.name} </div>)
             } else {
-                return ( <div> {name} </div> )
+                return (<div> {place} </div>)
             }
         })
     }
@@ -119,4 +135,4 @@ class Yelp extends React.Component {
     }
 }
 
-export default Yelp;
+export default Google;
