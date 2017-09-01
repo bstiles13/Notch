@@ -3,6 +3,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Map from './Map';
 import Form from './Form';
+import Yelp from './Yelp';
 
 class Main extends React.Component {
 
@@ -55,6 +56,7 @@ class Main extends React.Component {
                 <div id='main-container'>
                     <div id='map-container'>
                         <Map setLocation={this.setLocation.bind(this)} />
+                        <Yelp />
                     </div>
                     <div id='form-container'>
                         <Form categories={categories} latlng={this.state.latlng} setNotch={this.setNotch.bind(this)} setTitle={this.setTitle.bind(this)} />

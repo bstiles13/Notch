@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "sass": "node-sass -w public/assets/sass/ -o public/assets/css/"
+    "sass": "node-sass public/assets/sass/style.scss -o public/assets/css/"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/bstiles13/Notch#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "leaflet": "^1.1.0",

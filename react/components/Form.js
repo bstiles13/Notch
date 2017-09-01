@@ -20,13 +20,15 @@ class Form extends React.Component {
         return (
             <div>
                 <h2>Add a notch</h2>
-                <div className="form-group">
-                    <label htmlFor="latitude">Latitude</label>
-                    <input type="text" className="form-control" id="latitude" value={this.props.latlng.lat} disabled/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="longitude">Longitude</label>
-                    <input type="text" className="form-control" id="longitude" value={this.props.latlng.lng} disabled/>
+                <div id='location'>
+                    <div className="form-group">
+                        <label htmlFor="latitude">Latitude</label>
+                        <input type="text" className="form-control" id="latitude" value={this.props.latlng.lat} disabled />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="longitude">Longitude</label>
+                        <input type="text" className="form-control" id="longitude" value={this.props.latlng.lng} disabled />
+                    </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleSelect1">Category</label>
@@ -36,8 +38,8 @@ class Form extends React.Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="headline">Headline</label>
-                    <input type="text" className="form-control" id="headline" placeholder="Title" name="newTitle" onChange={this.props.setNotch}/>
+                    <label htmlFor="title">Headline</label>
+                    <input type="text" className="form-control" id="title" placeholder="Title" name="newTitle" onChange={this.props.setNotch} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="summary">The experience</label>

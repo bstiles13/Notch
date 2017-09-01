@@ -22,3 +22,9 @@ html, body {
 #map-container, #form-container {
   flex: 1;
   padding: 20px; }
+
+#search {
+  margin: 10px; }
+
+#location {
+  display: flex; }
