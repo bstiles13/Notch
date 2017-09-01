@@ -39,3 +39,7 @@ app.post('/autocomplete', function (req, res) {
         res.send(data.data.predictions);
     });
 })
+
+app.post('/getlatlng', function(req, res) {
+    let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJJ8Jse77m7IARRg_vzsKQArw&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
+})

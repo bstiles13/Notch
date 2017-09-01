@@ -23577,12 +23577,12 @@ var Yelp = function (_React$Component) {
             search: '',
             results: ['No results'],
             place: '',
-            autocomplete: ['Test']
+            autocomplete: ['South Park, CO, United States']
         };
         _this.showResults = _this.showResults.bind(_this);
         _this.search = _this.search.bind(_this);
         _this.askGoogle = _this.askGoogle.bind(_this);
-        _this.changePlace = _this.changePlace.bind(_this);
+        _this.setPlace = _this.setPlace.bind(_this);
         _this.autocomplete = _this.autocomplete.bind(_this);
         return _this;
     }
@@ -23643,8 +23643,8 @@ var Yelp = function (_React$Component) {
             });
         }
     }, {
-        key: 'changePlace',
-        value: function changePlace(event) {
+        key: 'setPlace',
+        value: function setPlace(event) {
             var _this3 = this;
 
             var place = event.target.value;
@@ -23669,7 +23669,7 @@ var Yelp = function (_React$Component) {
                 if (place.description) {
                     return _react2.default.createElement(
                         'option',
-                        null,
+                        { id: place.place_id },
                         ' ',
                         place.description,
                         ' '
@@ -23686,33 +23686,49 @@ var Yelp = function (_React$Component) {
             });
         }
     }, {
+        key: 'getLatLng',
+        value: function getLatLng(event) {
+            console.log(event.target.value);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement('input', { className: 'form-control form-control-lg', type: 'text', placeholder: 'Find a place', onKeyPress: this.search }),
+                _react2.default.createElement(
+                    'div',
+                    { id: 'search' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'label',
+                            { htmlFor: 'keyword' },
+                            'Keyword'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'keyword', placeholder: 'Find a place', onKeyPress: this.search })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'label',
+                            { htmlFor: 'autocomplete' },
+                            'City'
+                        ),
+                        _react2.default.createElement('input', { className: 'form-control', id: 'autocomplete', list: 'browsers', name: 'myBrowser', placeholder: 'South Park, CO, United States', onChange: this.setPlace }),
+                        _react2.default.createElement(
+                            'datalist',
+                            { id: 'browsers' },
+                            this.autocomplete()
+                        )
+                    )
+                ),
                 _react2.default.createElement(
                     'div',
                     { id: 'results' },
                     this.showResults()
-                ),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'Choose a browser from this list:',
-                    _react2.default.createElement('input', { list: 'browsers', name: 'myBrowser', onChange: this.changePlace })
-                ),
-                _react2.default.createElement(
-                    'datalist',
-                    { id: 'browsers' },
-                    _react2.default.createElement('option', { value: 'Chrome' }),
-                    _react2.default.createElement('option', { value: 'Firefox' }),
-                    _react2.default.createElement('option', { value: 'Internet Explorer' }),
-                    _react2.default.createElement('option', { value: 'Opera' }),
-                    _react2.default.createElement('option', { value: 'Safari' }),
-                    _react2.default.createElement('option', { value: 'Microsoft Edge' }),
-                    this.autocomplete()
                 )
             );
         }

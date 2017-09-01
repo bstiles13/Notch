@@ -8,13 +8,13 @@ class Yelp extends React.Component {
             search: '',
             results: ['No results'],
             place: '',
-            autocomplete: ['Test']
+            autocomplete: ['South Park, CO, United States']
         }
-        this.showResults = this.showResults.bind(this);
-        this.search = this.search.bind(this);
-        this.askGoogle = this.askGoogle.bind(this);
         this.changePlace = this.changePlace.bind(this);
-        this.autocomplete = this.autocomplete.bind(this);
+        this.changeCity = this.changeCity.bind(this);        
+        this.googleResults = this.googleResults.bind(this);
+        this.showResults = this.showResults.bind(this);        
+        this.showAutocomplete = this.showAutocomplete.bind(this);
     }
 
     componentDidUpdate() {
@@ -22,43 +22,16 @@ class Yelp extends React.Component {
         console.log(this.state.place);
     }
 
-    showResults() {
-        console.log(this.state.results);
-        let results = this.state.results;
-        return results.map(name => {
-            if (name.name) {
-                return (
-                    <div> {name.name} </div>
-                )
-            } else {
-                return (
-                    <div> {name} </div>
-                )
-            }
-        })
-    }
-
-    search(event) {
+    changePlace(event) {
         if (event.key == 'Enter') {
             let search = event.target.value;
             this.setState({
                 search: search
-            }, this.askGoogle)
+            }, this.googleResults)
         }
     }
 
-    askGoogle() {
-        axios.post('/yelp', this.state).then(data => {
-            console.log(data.data);
-            let results = data.data.businesses;
-            this.setState({
-                results: results
-            })
-            console.log('success');
-        })
-    }
-
-    changePlace(event) {
+    changeCity(event) {
         let place = event.target.value;
         this.setState({
             place: place
@@ -74,12 +47,36 @@ class Yelp extends React.Component {
         })
     }
 
-    autocomplete() {
+    googleResults() {
+        axios.post('/yelp', this.state).then(data => {
+            console.log(data.data);
+            let results = data.data.businesses;
+            this.setState({
+                results: results
+            })
+            console.log('success');
+        })
+    }
+
+    showResults() {
+        console.log(this.state.results);
+        let results = this.state.results;
+        return results.map(name => {
+            if (name.name) {
+                return ( <div> {name.name} </div> )
+            } else {
+                return ( <div> {name} </div> )
+            }
+        })
+    }
+
+
+    showAutocomplete() {
         let autocomplete = this.state.autocomplete;
         return autocomplete.map(place => {
             if (place.description) {
                 return (
-                    <option> {place.description} </option>
+                    <option id={place.place_id}> {place.description} </option>
                 )
             } else {
                 return (
@@ -89,24 +86,29 @@ class Yelp extends React.Component {
         })
     }
 
+    getLatLng(event) {
+        console.log(event.target.value);
+    }
+
     render() {
         return (
             <div>
-                <input className="form-control form-control-lg" type="text" placeholder="Find a place" onKeyPress={this.search} />
+                <div id='search'>
+                    <div className="form-group">
+                        <label htmlFor="keyword">Keyword</label>
+                        <input type="text" className="form-control" id="keyword" placeholder="Find a place" onKeyPress={this.changePlace} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="autocomplete">City</label>
+                        <input className="form-control" id="autocomplete" list="browsers" name="myBrowser" placeholder='South Park, CO, United States' onChange={this.changeCity} />
+                        <datalist id="browsers">
+                            {this.showAutocomplete()}
+                        </datalist>
+                    </div>
+                </div>
                 <div id='results'>
                     {this.showResults()}
                 </div>
-                <label>Choose a browser from this list:
-                <input list="browsers" name="myBrowser" onChange={this.changePlace} /></label>
-                <datalist id="browsers">
-                    <option value="Chrome" />
-                    <option value="Firefox" />
-                    <option value="Internet Explorer" />
-                    <option value="Opera" />
-                    <option value="Safari" />
-                    <option value="Microsoft Edge" />
-                    {this.autocomplete()}
-                </datalist>
             </div>
         )
     }

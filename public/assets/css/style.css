@@ -24,7 +24,8 @@ html, body {
   padding: 20px; }
 
 #search {
-  margin: 10px; }
+  margin: 10px;
+  display: flex; }
 
 #location {
   display: flex; }
