@@ -18,47 +18,47 @@ app.get('/', function (req, res) {
 })
 
 app.post('/autocomplete', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     let city = req.body.city;
-    let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + city + '&types=(cities)&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
+    let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + city + '&types=(cities)&key=AIzaSyBXqI8e9LOV_SFIicNjz3q0WFhtYTL0JIQ';
     // let url = 'https://api.yelp.com/v3/businesses/search?term=' + req.body + '&location=estes+park&Authorization=Bearer ubaFEKFibK6WH876p2V7lk4nQW8vx9_B6HZPSbrlflrSOsoJb-iR47o5G_psT7xeCtqYVI-Y1OHiv4DNgl59oZpUYEG_eTh_j2PjyfTvdkxg_ixl8jltKBzx5CmoWXYx';
-    console.log(url);
+    // console.log(url);
     axios.get(url).then(data => {
-        console.log('axios');
+        // console.log('axios');
         res.send(data.data.predictions);
     });
 })
 
 app.post('/getcoordinates', function(req, res) {
     let id = req.body.id;
-    console.log(id);
-    let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + id + '&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
+    // console.log(id);
+    let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + id + '&key=AIzaSyBXqI8e9LOV_SFIicNjz3q0WFhtYTL0JIQ';
     axios.get(url).then(data => {
-        console.log(data.data.result.geometry.location);
+        // console.log(data.data.result.geometry.location);
         let location = data.data.result.geometry.location;
         res.send(location);
     })
 })
 
 app.post('/googleplaces', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     let term = req.body.searchTerm;
     let lat = req.body.latitude;
     let lng = req.body.longitude;
-    let url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=200000&name=' + term + '&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
+    let url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=200000&name=' + term + '&key=AIzaSyBXqI8e9LOV_SFIicNjz3q0WFhtYTL0JIQ';
     // let url = 'https://api.yelp.com/v3/businesses/search?term=' + req.body + '&location=estes+park&Authorization=Bearer ubaFEKFibK6WH876p2V7lk4nQW8vx9_B6HZPSbrlflrSOsoJb-iR47o5G_psT7xeCtqYVI-Y1OHiv4DNgl59oZpUYEG_eTh_j2PjyfTvdkxg_ixl8jltKBzx5CmoWXYx';
     axios.get(url).then(data => {
-        console.log(data.data);
+        // console.log(data.data);
         res.send(data.data);
     });
 })
 
 app.post('/placedetails', function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     let id = req.body.id;
-    let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + id + '&key=AIzaSyC1-zEIcdJjRV_mHhU5X54clZdwuqMJxbk';
+    let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + id + '&key=AIzaSyBXqI8e9LOV_SFIicNjz3q0WFhtYTL0JIQ';
     axios.get(url).then(data => {
-        console.log(data.data);
+        // console.log(data.data);
         res.send(data.data);
     })
 })

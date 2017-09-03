@@ -15,13 +15,17 @@ class Main extends React.Component {
                 lng: -91.142578,
             },
             newCategory: '',
-            newTitle: '',
-            newSummary: ''
-
+            newPlace: 'Test',
+            existingPlace: false,
+            newHeadline: '',
+            newSummary: '',
+            googleResults: ['No results']
         };
         this.setTitle = this.setTitle.bind(this);
         this.setLocation = this.setLocation.bind(this);
+        this.setPlace = this.setPlace.bind(this);
         this.setMarker = this.setMarker.bind(this);
+        this.setResults = this.setResults.bind(this);
     }
 
     componentDidMount() { }
@@ -37,6 +41,13 @@ class Main extends React.Component {
                 lat: lat,
                 lng: lng
             }
+        })
+    }
+
+    setPlace(place, status) {
+        this.setState({
+            newPlace: place,
+            existingPlace: status
         })
     }
 
@@ -62,17 +73,23 @@ class Main extends React.Component {
         })
     }
 
+    setResults(results) {
+        this.setState({
+            googleResults: results
+        })
+    }
+
     render() {
         return (
             <div>
                 <Sidebar categories={categories} />
                 <div id='main-container'>
                     <div id='map-container'>
-                        <Map setLocation={this.setLocation} latlng={this.state.latlng}/>
-                        <Google setLocation={this.setLocation} setMarker={this.setMarker.bind(this)} />
+                        <Map setLocation={this.setLocation} setPlace={this.setPlace} latlng={this.state.latlng} googleResults={this.state.googleResults} setResults={this.setResults}/>
+                        <Google setLocation={this.setLocation} setPlace={this.setPlace} setMarker={this.setMarker.bind(this)} googleResults={this.state.googleResults} setResults={this.setResults}/>
                     </div>
                     <div id='form-container'>
-                        <Form categories={categories} latlng={this.state.latlng} setNotch={this.setNotch.bind(this)} setTitle={this.setTitle.bind(this)} />
+                        <Form categories={categories} state={this.state} setNotch={this.setNotch.bind(this)} setTitle={this.setTitle.bind(this)} />
                     </div>
                 </div>
             </div>

@@ -6,15 +6,15 @@ class Google extends React.Component {
         super(props);
         this.state = {
             searchTerm: '',
-            results: ['No results'],
             city: '',
             cityId: null,
             autocomplete: ['South Park, CO, United States'],
             latitude: null,
             latitude: null
         }
-        this.changePlace = this.changePlace.bind(this);
-        this.changeCity = this.changeCity.bind(this);
+        this.setPlace = this.setPlace.bind(this);
+        this.setCity = this.setCity.bind(this);
+        this.setCoordinates = this.setCoordinates.bind(this);
         this.googleResults = this.googleResults.bind(this);
         this.showResults = this.showResults.bind(this);
         this.showAutocomplete = this.showAutocomplete.bind(this);
@@ -28,16 +28,16 @@ class Google extends React.Component {
         console.log(this.state.latitude);
     }
 
-    changePlace(event) {
+    setPlace(event) {
         if (event.key == 'Enter') {
             let searchTerm = event.target.value;
             this.setState({
                 searchTerm: searchTerm
-            }, this.googleResults)
+            }, this.setCoordinates)
         }
     }
 
-    changeCity(event) {
+    setCity(event) {
         let value = event.target.value;
         this.setState({
             city: value
@@ -56,7 +56,7 @@ class Google extends React.Component {
         })
     }
 
-    googleResults() {
+    setCoordinates() {
         let id = this.state.cityId;
         axios.post('/getcoordinates', { id: id }).then(data => {
             let lat = data.data.lat;
@@ -65,23 +65,26 @@ class Google extends React.Component {
             this.setState({
                 latitude: lat,
                 longitude: lng
-            }, () => {
-                axios.post('/googleplaces', this.state).then(data => {
-                    // console.log(data.data);
-                    let results = data.data.results;
-                    console.log(results);
-                    this.setState({
-                        results: results
-                    })
-                    console.log('success');
-                })
-            })
+            }, this.googleResults)
+        })
+    }
+
+    googleResults() {
+        let id = this.state.cityId;
+        let state = this.state;
+        axios.post('/googleplaces', state).then(data => {
+            // console.log(data.data);
+            let results = data.data.results;
+            // console.log(results);
+            this.props.setResults(results);
+            this.placeDetails(id);
+            console.log('success');
         })
     }
 
     showResults() {
-        console.log(this.state.results);
-        let results = this.state.results;
+        console.log(this.props.googleResults);
+        let results = this.props.googleResults;
         return results.map(place => {
             if (place.name) {
                 return (
@@ -118,13 +121,20 @@ class Google extends React.Component {
     sendToMap(event) {
         console.log(event.target.value);
         let id = event.target.value;
+        this.placeDetails(id);
+    }
+
+    placeDetails(id) {
         axios.post('/placedetails', {id: id}).then(data => {
+            console.log(data.data.result)
             let location = data.data.result.geometry.location;
             let lat = location.lat;
             let lng = location.lng;
+            let place = data.data.result.name;
             console.log(lat);
             console.log(lng);
             this.props.setLocation(lat, lng);
+            this.props.setPlace(place, true);
         })
     }
 
@@ -134,11 +144,11 @@ class Google extends React.Component {
                 <div id='search'>
                     <div className="form-group search-child">
                         <label htmlFor="keyword">Keyword</label>
-                        <input type="text" className="form-control" id="keyword" placeholder="Find a place" onKeyPress={this.changePlace} />
+                        <input type="text" className="form-control" id="keyword" placeholder="Find a place" onKeyPress={this.setPlace} />
                     </div>
                     <div className="form-group search-child">
                         <label htmlFor="autocomplete">City</label>
-                        <input className="form-control" id="autocomplete" list="browsers" name="myBrowser" placeholder='South Park, CO, United States' onChange={this.changeCity} />
+                        <input className="form-control" id="autocomplete" list="browsers" name="myBrowser" placeholder='South Park, CO, United States' onChange={this.setCity} />
                         <datalist id="browsers">
                             {this.showAutocomplete()}
                         </datalist>

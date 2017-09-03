@@ -28,8 +28,12 @@ class Form extends React.Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="title">Headline</label>
-                    <input type="text" className="form-control" id="title" placeholder="Title" name="newTitle" onChange={this.props.setNotch} />
+                    <label htmlFor="place">Place</label>
+                    <input type="text" className="form-control" id="place" placeholder="Place" name="newPlace" value={this.props.state.newPlace} onChange={this.props.setNotch} disabled={this.props.state.existingPlace ? true : null} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="headline">Headline</label>
+                    <input type="text" className="form-control" id="headline" placeholder="Headline" name="newHeadline" onChange={this.props.setNotch} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="summary">The experience</label>
@@ -38,11 +42,11 @@ class Form extends React.Component {
                 <div id='location'>
                     <div className="form-group">
                         <label htmlFor="latitude">Latitude</label>
-                        <input type="text" className="form-control" id="latitude" value={this.props.latlng.lat} disabled />
+                        <input type="text" className="form-control" id="latitude" value={this.props.state.latlng.lat} disabled />
                     </div>
                     <div className="form-group">
                         <label htmlFor="longitude">Longitude</label>
-                        <input type="text" className="form-control" id="longitude" value={this.props.latlng.lng} disabled />
+                        <input type="text" className="form-control" id="longitude" value={this.props.state.latlng.lng} disabled />
                     </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
