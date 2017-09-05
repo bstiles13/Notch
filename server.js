@@ -1,18 +1,30 @@
+// Dependencies
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var axios = require('axios');
 var port = process.ENV || 8080;
 
+// MongoDB configuration
+var mongoose = require('mongoose');
+var db = process.env.MONGODB_URI || "mongodb://localhost/notch";
+
+// Server configuration
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
-app.listen(port, function () {
-    console.log('Server successful on port ' + port);
-})
+// Connect mongoose to database
+mongoose.connect(db, function(error) {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log("mongoose connection is successful");
+    }
+  });
 
+// Routes
 app.get('/', function (req, res) {
     res.send(path.join(__dirname + './public/index.html'));
 })
@@ -61,4 +73,9 @@ app.post('/placedetails', function(req, res) {
         // console.log(data.data);
         res.send(data.data);
     })
+})
+
+// Start server
+app.listen(port, function () {
+    console.log('Server successful on port ' + port);
 })
