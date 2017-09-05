@@ -23432,7 +23432,8 @@ var Login = function (_React$Component) {
             newUser: {
                 username: '',
                 password1: '',
-                password2: ''
+                password2: '',
+                zipCode: ''
             },
             invalidUser: false,
             invalidName: false,
@@ -23574,7 +23575,8 @@ var Login = function (_React$Component) {
                 newUser: {
                     username: '',
                     password1: '',
-                    password2: ''
+                    password2: '',
+                    zipCode: ''
                 }
             });
         }
@@ -23658,6 +23660,11 @@ var Login = function (_React$Component) {
                             'div',
                             { className: 'form-group' },
                             _react2.default.createElement('input', { type: 'password', className: 'form-control form-control-sm login-input', id: 'new-password2', placeholder: 'Re-enter password', name: 'password2', onChange: this.setNewUser })
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            _react2.default.createElement('input', { type: 'text', className: 'form-control form-control-sm login-input', id: 'new-zipcode', placeholder: 'Zip code (Optional)', name: 'zipCode', onChange: this.setNewUser })
                         ),
                         _react2.default.createElement(
                             'button',

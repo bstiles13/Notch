@@ -15,7 +15,8 @@ class Login extends React.Component {
             newUser: {
                 username: '',
                 password1: '',
-                password2: ''
+                password2: '',
+                zipCode: ''
             },
             invalidUser: false,
             invalidName: false,
@@ -50,11 +51,11 @@ class Login extends React.Component {
         var local = localStorage.getItem('notchUser');
         console.log('local user: ' + local);
         if (local != null && local != 'null' && local != undefined) {
-            this.setState({user: local});
-            this.setState({loggedIn: true});
+            this.setState({ user: local });
+            this.setState({ loggedIn: true });
         } else {
-            this.setState({user: null});            
-            this.setState({loggedIn: false});
+            this.setState({ user: null });
+            this.setState({ loggedIn: false });
         }
     }
 
@@ -101,7 +102,7 @@ class Login extends React.Component {
                     console.log('logging in');
                     this.loggedIn(existingUser.username);
                 } else {
-                    this.setState({invalidUser: true})
+                    this.setState({ invalidUser: true })
                 }
             });
         }
@@ -121,7 +122,7 @@ class Login extends React.Component {
                 if (result == 'success') {
                     this.loggedIn(newUser.username);
                 } else {
-                    {this.setState({invalidName: true})}
+                    { this.setState({ invalidName: true }) }
                 }
             });
         };
@@ -140,7 +141,8 @@ class Login extends React.Component {
             newUser: {
                 username: '',
                 password1: '',
-                password2: ''
+                password2: '',
+                zipCode: ''
             }
         })
     }
@@ -148,7 +150,7 @@ class Login extends React.Component {
     logout() {
         localStorage.setItem('notchUser', null);
         this.checkUser();
-      }
+    }
 
     clearWarnings() {
         this.setState({
@@ -169,7 +171,7 @@ class Login extends React.Component {
             return (
                 <div>
                     <div>Welcome back <span id="username">{this.state.user}</span>!</div>
-                    <br/>
+                    <br />
                     <button type="button" className="btn btn-primary btn-sm login-button" onClick={this.logout.bind(this)}>Sign Out</button>
                 </div>
             )
@@ -178,17 +180,20 @@ class Login extends React.Component {
                 <div>
                     <div>
                         {this.error('invalidText')}
-                        {this.error('invalidName')}                        
+                        {this.error('invalidName')}
                         <label>New User</label>
                         <div className="form-group">
                             <input type="email" className="form-control form-control-sm login-input" id="new-username" placeholder="Enter username" name='username' onChange={this.setNewUser} />
                         </div>
-                        {this.error('invalidPassword')}                        
+                        {this.error('invalidPassword')}
                         <div className="form-group">
                             <input type="password" className="form-control form-control-sm login-input" id="new-password1" placeholder="Password" name='password1' onChange={this.setNewUser} />
                         </div>
                         <div className="form-group">
                             <input type="password" className="form-control form-control-sm login-input" id="new-password2" placeholder="Re-enter password" name='password2' onChange={this.setNewUser} />
+                        </div>
+                        <div className="form-group">
+                            <input type="text" className="form-control form-control-sm login-input" id="new-zipcode" placeholder="Zip code (Optional)" name='zipCode' onChange={this.setNewUser} />
                         </div>
                         <button type="button" className="btn btn-primary btn-sm login-button" onClick={this.loginNew.bind(this)}>Register</button>
                         <button type="button" className="btn btn-secondary btn-sm login-button" onClick={this.setRegister.bind(this)}>Already a user?</button>
@@ -199,7 +204,7 @@ class Login extends React.Component {
             return (
                 <div>
                     {this.error('invalidText')}
-                    {this.error('invalidUser')}                                            
+                    {this.error('invalidUser')}
                     <div className="form-group">
                         <label for="exampleInputEmail1">Username</label>
                         <input type="email" className="form-control form-control-sm login-input" id="existing-username" placeholder="Enter username" name='username' onChange={this.setExistingUser} />

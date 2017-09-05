@@ -116,7 +116,7 @@ app.post('/newuser', function (req, res) {
                     console.log(newUser);
                     User.create(newUser).then(data => {
                             console.log(data);
-                            res.send(data);
+                            res.send('success');
                     }).catch(err => {
                         console.log(err);
                     })
