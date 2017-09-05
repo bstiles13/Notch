@@ -43,8 +43,8 @@ class Map extends React.Component {
     }
 
     onMapClick(e) {
-        var lat = e.latlng.lat;
-        var lng = e.latlng.lng;
+        var lat = (e.latlng.lat).toFixed(7);
+        var lng = (e.latlng.lng).toFixed(7);
         this.props.setLocation(lat, lng);
         this.setMarker(lat, lng);
         this.props.setPlace('My place', false)

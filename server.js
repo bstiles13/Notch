@@ -3,11 +3,13 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var axios = require('axios');
+var bcrypt = require('bcrypt');
 var port = process.ENV || 8080;
 
 // MongoDB configuration
 var mongoose = require('mongoose');
 var db = process.env.MONGODB_URI || "mongodb://localhost/notch";
+var User = require('./model/user.js');
 
 // Server configuration
 var app = express();
@@ -16,13 +18,13 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
 // Connect mongoose to database
-mongoose.connect(db, function(error) {
+mongoose.connect(db, function (error) {
     if (error) {
-      console.error(error);
+        console.error(error);
     } else {
-      console.log("mongoose connection is successful");
+        console.log("mongoose connection is successful");
     }
-  });
+});
 
 // Routes
 app.get('/', function (req, res) {
@@ -41,7 +43,7 @@ app.post('/autocomplete', function (req, res) {
     });
 })
 
-app.post('/getcoordinates', function(req, res) {
+app.post('/getcoordinates', function (req, res) {
     let id = req.body.id;
     // console.log(id);
     let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + id + '&key=AIzaSyBXqI8e9LOV_SFIicNjz3q0WFhtYTL0JIQ';
@@ -65,7 +67,7 @@ app.post('/googleplaces', function (req, res) {
     });
 })
 
-app.post('/placedetails', function(req, res) {
+app.post('/placedetails', function (req, res) {
     // console.log(req.body);
     let id = req.body.id;
     let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + id + '&key=AIzaSyBXqI8e9LOV_SFIicNjz3q0WFhtYTL0JIQ';
@@ -74,6 +76,58 @@ app.post('/placedetails', function(req, res) {
         res.send(data.data);
     })
 })
+
+// Receives and authenticates login information from existing users
+app.post('/existinguser', function (req, res) {
+    console.log(req.body);
+    User.findOne({ 'username': req.body.username }, function (err, user) {
+        if (err) {
+            console.log(err);
+            res.send('unsuccessful');
+        } else if (user == null) {
+            console.log('no user');
+            res.send('unsuccessful');
+        } else {
+            console.log(user);
+            var savedHash = user.password;
+            bcrypt.compare(req.body.password, savedHash, function(err, status) {
+              console.log(status);
+              status === true ? res.json('success') : res.json('unsuccessful');
+            });
+        }
+    })
+});
+
+// Accepts login information from new users, checks if the username exists, and saves the user if unique
+app.post('/newuser', function (req, res) {
+    console.log(req.body);
+    User.findOne({ 'username': req.body.username }, function (err, user) {
+        if (err) {
+            console.log(err);
+            res.send('unsuccessful');
+        } else if (user == null) {
+            console.log('no user');
+            bcrypt.genSalt(10, function (err, salt) {
+                bcrypt.hash(req.body.password1, salt, function (err, hash) {
+                    var newUser = {
+                        username: req.body.username,
+                        password: hash
+                    }
+                    console.log(newUser);
+                    User.create(newUser).then(data => {
+                            console.log(data);
+                            res.send(data);
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                });
+            });
+        } else {
+            console.log(user);
+            res.send('unsuccessful');
+        }
+    });
+});
 
 // Start server
 app.listen(port, function () {

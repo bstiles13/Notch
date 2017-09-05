@@ -21,6 +21,7 @@
   "homepage": "https://github.com/bstiles13/Notch#readme",
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "leaflet": "^1.1.0",

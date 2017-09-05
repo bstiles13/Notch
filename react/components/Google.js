@@ -59,8 +59,8 @@ class Google extends React.Component {
     setCoordinates() {
         let id = this.state.cityId;
         axios.post('/getcoordinates', { id: id }).then(data => {
-            let lat = data.data.lat;
-            let lng = data.data.lng;
+            let lat = (data.data.lat).toFixed(7);
+            let lng = (data.data.lng).toFixed(7);
             console.log(lat + " " + lng);
             this.setState({
                 latitude: lat,

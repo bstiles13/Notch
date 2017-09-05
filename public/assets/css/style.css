@@ -34,8 +34,18 @@ html, body {
   margin-right: 10px;
   flex: 1; }
 
-#location {
-  display: flex; }
-
 #city {
   background-color: lightcyan; }
+
+.warning {
+  color: red;
+  font-size: 11px; }
+
+.login-button {
+  margin-right: 10px; }
+
+.category {
+  list-style-type: none; }
+
+#username {
+  font-weight: bold; }

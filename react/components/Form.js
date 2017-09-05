@@ -27,28 +27,22 @@ class Form extends React.Component {
                         {this.options()}
                     </select>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="place">Place</label>
-                    <input type="text" className="form-control" id="place" placeholder="Place" name="newPlace" value={this.props.place} onChange={this.props.setNotch} disabled={this.props.existingPlace ? true : null} />
+                <label htmlFor="place">Place</label>
+                <div className="input-group">
+                    <input type="text" className="form-control" id="place" placeholder="Place" aria-describedby="basic-addon2" name="newPlace" value={this.props.place} onChange={this.props.setNotch} disabled={this.props.existingPlace ? true : null} />
+                    <span className="input-group-addon" id="basic-addon2">Lat {this.props.latlng.lat} | Lng {this.props.latlng.lng}</span>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="headline">Headline</label>
+                <br />
+                <label htmlFor="headline">Headline</label>
+                <div className="input-group">
                     <input type="text" className="form-control" id="headline" placeholder="Headline" name="newHeadline" onChange={this.props.setNotch} />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="summary">The experience</label>
+                <br />
+                <label htmlFor="summary">The experience</label>
+                <div className="input-group">
                     <textarea className="form-control" id="summary" rows="3" name="newSummary" onChange={this.props.setNotch}></textarea>
                 </div>
-                <div id='location'>
-                    <div className="form-group">
-                        <label htmlFor="latitude">Latitude</label>
-                        <input type="text" className="form-control" id="latitude" value={this.props.latlng.lat} disabled />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="longitude">Longitude</label>
-                        <input type="text" className="form-control" id="longitude" value={this.props.latlng.lng} disabled />
-                    </div>
-                </div>
+                <br />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </div>
         )
