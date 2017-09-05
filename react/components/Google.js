@@ -77,9 +77,24 @@ class Google extends React.Component {
             let results = data.data.results;
             // console.log(results);
             this.props.setResults(results);
-            this.placeDetails(id);
+            this.placeDetails(id, true);
             console.log('success');
         })
+    }
+
+    showCity() {
+        let city = this.state.city;
+        if (city != '') {
+            return (
+                <li id='city' className="list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">{this.state.city}</h5>
+                        <button value={this.state.cityId} className="btn btn-sm" onClick={this.sendToMap.bind(this)}>Select</button>
+                    </div>
+                    <small>City</small>
+                </li>
+            )
+        }
     }
 
     showResults() {
@@ -97,7 +112,7 @@ class Google extends React.Component {
                     </li>
                 )
             } else {
-                return (<div> {place} </div>)
+                return (<li className="list-group-item">{place}</li>)
             }
         })
     }
@@ -121,11 +136,11 @@ class Google extends React.Component {
     sendToMap(event) {
         console.log(event.target.value);
         let id = event.target.value;
-        this.placeDetails(id);
+        this.placeDetails(id, false);
     }
 
-    placeDetails(id) {
-        axios.post('/placedetails', {id: id}).then(data => {
+    placeDetails(id, city) {
+        axios.post('/placedetails', { id: id }).then(data => {
             console.log(data.data.result)
             let location = data.data.result.geometry.location;
             let lat = location.lat;
@@ -133,7 +148,7 @@ class Google extends React.Component {
             let place = data.data.result.name;
             console.log(lat);
             console.log(lng);
-            this.props.setLocation(lat, lng);
+            this.props.setLocation(lat, lng, city);
             this.props.setPlace(place, true);
         })
     }
@@ -155,6 +170,7 @@ class Google extends React.Component {
                     </div>
                 </div>
                 <ul className='list-group' id='results'>
+                    {this.showCity()}
                     {this.showResults()}
                 </ul>
             </div>

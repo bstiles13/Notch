@@ -23140,7 +23140,8 @@ var Main = function (_React$Component) {
         _this.state = {
             latlng: {
                 lat: -0.777259,
-                lng: -91.142578
+                lng: -91.142578,
+                city: false
             },
             newCategory: '',
             newPlace: 'Test',
@@ -23152,7 +23153,6 @@ var Main = function (_React$Component) {
         _this.setTitle = _this.setTitle.bind(_this);
         _this.setLocation = _this.setLocation.bind(_this);
         _this.setPlace = _this.setPlace.bind(_this);
-        _this.setMarker = _this.setMarker.bind(_this);
         _this.setResults = _this.setResults.bind(_this);
         return _this;
     }
@@ -23167,12 +23167,13 @@ var Main = function (_React$Component) {
         }
     }, {
         key: 'setLocation',
-        value: function setLocation(lat, lng) {
+        value: function setLocation(lat, lng, city) {
             console.log('setting location');
             this.setState({
                 latlng: {
                     lat: lat,
-                    lng: lng
+                    lng: lng,
+                    city: city
                 }
             });
         }
@@ -23197,17 +23198,6 @@ var Main = function (_React$Component) {
             });
         }
     }, {
-        key: 'setMarker',
-        value: function setMarker(lat, lng) {
-            console.log('set marker');
-            this.setState({
-                latlng: {
-                    lat: lat,
-                    lng: lng
-                }
-            });
-        }
-    }, {
         key: 'setResults',
         value: function setResults(results) {
             this.setState({
@@ -23220,20 +23210,41 @@ var Main = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_Sidebar2.default, { categories: categories }),
+                _react2.default.createElement(_Sidebar2.default, {
+                    categories: categories
+                }),
                 _react2.default.createElement(
                     'div',
                     { id: 'main-container' },
                     _react2.default.createElement(
                         'div',
                         { id: 'map-container' },
-                        _react2.default.createElement(_Map2.default, { setLocation: this.setLocation, setPlace: this.setPlace, latlng: this.state.latlng, googleResults: this.state.googleResults, setResults: this.setResults }),
-                        _react2.default.createElement(_Google2.default, { setLocation: this.setLocation, setPlace: this.setPlace, setMarker: this.setMarker.bind(this), googleResults: this.state.googleResults, setResults: this.setResults })
+                        _react2.default.createElement(_Map2.default, {
+                            setLocation: this.setLocation,
+                            setPlace: this.setPlace,
+                            latlng: this.state.latlng,
+                            place: this.state.newPlace,
+                            googleResults: this.state.googleResults,
+                            setResults: this.setResults
+                        }),
+                        _react2.default.createElement(_Google2.default, {
+                            setLocation: this.setLocation,
+                            setPlace: this.setPlace,
+                            googleResults: this.state.googleResults,
+                            setResults: this.setResults
+                        })
                     ),
                     _react2.default.createElement(
                         'div',
                         { id: 'form-container' },
-                        _react2.default.createElement(_Form2.default, { categories: categories, state: this.state, setNotch: this.setNotch.bind(this), setTitle: this.setTitle.bind(this) })
+                        _react2.default.createElement(_Form2.default, {
+                            categories: categories,
+                            latlng: this.state.latlng,
+                            place: this.state.newPlace,
+                            existingPlace: this.state.existingPlace,
+                            setNotch: this.setNotch.bind(this),
+                            setTitle: this.setTitle.bind(this)
+                        })
                     )
                 )
             );
@@ -23288,52 +23299,124 @@ var Sidebar = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
 
         _this.state = {
-            category: 'categories'
+            loggedIn: false
         };
+        _this.showLogin = _this.showLogin.bind(_this);
         _this.showMenu = _this.showMenu.bind(_this);
         return _this;
     }
 
     _createClass(Sidebar, [{
-        key: 'showMenu',
+        key: "showLogin",
+        value: function showLogin() {
+            if (this.state.loggedIn) {
+                return _react2.default.createElement(
+                    "div",
+                    null,
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        "Welcome back!"
+                    ),
+                    _react2.default.createElement(
+                        "button",
+                        { type: "button", className: "btn btn-primary btn-sm" },
+                        "Sign In"
+                    )
+                );
+            } else {
+                return _react2.default.createElement(
+                    "div",
+                    null,
+                    _react2.default.createElement(
+                        "div",
+                        { className: "form-group" },
+                        _react2.default.createElement(
+                            "label",
+                            { "for": "exampleInputEmail1" },
+                            "Email address"
+                        ),
+                        _react2.default.createElement("input", { type: "email", className: "form-control form-control-sm login-input", id: "exampleInputEmail1", "aria-describedby": "emailHelp", placeholder: "Enter email" })
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "form-group" },
+                        _react2.default.createElement(
+                            "label",
+                            { "for": "exampleInputPassword1" },
+                            "Password"
+                        ),
+                        _react2.default.createElement("input", { type: "password", className: "form-control form-control-sm login-input", id: "exampleInputPassword1", placeholder: "Password" })
+                    ),
+                    _react2.default.createElement(
+                        "button",
+                        { type: "button", className: "btn btn-primary btn-sm" },
+                        "Sign In"
+                    )
+                );
+            }
+        }
+    }, {
+        key: "showMenu",
         value: function showMenu() {
             var categories = this.props.categories;
             return Object.keys(categories).map(function (key) {
                 var array = categories[key].map(function (index) {
                     return _react2.default.createElement(
-                        'li',
+                        "li",
                         null,
                         _react2.default.createElement(
-                            'a',
+                            "a",
                             null,
                             index
                         )
                     );
                 });
                 return _react2.default.createElement(
-                    'div',
+                    "div",
                     null,
                     _react2.default.createElement(
-                        'p',
-                        { className: 'menu-label' },
+                        "p",
+                        { className: "menu-label" },
                         key
                     ),
                     _react2.default.createElement(
-                        'ul',
-                        { className: 'menu-list' },
+                        "ul",
+                        { className: "menu-list" },
                         array
                     ),
-                    _react2.default.createElement('br', null)
+                    _react2.default.createElement("br", null)
                 );
             });
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'aside',
-                { className: 'menu', style: style.barStyle },
-                this.showMenu()
+                "aside",
+                { className: "menu", style: style.barStyle },
+                _react2.default.createElement(
+                    "h3",
+                    { id: "logo" },
+                    "Notch"
+                ),
+                _react2.default.createElement("hr", null),
+                _react2.default.createElement(
+                    "div",
+                    { id: "login" },
+                    this.showLogin()
+                ),
+                _react2.default.createElement("hr", null),
+                _react2.default.createElement(
+                    "h5",
+                    null,
+                    "Find Notches"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { id: "categories" },
+                    this.showMenu()
+                )
             );
         }
     }]);
@@ -23346,7 +23429,9 @@ var style = {
         'position': 'fixed',
         'width': '15%',
         'height': '100%',
-        'backgroundColor': 'dimgray',
+        'paddingLeft': '10px',
+        'paddingRight': '30px',
+        'backgroundColor': 'gainsboro',
         'overflow': 'scroll'
     }
 };
@@ -23408,15 +23493,10 @@ var Map = function (_React$Component) {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             console.log('prev props: ', prevProps);
-            // console.log(this.props.googleResults);
             var newLat = this.props.latlng.lat;
             var newLng = this.props.latlng.lng;
             mymap.panTo(new L.LatLng(newLat, newLng));
-            // mymap.removeLayer(marker)
-            // marker = L.marker([newLat, newLng]).addTo(mymap);
-            // if (prevProps.googleResults != this.props.googleResults) {
-            //     this.showResults();
-            // };
+            this.setMarker(newLat, newLng);
         }
     }, {
         key: 'initiateMap',
@@ -23439,55 +23519,39 @@ var Map = function (_React$Component) {
     }, {
         key: 'onMapClick',
         value: function onMapClick(e) {
-            // alert("You clicked the map at " + e.latlng);
             var lat = e.latlng.lat;
             var lng = e.latlng.lng;
             this.props.setLocation(lat, lng);
-            this.setMarker(lat, lng, 'My place!');
-            this.props.setPlace('My place!', false);
+            this.setMarker(lat, lng);
+            this.props.setPlace('My place', false);
         }
     }, {
         key: 'setMarker',
-        value: function setMarker(lat, lng, name) {
+        value: function setMarker(lat, lng) {
             mymap.removeLayer(marker);
-            markers = [];
+            // let icon = L.icon({
+            //     iconUrl: 'https://image.flaticon.com/icons/svg/66/66455.svg',
+            //     iconSize: [25, 85], // size of the icon
+            // })
             marker = new L.Marker([lat, lng]);
-            marker.bindTooltip(name, {
-                permanent: true,
-                direction: 'right',
-                className: 'tooltip'
-            });
-
-            // mymap.addLayer(marker);
-            // layer = L.layerGroup(markers);
+            if (this.props.latlng.city) {
+                var icon = new L.Icon({
+                    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+                marker = new L.marker([lat, lng], { icon: icon });
+            } else {
+                marker.bindTooltip(this.props.place, {
+                    permanent: true,
+                    direction: 'right'
+                });
+            }
             mymap.addLayer(marker);
         }
-
-        // showResults() {
-        //     mymap.removeLayer(layer);
-        //     markers = [];
-        //     let results = this.props.googleResults;
-        //     return results.map(place => {
-        //         axios.post('/placedetails', {id: place.place_id}).then(data => {
-        //             console.log(data.data.result.geometry.location);
-        //             let lat = data.data.result.geometry.location.lat;
-        //             let lng = data.data.result.geometry.location.lng;
-        //             let name = data.data.result.name;
-        //             var googleMarker = new L.Marker([lat, lng]);
-        //             googleMarker.bindTooltip(name, 
-        //             {
-        //                 permanent: true, 
-        //                 direction: 'right',
-        //                 className: 'tooltip'
-        //             });
-        //             markers.push(googleMarker);                
-        //             // mymap.addLayer(marker);
-        //             layer = L.layerGroup(markers);
-        //             mymap.addLayer(layer);         
-        //         })
-        //     })
-        // }
-
     }, {
         key: 'render',
         value: function render() {
@@ -23500,7 +23564,6 @@ var Map = function (_React$Component) {
 
 var mymap;
 var marker;
-var markers = [];
 var layer;
 var array;
 
@@ -24465,7 +24528,7 @@ var Form = function (_React$Component) {
                         { htmlFor: "place" },
                         "Place"
                     ),
-                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "place", placeholder: "Place", name: "newPlace", value: this.props.state.newPlace, onChange: this.props.setNotch, disabled: this.props.state.existingPlace ? true : null })
+                    _react2.default.createElement("input", { type: "text", className: "form-control", id: "place", placeholder: "Place", name: "newPlace", value: this.props.place, onChange: this.props.setNotch, disabled: this.props.existingPlace ? true : null })
                 ),
                 _react2.default.createElement(
                     "div",
@@ -24498,7 +24561,7 @@ var Form = function (_React$Component) {
                             { htmlFor: "latitude" },
                             "Latitude"
                         ),
-                        _react2.default.createElement("input", { type: "text", className: "form-control", id: "latitude", value: this.props.state.latlng.lat, disabled: true })
+                        _react2.default.createElement("input", { type: "text", className: "form-control", id: "latitude", value: this.props.latlng.lat, disabled: true })
                     ),
                     _react2.default.createElement(
                         "div",
@@ -24508,7 +24571,7 @@ var Form = function (_React$Component) {
                             { htmlFor: "longitude" },
                             "Longitude"
                         ),
-                        _react2.default.createElement("input", { type: "text", className: "form-control", id: "longitude", value: this.props.state.latlng.lng, disabled: true })
+                        _react2.default.createElement("input", { type: "text", className: "form-control", id: "longitude", value: this.props.latlng.lng, disabled: true })
                     )
                 ),
                 _react2.default.createElement(
@@ -24649,9 +24712,39 @@ var Google = function (_React$Component) {
                 var results = data.data.results;
                 // console.log(results);
                 _this4.props.setResults(results);
-                _this4.placeDetails(id);
+                _this4.placeDetails(id, true);
                 console.log('success');
             });
+        }
+    }, {
+        key: 'showCity',
+        value: function showCity() {
+            var city = this.state.city;
+            if (city != '') {
+                return _react2.default.createElement(
+                    'li',
+                    { id: 'city', className: 'list-group-item list-group-item-action flex-column align-items-start' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'd-flex w-100 justify-content-between' },
+                        _react2.default.createElement(
+                            'h5',
+                            { className: 'mb-1' },
+                            this.state.city
+                        ),
+                        _react2.default.createElement(
+                            'button',
+                            { value: this.state.cityId, className: 'btn btn-sm', onClick: this.sendToMap.bind(this) },
+                            'Select'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'small',
+                        null,
+                        'City'
+                    )
+                );
+            }
         }
     }, {
         key: 'showResults',
@@ -24687,11 +24780,9 @@ var Google = function (_React$Component) {
                     );
                 } else {
                     return _react2.default.createElement(
-                        'div',
-                        null,
-                        ' ',
-                        place,
-                        ' '
+                        'li',
+                        { className: 'list-group-item' },
+                        place
                     );
                 }
             });
@@ -24725,11 +24816,11 @@ var Google = function (_React$Component) {
         value: function sendToMap(event) {
             console.log(event.target.value);
             var id = event.target.value;
-            this.placeDetails(id);
+            this.placeDetails(id, false);
         }
     }, {
         key: 'placeDetails',
-        value: function placeDetails(id) {
+        value: function placeDetails(id, city) {
             var _this6 = this;
 
             _axios2.default.post('/placedetails', { id: id }).then(function (data) {
@@ -24740,7 +24831,7 @@ var Google = function (_React$Component) {
                 var place = data.data.result.name;
                 console.log(lat);
                 console.log(lng);
-                _this6.props.setLocation(lat, lng);
+                _this6.props.setLocation(lat, lng, city);
                 _this6.props.setPlace(place, true);
             });
         }
@@ -24782,6 +24873,7 @@ var Google = function (_React$Component) {
                 _react2.default.createElement(
                     'ul',
                     { className: 'list-group', id: 'results' },
+                    this.showCity(),
                     this.showResults()
                 )
             );

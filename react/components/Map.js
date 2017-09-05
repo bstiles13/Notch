@@ -19,15 +19,10 @@ class Map extends React.Component {
 
     componentDidUpdate(prevProps) {
         console.log('prev props: ', prevProps);
-        // console.log(this.props.googleResults);
         let newLat = this.props.latlng.lat;
         let newLng = this.props.latlng.lng;
         mymap.panTo(new L.LatLng(newLat, newLng));
-        // mymap.removeLayer(marker)
-        // marker = L.marker([newLat, newLng]).addTo(mymap);
-        // if (prevProps.googleResults != this.props.googleResults) {
-        //     this.showResults();
-        // };
+        this.setMarker(newLat, newLng)
     }
 
     initiateMap() {
@@ -48,54 +43,39 @@ class Map extends React.Component {
     }
 
     onMapClick(e) {
-        // alert("You clicked the map at " + e.latlng);
         var lat = e.latlng.lat;
         var lng = e.latlng.lng;
         this.props.setLocation(lat, lng);
-        this.setMarker(lat, lng, 'My place!');
-        this.props.setPlace('My place!', false)
+        this.setMarker(lat, lng);
+        this.props.setPlace('My place', false)
     }
 
-    setMarker(lat, lng, name) {
+    setMarker(lat, lng) {
         mymap.removeLayer(marker);
-        markers = [];
-        marker = new L.Marker([lat, lng]);
-        marker.bindTooltip(name, 
-            {
-                permanent: true, 
-                direction: 'right',
-                className: 'tooltip'
-            });
-
-        // mymap.addLayer(marker);
-        // layer = L.layerGroup(markers);
+        // let icon = L.icon({
+        //     iconUrl: 'https://image.flaticon.com/icons/svg/66/66455.svg',
+        //     iconSize: [25, 85], // size of the icon
+        // })
+        marker = new L.Marker([lat, lng]);        
+        if (this.props.latlng.city) {
+            let icon = new L.Icon({
+                iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              });
+              marker = new L.marker([lat, lng], {icon: icon});
+        } else {
+            marker.bindTooltip(this.props.place,
+                {
+                    permanent: true,
+                    direction: 'right',
+                })
+        }
         mymap.addLayer(marker);
     }
-
-    // showResults() {
-    //     mymap.removeLayer(layer);
-    //     markers = [];
-    //     let results = this.props.googleResults;
-    //     return results.map(place => {
-    //         axios.post('/placedetails', {id: place.place_id}).then(data => {
-    //             console.log(data.data.result.geometry.location);
-    //             let lat = data.data.result.geometry.location.lat;
-    //             let lng = data.data.result.geometry.location.lng;
-    //             let name = data.data.result.name;
-    //             var googleMarker = new L.Marker([lat, lng]);
-    //             googleMarker.bindTooltip(name, 
-    //             {
-    //                 permanent: true, 
-    //                 direction: 'right',
-    //                 className: 'tooltip'
-    //             });
-    //             markers.push(googleMarker);                
-    //             // mymap.addLayer(marker);
-    //             layer = L.layerGroup(markers);
-    //             mymap.addLayer(layer);         
-    //         })
-    //     })
-    // }
 
     render() {
         return (
@@ -106,7 +86,6 @@ class Map extends React.Component {
 
 var mymap;
 var marker;
-var markers = [];
 var layer;
 var array;
 

@@ -36,3 +36,6 @@ html, body {
 
 #location {
   display: flex; }
+
+#city {
+  background-color: lightcyan; }

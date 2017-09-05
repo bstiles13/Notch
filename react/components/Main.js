@@ -13,6 +13,7 @@ class Main extends React.Component {
             latlng: {
                 lat: -0.777259,
                 lng: -91.142578,
+                city: false
             },
             newCategory: '',
             newPlace: 'Test',
@@ -24,7 +25,6 @@ class Main extends React.Component {
         this.setTitle = this.setTitle.bind(this);
         this.setLocation = this.setLocation.bind(this);
         this.setPlace = this.setPlace.bind(this);
-        this.setMarker = this.setMarker.bind(this);
         this.setResults = this.setResults.bind(this);
     }
 
@@ -34,12 +34,13 @@ class Main extends React.Component {
         console.log(this.state);
     }
 
-    setLocation(lat, lng) {
+    setLocation(lat, lng, city) {
         console.log('setting location');
         this.setState({
             latlng: {
                 lat: lat,
-                lng: lng
+                lng: lng,
+                city: city
             }
         })
     }
@@ -63,16 +64,6 @@ class Main extends React.Component {
         })
     }
 
-    setMarker(lat, lng) {
-        console.log('set marker');
-        this.setState({
-            latlng: {
-                lat: lat,
-                lng: lng
-            }
-        })
-    }
-
     setResults(results) {
         this.setState({
             googleResults: results
@@ -82,14 +73,35 @@ class Main extends React.Component {
     render() {
         return (
             <div>
-                <Sidebar categories={categories} />
+                <Sidebar
+                    categories={categories}
+                />
                 <div id='main-container'>
                     <div id='map-container'>
-                        <Map setLocation={this.setLocation} setPlace={this.setPlace} latlng={this.state.latlng} googleResults={this.state.googleResults} setResults={this.setResults}/>
-                        <Google setLocation={this.setLocation} setPlace={this.setPlace} setMarker={this.setMarker.bind(this)} googleResults={this.state.googleResults} setResults={this.setResults}/>
+                        <Map
+                            setLocation={this.setLocation}
+                            setPlace={this.setPlace}
+                            latlng={this.state.latlng}
+                            place={this.state.newPlace}
+                            googleResults={this.state.googleResults}
+                            setResults={this.setResults}
+                        />
+                        <Google
+                            setLocation={this.setLocation}
+                            setPlace={this.setPlace}
+                            googleResults={this.state.googleResults}
+                            setResults={this.setResults}
+                        />
                     </div>
                     <div id='form-container'>
-                        <Form categories={categories} state={this.state} setNotch={this.setNotch.bind(this)} setTitle={this.setTitle.bind(this)} />
+                        <Form
+                            categories={categories}
+                            latlng={this.state.latlng}
+                            place={this.state.newPlace}
+                            existingPlace={this.state.existingPlace}
+                            setNotch={this.setNotch.bind(this)}
+                            setTitle={this.setTitle.bind(this)}
+                        />
                     </div>
                 </div>
             </div>

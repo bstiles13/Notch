@@ -29,7 +29,7 @@ class Form extends React.Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="place">Place</label>
-                    <input type="text" className="form-control" id="place" placeholder="Place" name="newPlace" value={this.props.state.newPlace} onChange={this.props.setNotch} disabled={this.props.state.existingPlace ? true : null} />
+                    <input type="text" className="form-control" id="place" placeholder="Place" name="newPlace" value={this.props.place} onChange={this.props.setNotch} disabled={this.props.existingPlace ? true : null} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="headline">Headline</label>
@@ -42,11 +42,11 @@ class Form extends React.Component {
                 <div id='location'>
                     <div className="form-group">
                         <label htmlFor="latitude">Latitude</label>
-                        <input type="text" className="form-control" id="latitude" value={this.props.state.latlng.lat} disabled />
+                        <input type="text" className="form-control" id="latitude" value={this.props.latlng.lat} disabled />
                     </div>
                     <div className="form-group">
                         <label htmlFor="longitude">Longitude</label>
-                        <input type="text" className="form-control" id="longitude" value={this.props.state.latlng.lng} disabled />
+                        <input type="text" className="form-control" id="longitude" value={this.props.latlng.lng} disabled />
                     </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
