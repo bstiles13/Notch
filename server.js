@@ -111,7 +111,8 @@ app.post('/newuser', function (req, res) {
                 bcrypt.hash(req.body.password1, salt, function (err, hash) {
                     var newUser = {
                         username: req.body.username,
-                        password: hash
+                        password: hash,
+                        zipcode: req.body.zipCode
                     }
                     console.log(newUser);
                     User.create(newUser).then(data => {
