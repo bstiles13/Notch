@@ -147,7 +147,7 @@ app.post('/newnotch', function (req, res) {
             "summary": req.body.summary,
         }
     }
-    console.log(notch);    
+    console.log(notch);
     Notch.create(notch).then(data => {
         console.log(data);
         res.send('success');
@@ -157,28 +157,36 @@ app.post('/newnotch', function (req, res) {
     })
 })
 
-app.post('/getnotches', function(req, res) {
+app.post('/getnotches', function (req, res) {
     console.log(req.body);
     console.log('finding notches');
     let lng = req.body.lng;
     let lat = req.body.lat;
-    Notch.find(
-        {
-          "geometry":
-            { $near :
-               {
-                 $geometry: { type: "Point",  coordinates: [ lng, lat ] },
-                 $maxDistance: 160000
-               }
+    if (req.body.category != 'All') {
+        let category = req.body.category.split("|");
+        var parent = category[0].trim();
+        var child = category[1].trim();
+    } else {
+        var parent = { $exists: true }
+        var child = { $exists: true }
+    }
+    Notch.find({
+        "geometry": {
+            $near: {
+                $geometry: { type: "Point", coordinates: [lng, lat] },
+                $maxDistance: 160000
             }
-        }
-     ).then(data => {
-         console.log('found notches');
-         console.log(data);
-         res.send(data);
-     }).catch(err => {
-         console.log('Error: ' + err);
-     })
+        },
+        "properties.category_parent": parent,
+        "properties.category_child": child
+    }
+    ).then(data => {
+        console.log('found notches');
+        console.log(data);
+        res.send(data);
+    }).catch(err => {
+        console.log('Error: ' + err);
+    })
 })
 
 // Start server

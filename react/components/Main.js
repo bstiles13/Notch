@@ -90,13 +90,11 @@ class Main extends React.Component {
     }
 
     setFilter(event) {
-        console.log('pushed');
-        console.log(event.target.getAttribute('value'));
-        // this.setState({
-        //     notchFilter: {
-        //         category: event.target.value;
-        //     }
-        // })
+        this.setState({
+            notchFilter: {
+                category: event.target.getAttribute('value')
+            }
+        }, this.getNotches)
     }
 
 
@@ -104,7 +102,8 @@ class Main extends React.Component {
         console.log('notch request received');
         let scope = {
             lat: this.state.latlng.lat,
-            lng: this.state.latlng.lng
+            lng: this.state.latlng.lng,
+            category: this.state.notchFilter.category
         }
         axios.post('/getnotches', scope).then(data => {
             console.log('got notches');
@@ -161,6 +160,7 @@ class Main extends React.Component {
                             <Notch
                                 notchFilter={this.state.notchFilter}
                                 notchResults={this.state.notchResults}
+                                setFilter={this.setFilter}
                             />
                             <Google
                                 setLocation={this.setLocation}

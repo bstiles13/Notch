@@ -31,7 +31,7 @@ class Notch extends React.Component {
         return (
             <div id='notch'>
                 <h4>Nearby Notches</h4>
-                <span>Filters: [category: {this.props.notchFilter.category}]</span>
+                <span>Filters: [category: {this.props.notchFilter.category} <i onClick={this.props.setFilter} value={"All"} className="fa fa-times" aria-hidden="true"></i>]</span>
                 <br /><br />                
                 {this.showResults()}
             </div>

@@ -23231,13 +23231,11 @@ var Main = function (_React$Component) {
     }, {
         key: 'setFilter',
         value: function setFilter(event) {
-            console.log('pushed');
-            console.log(event.target.getAttribute('value'));
-            // this.setState({
-            //     notchFilter: {
-            //         category: event.target.value;
-            //     }
-            // })
+            this.setState({
+                notchFilter: {
+                    category: event.target.getAttribute('value')
+                }
+            }, this.getNotches);
         }
     }, {
         key: 'getNotches',
@@ -23247,7 +23245,8 @@ var Main = function (_React$Component) {
             console.log('notch request received');
             var scope = {
                 lat: this.state.latlng.lat,
-                lng: this.state.latlng.lng
+                lng: this.state.latlng.lng,
+                category: this.state.notchFilter.category
             };
             _axios2.default.post('/getnotches', scope).then(function (data) {
                 console.log('got notches');
@@ -23313,7 +23312,8 @@ var Main = function (_React$Component) {
                             { id: 'content-bottom' },
                             _react2.default.createElement(_Notch2.default, {
                                 notchFilter: this.state.notchFilter,
-                                notchResults: this.state.notchResults
+                                notchResults: this.state.notchResults,
+                                setFilter: this.setFilter
                             }),
                             _react2.default.createElement(_Google2.default, {
                                 setLocation: this.setLocation,
@@ -25091,6 +25091,8 @@ var Notch = function (_React$Component) {
                     null,
                     'Filters: [category: ',
                     this.props.notchFilter.category,
+                    ' ',
+                    _react2.default.createElement('i', { onClick: this.props.setFilter, value: "All", className: 'fa fa-times', 'aria-hidden': 'true' }),
                     ']'
                 ),
                 _react2.default.createElement('br', null),
