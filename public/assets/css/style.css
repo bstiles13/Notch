@@ -1,5 +1,5 @@
 html, body {
-  background-color: lemonchiffon;
+  background-color: floralwhite;
   width: 100%; }
 
 .menu-label {
@@ -14,25 +14,41 @@ html, body {
   height: 100%;
   width: 100%; }
 
-#sidebar-container {
+#sidebar {
   flex: 1;
   background-color: #383f51;
   color: ivory; }
 
-#map-container {
-  flex: 4; }
+#content {
+  flex: 8; }
 
-#form-container {
-  flex: 3; }
+#content-top {
+  display: flex;
+  margin-bottom: 20px; }
 
-#sidebar-container, #map-container, #form-container {
-  padding: 20px; }
+#content-bottom {
+  display: flex;
+  align-items: stretch; }
 
-#form-container {
+#map {
+  flex: 2; }
+
+#form {
+  flex: 1;
   background-color: mintcream; }
 
+#notch {
+  flex: 1;
+  border-right: 1px solid gray; }
+
+#google {
+  flex: 1; }
+
+#sidebar, #form, #notch, #google {
+  padding: 20px; }
+
 #mapid {
-  height: 500px;
+  height: 100%;
   width: 100%; }
 
 #search {

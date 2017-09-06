@@ -18,7 +18,7 @@ class Form extends React.Component {
 
     render() {
         return (
-            <div id='form-container'>
+            <div id='form'>
                 <h2>Add a notch</h2>
                 <div className="form-group">
                     <label htmlFor="exampleSelect1">Category</label>

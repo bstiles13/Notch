@@ -1,4 +1,4 @@
-$color: lemonchiffon;
+$color: floralwhite;
 
 html, body {
     background-color: $color;
@@ -20,30 +20,52 @@ html, body {
     width: 100%;
 }
 
-#sidebar-container {
+
+#sidebar {
     flex: 1;
     background-color: rgb(56, 63, 81);
     color: ivory;
 }
 
-#map-container {
-    flex: 4;
+#content {
+    flex: 8;
 }
 
-#form-container {
-    flex: 3;
+#content-top {
+    display: flex;
+    margin-bottom: 20px;
 }
 
-#sidebar-container, #map-container, #form-container {
-    padding: 20px;
+#content-bottom {
+    display: flex;    
+    // height: 100%;
+    align-items: stretch;        
 }
 
-#form-container {
+#map {
+    flex: 2;
+}
+
+#form {
+    flex: 1;
     background-color: mintcream;
 }
 
+#notch {
+    flex: 1;
+    border-right: 1px solid gray;
+}
+
+#google {
+    flex: 1;
+}
+
+#sidebar, #form, #notch, #google {
+    padding: 20px;
+}
+
 #mapid {
-    height: 500px;
+    height: 100%;
     width: 100%;
 }
 

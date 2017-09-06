@@ -56,7 +56,7 @@ class Map extends React.Component {
         //     iconUrl: 'https://image.flaticon.com/icons/svg/66/66455.svg',
         //     iconSize: [25, 85], // size of the icon
         // })
-        marker = new L.Marker([lat, lng]);        
+        marker = new L.Marker([lat, lng]);
         if (this.props.latlng.city) {
             let icon = new L.Icon({
                 iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
@@ -65,8 +65,8 @@ class Map extends React.Component {
                 iconAnchor: [12, 41],
                 popupAnchor: [1, -34],
                 shadowSize: [41, 41]
-              });
-              marker = new L.marker([lat, lng], {icon: icon});
+            });
+            marker = new L.marker([lat, lng], { icon: icon });
         } else {
             marker.bindTooltip(this.props.place,
                 {
@@ -79,7 +79,9 @@ class Map extends React.Component {
 
     render() {
         return (
-            <div id='mapid'></div>
+            <div id='map'>
+                <div id='mapid'></div>
+            </div>
         );
     }
 }

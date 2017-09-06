@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
 
     render() {
         return (
-            <aside id='sidebar-container' className="menu">
+            <aside id='sidebar' className="menu">
                 <h3 id='logo'>Notch</h3>
                 <hr />
                 <Login id='login' user={this.props.user} setUser={this.props.setUser}/>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import Map from './Map';
 import Form from './Form';
+import Notch from './Notch';
 import Google from './Google';
 
 class Main extends React.Component {
@@ -22,7 +23,8 @@ class Main extends React.Component {
             newHeadline: '',
             newSummary: '',
             existingPlace: false,
-            googleResults: ['No results']
+            googleResults: ['No results'],
+            notchResults: ['No results']
         };
         this.setUser = this.setUser.bind(this);
         this.setTitle = this.setTitle.bind(this);
@@ -110,31 +112,38 @@ class Main extends React.Component {
                         user={this.state.user}
                         setUser={this.setUser}
                     />
-                    <div id='map-container'>
-                        <Map
-                            setLocation={this.setLocation}
-                            setPlace={this.setPlace}
-                            latlng={this.state.latlng}
-                            place={this.state.newPlace}
-                            googleResults={this.state.googleResults}
-                            setResults={this.setResults}
-                        />
-                        <Google
-                            setLocation={this.setLocation}
-                            setPlace={this.setPlace}
-                            googleResults={this.state.googleResults}
-                            setResults={this.setResults}
-                        />
+                    <div id='content'>
+                        <div id='content-top'>
+                            <Map
+                                setLocation={this.setLocation}
+                                setPlace={this.setPlace}
+                                latlng={this.state.latlng}
+                                place={this.state.newPlace}
+                                googleResults={this.state.googleResults}
+                                setResults={this.setResults}
+                            />
+                            <Form
+                                categories={categories}
+                                latlng={this.state.latlng}
+                                place={this.state.newPlace}
+                                existingPlace={this.state.existingPlace}
+                                setNotch={this.setNotch.bind(this)}
+                                setTitle={this.setTitle.bind(this)}
+                                newNotch={this.newNotch}
+                            />
+                        </div>
+                        <div id="content-bottom">
+                            <Notch
+                                notchResults={this.state.notchResults}
+                            />
+                            <Google
+                                setLocation={this.setLocation}
+                                setPlace={this.setPlace}
+                                googleResults={this.state.googleResults}
+                                setResults={this.setResults}
+                            />
+                        </div>
                     </div>
-                    <Form
-                        categories={categories}
-                        latlng={this.state.latlng}
-                        place={this.state.newPlace}
-                        existingPlace={this.state.existingPlace}
-                        setNotch={this.setNotch.bind(this)}
-                        setTitle={this.setTitle.bind(this)}
-                        newNotch={this.newNotch}
-                    />
                 </div>
             </div>
         );

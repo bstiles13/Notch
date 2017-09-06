@@ -155,7 +155,8 @@ class Google extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id='google'>
+                <h4>Google</h4>
                 <div id='search'>
                     <div className="form-group search-child">
                         <label htmlFor="keyword">Keyword</label>
