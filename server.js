@@ -10,6 +10,7 @@ var port = process.ENV || 8080;
 var mongoose = require('mongoose');
 var db = process.env.MONGODB_URI || "mongodb://localhost/notch";
 var User = require('./model/user.js');
+var Notch = require('./model/notch.js');
 
 // Server configuration
 var app = express();
@@ -90,9 +91,9 @@ app.post('/existinguser', function (req, res) {
         } else {
             console.log(user);
             var savedHash = user.password;
-            bcrypt.compare(req.body.password, savedHash, function(err, status) {
-              console.log(status);
-              status === true ? res.json('success') : res.json('unsuccessful');
+            bcrypt.compare(req.body.password, savedHash, function (err, status) {
+                console.log(status);
+                status === true ? res.json('success') : res.json('unsuccessful');
             });
         }
     })
@@ -116,8 +117,8 @@ app.post('/newuser', function (req, res) {
                     }
                     console.log(newUser);
                     User.create(newUser).then(data => {
-                            console.log(data);
-                            res.send('success');
+                        console.log(data);
+                        res.send('success');
                     }).catch(err => {
                         console.log(err);
                     })
@@ -129,6 +130,32 @@ app.post('/newuser', function (req, res) {
         }
     });
 });
+
+app.post('/newnotch', function (req, res) {
+    console.log(req.body);
+    let categories = req.body.category.split('|');
+    let notch = {
+        "geometry": {
+            "coordinates": [req.body.lng.toString(), req.body.lat.toString()]
+        },
+        "properties": {
+            "user": req.body.user,
+            "category_parent": categories[0].trim(),
+            "category_child": categories[1].trim(),
+            "place": req.body.place,
+            "headline": req.body.headline,
+            "summary": req.body.summary,
+        }
+    }
+    console.log(notch);    
+    Notch.create(notch).then(data => {
+        console.log(data);
+        res.send('success');
+    }).catch(err => {
+        console.log(err);
+        res.send('unsuccessful');
+    })
+})
 
 // Start server
 app.listen(port, function () {

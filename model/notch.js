@@ -3,14 +3,21 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let notchSchema = new Schema({
-    "type": "Feature",
+    "type": {
+        type: String,
+        default: "Feature"
+    },
     "geometry": {
-        "type": "Point",
-        "coordinates": [String]
+        "type": {
+            type: String,
+            default: "Point"
+        },
+        "coordinates": [Number]
     },
     "properties": {
         "user": String,
-        "category": String,
+        "category_parent": String,
+        "category_child": String,
         "place": String,
         "headline": String,
         "summary": String,
@@ -21,7 +28,7 @@ let notchSchema = new Schema({
     }
 })
 
-wreckSchema.index({"geometry": '2dsphere'});
+notchSchema.index({"geometry": '2dsphere'});
 
 let Notch = mongoose.model("Notch", notchSchema);
 

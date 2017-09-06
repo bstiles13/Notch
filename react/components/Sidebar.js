@@ -18,16 +18,16 @@ class Sidebar extends React.Component {
             return <div><p className="menu-label">{key}</p>
                 <ul className="menu-list category">
                     {array}
-                </ul><br /></div>;
+                </ul></div>;
         });
     }
 
     render() {
         return (
-            <aside className="menu" style={style.barStyle}>
+            <aside id='sidebar-container' className="menu">
                 <h3 id='logo'>Notch</h3>
                 <hr />
-                <Login id='login'/>
+                <Login id='login' user={this.props.user} setUser={this.props.setUser}/>
                 <hr />
                 <h5>Find Notches</h5>
                 <div id='categories'>
@@ -35,18 +35,6 @@ class Sidebar extends React.Component {
                 </div>
             </aside>
         )
-    }
-}
-
-var style = {
-    barStyle: {
-        'position': 'fixed',
-        'width': '15%',
-        'height': '100%',
-        'paddingLeft': '10px',
-        'paddingRight': '30px',
-        'backgroundColor': 'gainsboro',
-        'overflow': 'scroll'
     }
 }
 

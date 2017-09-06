@@ -51,10 +51,12 @@ class Login extends React.Component {
         var local = localStorage.getItem('notchUser');
         console.log('local user: ' + local);
         if (local != null && local != 'null' && local != undefined) {
-            this.setState({ user: local });
+            // this.setState({ user: local });
+            this.props.setUser(local);
             this.setState({ loggedIn: true });
         } else {
-            this.setState({ user: null });
+            // this.setState({ user: null });
+            this.props.setUser(null);
             this.setState({ loggedIn: false });
         }
     }
@@ -170,7 +172,7 @@ class Login extends React.Component {
         if (this.state.loggedIn) {
             return (
                 <div>
-                    <div>Welcome back <span id="username">{this.state.user}</span>!</div>
+                    <div>Welcome back <span id="username">{this.props.user}</span>!</div>
                     <br />
                     <button type="button" className="btn btn-primary btn-sm login-button" onClick={this.logout.bind(this)}>Sign Out</button>
                 </div>
@@ -206,11 +208,11 @@ class Login extends React.Component {
                     {this.error('invalidText')}
                     {this.error('invalidUser')}
                     <div className="form-group">
-                        <label for="exampleInputEmail1">Username</label>
+                        <label htmlFor="exampleInputEmail1">Username</label>
                         <input type="email" className="form-control form-control-sm login-input" id="existing-username" placeholder="Enter username" name='username' onChange={this.setExistingUser} />
                     </div>
                     <div className="form-group">
-                        <label for="exampleInputPassword1">Password</label>
+                        <label htmlFor="exampleInputPassword1">Password</label>
                         <input type="password" className="form-control form-control-sm login-input" id="existing-password" placeholder="Password" name='password' onChange={this.setExistingUser} />
                     </div>
                     <button type="button" className="btn btn-primary btn-sm login-button" onClick={this.loginExisting.bind(this)}>Sign In</button>

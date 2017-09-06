@@ -12,23 +12,33 @@ html, body {
   display: flex;
   justify-content: space-around;
   height: 100%;
-  width: 100%;
-  padding-left: 300px; }
+  width: 100%; }
+
+#sidebar-container {
+  flex: 1;
+  background-color: #383f51;
+  color: ivory; }
+
+#map-container {
+  flex: 4; }
+
+#form-container {
+  flex: 3; }
+
+#sidebar-container, #map-container, #form-container {
+  padding: 20px; }
 
 #form-container {
   background-color: mintcream; }
 
 #mapid {
   height: 500px;
-  width: 700px; }
-
-#map-container, #form-container {
-  flex: 1;
-  padding: 20px; }
+  width: 100%; }
 
 #search {
   margin: 10px;
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
 
 .search-child {
   margin-right: 10px;

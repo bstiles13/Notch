@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import Sidebar from './Sidebar';
 import Map from './Map';
@@ -10,6 +11,7 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: null,
             latlng: {
                 lat: -0.777259,
                 lng: -91.142578,
@@ -17,15 +19,17 @@ class Main extends React.Component {
             },
             newCategory: '',
             newPlace: 'Test',
-            existingPlace: false,
             newHeadline: '',
             newSummary: '',
+            existingPlace: false,
             googleResults: ['No results']
         };
+        this.setUser = this.setUser.bind(this);
         this.setTitle = this.setTitle.bind(this);
         this.setLocation = this.setLocation.bind(this);
         this.setPlace = this.setPlace.bind(this);
         this.setResults = this.setResults.bind(this);
+        this.newNotch = this.newNotch.bind(this);
     }
 
     componentDidMount() { }
@@ -42,6 +46,12 @@ class Main extends React.Component {
                 lng: lng,
                 city: city
             }
+        })
+    }
+
+    setUser(user) {
+        this.setState({
+            user: user
         })
     }
 
@@ -70,13 +80,36 @@ class Main extends React.Component {
         })
     }
 
+    newNotch() {
+        let notch = {
+            user: this.state.user,
+            lat: this.state.latlng.lat,
+            lng: this.state.latlng.lng,
+            category: this.state.newCategory,
+            place: this.state.newPlace,
+            headline: this.state.newHeadline,
+            summary: this.state.newSummary
+        }
+        if (notch.user == null) {
+            return;
+        } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
+            axios.post('/newnotch', notch).then(data => {
+                console.log(data.data);
+            })
+        } else {
+            console.log('error');
+        }
+    }
+
     render() {
         return (
             <div>
-                <Sidebar
-                    categories={categories}
-                />
                 <div id='main-container'>
+                    <Sidebar
+                        categories={categories}
+                        user={this.state.user}
+                        setUser={this.setUser}
+                    />
                     <div id='map-container'>
                         <Map
                             setLocation={this.setLocation}
@@ -93,16 +126,15 @@ class Main extends React.Component {
                             setResults={this.setResults}
                         />
                     </div>
-                    <div id='form-container'>
-                        <Form
-                            categories={categories}
-                            latlng={this.state.latlng}
-                            place={this.state.newPlace}
-                            existingPlace={this.state.existingPlace}
-                            setNotch={this.setNotch.bind(this)}
-                            setTitle={this.setTitle.bind(this)}
-                        />
-                    </div>
+                    <Form
+                        categories={categories}
+                        latlng={this.state.latlng}
+                        place={this.state.newPlace}
+                        existingPlace={this.state.existingPlace}
+                        setNotch={this.setNotch.bind(this)}
+                        setTitle={this.setTitle.bind(this)}
+                        newNotch={this.newNotch}
+                    />
                 </div>
             </div>
         );

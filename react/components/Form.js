@@ -18,7 +18,7 @@ class Form extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id='form-container'>
                 <h2>Add a notch</h2>
                 <div className="form-group">
                     <label htmlFor="exampleSelect1">Category</label>
@@ -43,7 +43,7 @@ class Form extends React.Component {
                     <textarea className="form-control" id="summary" rows="3" name="newSummary" onChange={this.props.setNotch}></textarea>
                 </div>
                 <br />
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" onClick={this.props.newNotch}>Submit</button>
             </div>
         )
     }
