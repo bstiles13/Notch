@@ -11,9 +11,10 @@ class Sidebar extends React.Component {
 
     showMenu() {
         var categories = this.props.categories;
+        var that = this;
         return Object.keys(categories).map(function (key) {
             var array = categories[key].map(function (index) {
-                return <li><a href='#'>{index}</a></li>;
+                return <li className="category" onClick={that.props.setFilter} value={key + " | " + index}>{index}</li>;
             })
             return <div><p className="menu-label">{key}</p>
                 <ul className="menu-list category">
@@ -27,9 +28,11 @@ class Sidebar extends React.Component {
             <aside id='sidebar' className="menu">
                 <h3 id='logo'>Notch</h3>
                 <hr />
-                <Login id='login' user={this.props.user} setUser={this.props.setUser}/>
+                <Login id='login' user={this.props.user} setUser={this.props.setUser} />
                 <hr />
-                <h5>Find Notches</h5>
+                <br />
+                <h6>Filter by Category</h6>
+                <hr />                
                 <div id='categories'>
                     {this.showMenu()}
                 </div>

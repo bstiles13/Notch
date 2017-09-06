@@ -14,15 +14,20 @@ class Main extends React.Component {
         this.state = {
             user: null,
             latlng: {
-                lat: -0.777259,
-                lng: -91.142578,
+                // lat: -0.777259,
+                // lng: -91.142578,
+                lat: 39.7392,
+                lng: -104.9903,
                 city: false
             },
             newCategory: '',
-            newPlace: 'Test',
+            newPlace: 'Give me a name!',
             newHeadline: '',
             newSummary: '',
             existingPlace: false,
+            notchFilter: {
+                category: 'All'
+            },
             googleResults: ['No results'],
             notchResults: ['No results']
         };
@@ -31,24 +36,26 @@ class Main extends React.Component {
         this.setLocation = this.setLocation.bind(this);
         this.setPlace = this.setPlace.bind(this);
         this.setResults = this.setResults.bind(this);
-        this.newNotch = this.newNotch.bind(this);
+        this.setFilter = this.setFilter.bind(this);
+        this.getNotches = this.getNotches.bind(this);
     }
 
-    componentDidMount() { }
+    componentDidMount() {
+        this.getNotches();
+    }
 
-    componentDidUpdate() {
-        console.log(this.state);
+    componentDidUpdate(prevProps, prevState) {
+
     }
 
     setLocation(lat, lng, city) {
-        console.log('setting location');
         this.setState({
             latlng: {
                 lat: lat,
                 lng: lng,
                 city: city
             }
-        })
+        }, this.getNotches)
     }
 
     setUser(user) {
@@ -82,25 +89,37 @@ class Main extends React.Component {
         })
     }
 
-    newNotch() {
-        let notch = {
-            user: this.state.user,
+    setFilter(event) {
+        console.log('pushed');
+        console.log(event.target.getAttribute('value'));
+        // this.setState({
+        //     notchFilter: {
+        //         category: event.target.value;
+        //     }
+        // })
+    }
+
+
+    getNotches() {
+        console.log('notch request received');
+        let scope = {
             lat: this.state.latlng.lat,
-            lng: this.state.latlng.lng,
-            category: this.state.newCategory,
-            place: this.state.newPlace,
-            headline: this.state.newHeadline,
-            summary: this.state.newSummary
+            lng: this.state.latlng.lng
         }
-        if (notch.user == null) {
-            return;
-        } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
-            axios.post('/newnotch', notch).then(data => {
-                console.log(data.data);
-            })
-        } else {
-            console.log('error');
-        }
+        axios.post('/getnotches', scope).then(data => {
+            console.log('got notches');
+            console.log(data.data);
+            if (data.data == '' || data.data == []) {
+                console.log('notches out of range');
+                this.setState({
+                    notchResults: ['No results']
+                })
+            } else {
+                this.setState({
+                    notchResults: data.data
+                })
+            }
+        })
     }
 
     render() {
@@ -111,6 +130,7 @@ class Main extends React.Component {
                         categories={categories}
                         user={this.state.user}
                         setUser={this.setUser}
+                        setFilter={this.setFilter}
                     />
                     <div id='content'>
                         <div id='content-top'>
@@ -121,19 +141,25 @@ class Main extends React.Component {
                                 place={this.state.newPlace}
                                 googleResults={this.state.googleResults}
                                 setResults={this.setResults}
+                                notchResults={this.state.notchResults}
                             />
                             <Form
                                 categories={categories}
+                                user={this.state.user}
                                 latlng={this.state.latlng}
+                                category={this.state.newCategory}
                                 place={this.state.newPlace}
+                                headline={this.state.newHeadline}
+                                summary={this.state.newSummary}
                                 existingPlace={this.state.existingPlace}
                                 setNotch={this.setNotch.bind(this)}
                                 setTitle={this.setTitle.bind(this)}
-                                newNotch={this.newNotch}
+                                getNotches={this.getNotches}
                             />
                         </div>
                         <div id="content-bottom">
                             <Notch
+                                notchFilter={this.state.notchFilter}
                                 notchResults={this.state.notchResults}
                             />
                             <Google

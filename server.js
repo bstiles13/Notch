@@ -157,6 +157,30 @@ app.post('/newnotch', function (req, res) {
     })
 })
 
+app.post('/getnotches', function(req, res) {
+    console.log(req.body);
+    console.log('finding notches');
+    let lng = req.body.lng;
+    let lat = req.body.lat;
+    Notch.find(
+        {
+          "geometry":
+            { $near :
+               {
+                 $geometry: { type: "Point",  coordinates: [ lng, lat ] },
+                 $maxDistance: 160000
+               }
+            }
+        }
+     ).then(data => {
+         console.log('found notches');
+         console.log(data);
+         res.send(data);
+     }).catch(err => {
+         console.log('Error: ' + err);
+     })
+})
+
 // Start server
 app.listen(port, function () {
     console.log('Server successful on port ' + port);

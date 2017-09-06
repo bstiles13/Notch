@@ -7,21 +7,22 @@ class Notch extends React.Component {
     }
 
     showResults() {
+        console.log('notch results')
         console.log(this.props.notchResults);
         let results = this.props.notchResults;
-        return results.map(place => {
-            if (place.name) {
+        return results.map(notch => {
+            if (notch.properties == undefined || notch.properties == null) {
+                return (<li className="list-group-item">{notch}</li>)                
+            } else {
                 return (
                     <li className="list-group-item list-group-item-action flex-column align-items-start">
                         <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">{place.name}</h5>
+                            <h5 className="mb-1">{notch.properties.place}</h5>
                             <button>Select</button>
                         </div>
-                        <small>Placeholder</small>
+                        <small>{notch.properties.headline}</small>
                     </li>
                 )
-            } else {
-                return (<li className="list-group-item">{place}</li>)
             }
         })
     }
@@ -30,6 +31,8 @@ class Notch extends React.Component {
         return (
             <div id='notch'>
                 <h4>Nearby Notches</h4>
+                <span>Filters: [category: {this.props.notchFilter.category}]</span>
+                <br /><br />                
                 {this.showResults()}
             </div>
         )

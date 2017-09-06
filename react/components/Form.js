@@ -1,10 +1,12 @@
 import React from 'react';
+import axios from 'axios';
 
 class Form extends React.Component {
 
     constructor(props) {
         super(props);
         this.options = this.options.bind(this);
+        this.newNotch = this.newNotch.bind(this);
     }
 
     options() {
@@ -14,6 +16,29 @@ class Form extends React.Component {
                 return <option>{key} | {index}</option>;
             })
         });
+    }
+
+    newNotch() {
+        let notch = {
+            user: this.props.user,
+            lat: this.props.latlng.lat,
+            lng: this.props.latlng.lng,
+            category: this.props.category,
+            place: this.props.place,
+            headline: this.props.headline,
+            summary: this.props.summary
+        }
+        if (notch.user == null || notch.user === '' || notch.user == undefined) {
+            console.log('no user');
+            console.log(notch);
+            return;
+        } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
+            axios.post('/newnotch', notch).then(data => {
+                console.log(data.data);
+            })
+        } else {
+            console.log('error');
+        }
     }
 
     render() {
@@ -43,7 +68,7 @@ class Form extends React.Component {
                     <textarea className="form-control" id="summary" rows="3" name="newSummary" onChange={this.props.setNotch}></textarea>
                 </div>
                 <br />
-                <button type="submit" className="btn btn-primary" onClick={this.props.newNotch}>Submit</button>
+                <button type="submit" className="btn btn-primary" onClick={this.newNotch}>Submit</button>
             </div>
         )
     }

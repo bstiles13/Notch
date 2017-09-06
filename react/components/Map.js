@@ -14,7 +14,8 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
-        this.initiateMap()
+        this.initiateMap();
+        this.showNotches();
     }
 
     componentDidUpdate(prevProps) {
@@ -23,6 +24,7 @@ class Map extends React.Component {
         let newLng = this.props.latlng.lng;
         mymap.panTo(new L.LatLng(newLat, newLng));
         this.setMarker(newLat, newLng)
+        this.showNotches();        
     }
 
     initiateMap() {
@@ -30,7 +32,7 @@ class Map extends React.Component {
         console.log('Prop' + this.props.latlng.lng);
         let lat = this.props.latlng.lat;
         let lng = this.props.latlng.lng;
-        mymap = new L.map('mapid').setView([lat, lng], 8);
+        mymap = new L.map('mapid').setView([lat, lng], 10);
         mymap.doubleClickZoom.disable();
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -45,17 +47,13 @@ class Map extends React.Component {
     onMapClick(e) {
         var lat = (e.latlng.lat).toFixed(7);
         var lng = (e.latlng.lng).toFixed(7);
-        this.props.setLocation(lat, lng);
+        this.props.setLocation(lat, lng, false);
         this.setMarker(lat, lng);
         this.props.setPlace('My place', false)
     }
 
     setMarker(lat, lng) {
         mymap.removeLayer(marker);
-        // let icon = L.icon({
-        //     iconUrl: 'https://image.flaticon.com/icons/svg/66/66455.svg',
-        //     iconSize: [25, 85], // size of the icon
-        // })
         marker = new L.Marker([lat, lng]);
         if (this.props.latlng.city) {
             let icon = new L.Icon({
@@ -71,10 +69,41 @@ class Map extends React.Component {
             marker.bindTooltip(this.props.place,
                 {
                     permanent: true,
-                    direction: 'right',
+                    direction: 'top',
                 })
         }
         mymap.addLayer(marker);
+    }
+
+    showNotches() {
+        if (notches != '' && notches != undefined && notches != null) {
+            mymap.removeLayer(notches);                    
+        }
+        let notchResults = this.props.notchResults;
+        let markers = [];
+        if (notchResults[0].geometry == undefined) {
+            console.log('no notch results');
+            return;
+        } else {
+            for (var i = 0; i < notchResults.length; i++) {
+                let coordinates = [notchResults[i].geometry.coordinates[1], notchResults[i].geometry.coordinates[0]];
+                let icon = new L.Icon({
+                    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [20, 20]
+                });
+                let marker = L.marker(coordinates, { icon: icon }).bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>');
+                markers.push(marker);
+            }
+            console.log(markers);
+            console.log('adding notch layer');
+            notches = L.layerGroup(markers);
+            mymap.addLayer(notches);
+        }
+
     }
 
     render() {
@@ -90,5 +119,6 @@ var mymap;
 var marker;
 var layer;
 var array;
+var notches;
 
 export default Map;

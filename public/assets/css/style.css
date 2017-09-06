@@ -24,7 +24,8 @@ html, body {
 
 #content-top {
   display: flex;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  border-bottom: 2px solid #383f51; }
 
 #content-bottom {
   display: flex;
@@ -75,3 +76,6 @@ html, body {
 
 #username {
   font-weight: bold; }
+
+.category {
+  cursor: pointer; }

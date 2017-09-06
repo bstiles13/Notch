@@ -1598,7 +1598,7 @@ var CallbackQueue = __webpack_require__(64);
 var PooledClass = __webpack_require__(17);
 var ReactFeatureFlags = __webpack_require__(65);
 var ReactReconciler = __webpack_require__(20);
-var Transaction = __webpack_require__(29);
+var Transaction = __webpack_require__(30);
 
 var invariant = __webpack_require__(1);
 
@@ -2350,7 +2350,7 @@ var _assign = __webpack_require__(4);
 var ReactCurrentOwner = __webpack_require__(11);
 
 var warning = __webpack_require__(2);
-var canDefineProperty = __webpack_require__(26);
+var canDefineProperty = __webpack_require__(27);
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 var REACT_ELEMENT_TYPE = __webpack_require__(55);
@@ -2828,7 +2828,7 @@ var cloneElement = ReactElement.cloneElement;
 
 if (process.env.NODE_ENV !== 'production') {
   var lowPriorityWarning = __webpack_require__(35);
-  var canDefineProperty = __webpack_require__(26);
+  var canDefineProperty = __webpack_require__(27);
   var ReactElementValidator = __webpack_require__(57);
   var didWarnPropTypesDeprecated = false;
   createElement = ReactElementValidator.createElement;
@@ -3165,7 +3165,7 @@ module.exports = ReactReconciler;
 
 
 var DOMNamespaces = __webpack_require__(42);
-var setInnerHTML = __webpack_require__(31);
+var setInnerHTML = __webpack_require__(32);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(43);
 var setTextContent = __webpack_require__(69);
@@ -3429,7 +3429,7 @@ module.exports = EventPropagators;
 
 var _prodInvariant = __webpack_require__(3);
 
-var EventPluginRegistry = __webpack_require__(28);
+var EventPluginRegistry = __webpack_require__(29);
 var EventPluginUtils = __webpack_require__(36);
 var ReactErrorUtils = __webpack_require__(37);
 
@@ -3809,6 +3809,12 @@ module.exports = ReactInstanceMap;
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(193);
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-present, Facebook, Inc.
@@ -3838,7 +3844,7 @@ module.exports = canDefineProperty;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3864,7 +3870,7 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4123,7 +4129,7 @@ module.exports = EventPluginRegistry;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4357,7 +4363,7 @@ module.exports = TransactionImpl;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4434,7 +4440,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 module.exports = SyntheticMouseEvent;
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4537,7 +4543,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setInnerHTML;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4664,7 +4670,7 @@ function escapeTextContentForBrowser(text) {
 module.exports = escapeTextContentForBrowser;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4682,7 +4688,7 @@ module.exports = escapeTextContentForBrowser;
 
 var _assign = __webpack_require__(4);
 
-var EventPluginRegistry = __webpack_require__(28);
+var EventPluginRegistry = __webpack_require__(29);
 var ReactEventEmitterMixin = __webpack_require__(141);
 var ViewportMetrics = __webpack_require__(68);
 
@@ -4991,12 +4997,6 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
 });
 
 module.exports = ReactBrowserEventEmitter;
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(193);
 
 /***/ }),
 /* 35 */
@@ -5559,7 +5559,7 @@ var ReactDOMComponentTree = __webpack_require__(5);
 var ReactInstrumentation = __webpack_require__(8);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(43);
-var setInnerHTML = __webpack_require__(31);
+var setInnerHTML = __webpack_require__(32);
 var setTextContent = __webpack_require__(69);
 
 function getNodeAfter(parentNode, node) {
@@ -7002,8 +7002,8 @@ var _prodInvariant = __webpack_require__(19),
 
 var ReactNoopUpdateQueue = __webpack_require__(54);
 
-var canDefineProperty = __webpack_require__(26);
-var emptyObject = __webpack_require__(27);
+var canDefineProperty = __webpack_require__(27);
+var emptyObject = __webpack_require__(28);
 var invariant = __webpack_require__(1);
 var lowPriorityWarning = __webpack_require__(35);
 
@@ -7331,7 +7331,7 @@ var ReactElement = __webpack_require__(16);
 
 var checkReactTypeSpec = __webpack_require__(96);
 
-var canDefineProperty = __webpack_require__(26);
+var canDefineProperty = __webpack_require__(27);
 var getIteratorFn = __webpack_require__(56);
 var warning = __webpack_require__(2);
 var lowPriorityWarning = __webpack_require__(35);
@@ -8156,8 +8156,8 @@ module.exports = ViewportMetrics;
 
 
 var ExecutionEnvironment = __webpack_require__(6);
-var escapeTextContentForBrowser = __webpack_require__(32);
-var setInnerHTML = __webpack_require__(31);
+var escapeTextContentForBrowser = __webpack_require__(33);
+var setInnerHTML = __webpack_require__(32);
 
 /**
  * Set the textContent property of a node, ensuring that whitespace is preserved
@@ -9611,7 +9611,7 @@ var _prodInvariant = __webpack_require__(3);
 var DOMLazyTree = __webpack_require__(21);
 var DOMProperty = __webpack_require__(15);
 var React = __webpack_require__(18);
-var ReactBrowserEventEmitter = __webpack_require__(33);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactCurrentOwner = __webpack_require__(11);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMContainerInfo = __webpack_require__(182);
@@ -9624,10 +9624,10 @@ var ReactReconciler = __webpack_require__(20);
 var ReactUpdateQueue = __webpack_require__(49);
 var ReactUpdates = __webpack_require__(12);
 
-var emptyObject = __webpack_require__(27);
+var emptyObject = __webpack_require__(28);
 var instantiateReactComponent = __webpack_require__(75);
 var invariant = __webpack_require__(1);
-var setInnerHTML = __webpack_require__(31);
+var setInnerHTML = __webpack_require__(32);
 var shouldUpdateReactComponent = __webpack_require__(47);
 var warning = __webpack_require__(2);
 
@@ -12020,7 +12020,7 @@ module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
 
 var _assign = __webpack_require__(4);
 
-var emptyObject = __webpack_require__(27);
+var emptyObject = __webpack_require__(28);
 var _invariant = __webpack_require__(1);
 
 if (process.env.NODE_ENV !== 'production') {
@@ -14870,7 +14870,7 @@ module.exports = DefaultEventPluginOrder;
 
 var EventPropagators = __webpack_require__(22);
 var ReactDOMComponentTree = __webpack_require__(5);
-var SyntheticMouseEvent = __webpack_require__(30);
+var SyntheticMouseEvent = __webpack_require__(31);
 
 var eventTypes = {
   mouseEnter: {
@@ -15671,8 +15671,8 @@ var DOMNamespaces = __webpack_require__(42);
 var DOMProperty = __webpack_require__(15);
 var DOMPropertyOperations = __webpack_require__(72);
 var EventPluginHub = __webpack_require__(23);
-var EventPluginRegistry = __webpack_require__(28);
-var ReactBrowserEventEmitter = __webpack_require__(33);
+var EventPluginRegistry = __webpack_require__(29);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactDOMComponentFlags = __webpack_require__(60);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMInput = __webpack_require__(143);
@@ -15684,7 +15684,7 @@ var ReactMultiChild = __webpack_require__(146);
 var ReactServerRenderingTransaction = __webpack_require__(155);
 
 var emptyFunction = __webpack_require__(10);
-var escapeTextContentForBrowser = __webpack_require__(32);
+var escapeTextContentForBrowser = __webpack_require__(33);
 var invariant = __webpack_require__(1);
 var isEventSupported = __webpack_require__(39);
 var shallowEqual = __webpack_require__(46);
@@ -17209,7 +17209,7 @@ module.exports = memoizeStringOnly;
 
 
 
-var escapeTextContentForBrowser = __webpack_require__(32);
+var escapeTextContentForBrowser = __webpack_require__(33);
 
 /**
  * Escapes attribute value to prevent scripting attacks.
@@ -18597,7 +18597,7 @@ if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(149);
 }
 
-var emptyObject = __webpack_require__(27);
+var emptyObject = __webpack_require__(28);
 var invariant = __webpack_require__(1);
 var shallowEqual = __webpack_require__(46);
 var shouldUpdateReactComponent = __webpack_require__(47);
@@ -19793,7 +19793,7 @@ module.exports = flattenChildren;
 var _assign = __webpack_require__(4);
 
 var PooledClass = __webpack_require__(17);
-var Transaction = __webpack_require__(29);
+var Transaction = __webpack_require__(30);
 var ReactInstrumentation = __webpack_require__(8);
 var ReactServerUpdateQueue = __webpack_require__(156);
 
@@ -20245,7 +20245,7 @@ var DOMChildrenOperations = __webpack_require__(41);
 var DOMLazyTree = __webpack_require__(21);
 var ReactDOMComponentTree = __webpack_require__(5);
 
-var escapeTextContentForBrowser = __webpack_require__(32);
+var escapeTextContentForBrowser = __webpack_require__(33);
 var invariant = __webpack_require__(1);
 var validateDOMNesting = __webpack_require__(50);
 
@@ -20409,7 +20409,7 @@ module.exports = ReactDOMTextComponent;
 var _assign = __webpack_require__(4);
 
 var ReactUpdates = __webpack_require__(12);
-var Transaction = __webpack_require__(29);
+var Transaction = __webpack_require__(30);
 
 var emptyFunction = __webpack_require__(10);
 
@@ -20688,7 +20688,7 @@ var EventPluginHub = __webpack_require__(23);
 var EventPluginUtils = __webpack_require__(36);
 var ReactComponentEnvironment = __webpack_require__(45);
 var ReactEmptyComponent = __webpack_require__(77);
-var ReactBrowserEventEmitter = __webpack_require__(33);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactHostComponent = __webpack_require__(78);
 var ReactUpdates = __webpack_require__(12);
 
@@ -20726,10 +20726,10 @@ var _assign = __webpack_require__(4);
 
 var CallbackQueue = __webpack_require__(64);
 var PooledClass = __webpack_require__(17);
-var ReactBrowserEventEmitter = __webpack_require__(33);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactInputSelection = __webpack_require__(81);
 var ReactInstrumentation = __webpack_require__(8);
-var Transaction = __webpack_require__(29);
+var Transaction = __webpack_require__(30);
 var ReactUpdateQueue = __webpack_require__(49);
 
 /**
@@ -21818,7 +21818,7 @@ var SyntheticClipboardEvent = __webpack_require__(174);
 var SyntheticEvent = __webpack_require__(13);
 var SyntheticFocusEvent = __webpack_require__(175);
 var SyntheticKeyboardEvent = __webpack_require__(176);
-var SyntheticMouseEvent = __webpack_require__(30);
+var SyntheticMouseEvent = __webpack_require__(31);
 var SyntheticDragEvent = __webpack_require__(178);
 var SyntheticTouchEvent = __webpack_require__(179);
 var SyntheticTransitionEvent = __webpack_require__(180);
@@ -22373,7 +22373,7 @@ module.exports = getEventKey;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(30);
+var SyntheticMouseEvent = __webpack_require__(31);
 
 /**
  * @interface DragEvent
@@ -22508,7 +22508,7 @@ module.exports = SyntheticTransitionEvent;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(30);
+var SyntheticMouseEvent = __webpack_require__(31);
 
 /**
  * @interface WheelEvent
@@ -22838,7 +22838,7 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
 
 
 var DOMProperty = __webpack_require__(15);
-var EventPluginRegistry = __webpack_require__(28);
+var EventPluginRegistry = __webpack_require__(29);
 var ReactComponentTreeHook = __webpack_require__(7);
 
 var warning = __webpack_require__(2);
@@ -23103,7 +23103,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(34);
+var _axios = __webpack_require__(26);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -23148,15 +23148,20 @@ var Main = function (_React$Component) {
         _this.state = {
             user: null,
             latlng: {
-                lat: -0.777259,
-                lng: -91.142578,
+                // lat: -0.777259,
+                // lng: -91.142578,
+                lat: 39.7392,
+                lng: -104.9903,
                 city: false
             },
             newCategory: '',
-            newPlace: 'Test',
+            newPlace: 'Give me a name!',
             newHeadline: '',
             newSummary: '',
             existingPlace: false,
+            notchFilter: {
+                category: 'All'
+            },
             googleResults: ['No results'],
             notchResults: ['No results']
         };
@@ -23165,29 +23170,29 @@ var Main = function (_React$Component) {
         _this.setLocation = _this.setLocation.bind(_this);
         _this.setPlace = _this.setPlace.bind(_this);
         _this.setResults = _this.setResults.bind(_this);
-        _this.newNotch = _this.newNotch.bind(_this);
+        _this.setFilter = _this.setFilter.bind(_this);
+        _this.getNotches = _this.getNotches.bind(_this);
         return _this;
     }
 
     _createClass(Main, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {}
+        value: function componentDidMount() {
+            this.getNotches();
+        }
     }, {
         key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            console.log(this.state);
-        }
+        value: function componentDidUpdate(prevProps, prevState) {}
     }, {
         key: 'setLocation',
         value: function setLocation(lat, lng, city) {
-            console.log('setting location');
             this.setState({
                 latlng: {
                     lat: lat,
                     lng: lng,
                     city: city
                 }
-            });
+            }, this.getNotches);
         }
     }, {
         key: 'setUser',
@@ -23224,26 +23229,40 @@ var Main = function (_React$Component) {
             });
         }
     }, {
-        key: 'newNotch',
-        value: function newNotch() {
-            var notch = {
-                user: this.state.user,
+        key: 'setFilter',
+        value: function setFilter(event) {
+            console.log('pushed');
+            console.log(event.target.getAttribute('value'));
+            // this.setState({
+            //     notchFilter: {
+            //         category: event.target.value;
+            //     }
+            // })
+        }
+    }, {
+        key: 'getNotches',
+        value: function getNotches() {
+            var _this2 = this;
+
+            console.log('notch request received');
+            var scope = {
                 lat: this.state.latlng.lat,
-                lng: this.state.latlng.lng,
-                category: this.state.newCategory,
-                place: this.state.newPlace,
-                headline: this.state.newHeadline,
-                summary: this.state.newSummary
+                lng: this.state.latlng.lng
             };
-            if (notch.user == null) {
-                return;
-            } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
-                _axios2.default.post('/newnotch', notch).then(function (data) {
-                    console.log(data.data);
-                });
-            } else {
-                console.log('error');
-            }
+            _axios2.default.post('/getnotches', scope).then(function (data) {
+                console.log('got notches');
+                console.log(data.data);
+                if (data.data == '' || data.data == []) {
+                    console.log('notches out of range');
+                    _this2.setState({
+                        notchResults: ['No results']
+                    });
+                } else {
+                    _this2.setState({
+                        notchResults: data.data
+                    });
+                }
+            });
         }
     }, {
         key: 'render',
@@ -23257,7 +23276,8 @@ var Main = function (_React$Component) {
                     _react2.default.createElement(_Sidebar2.default, {
                         categories: categories,
                         user: this.state.user,
-                        setUser: this.setUser
+                        setUser: this.setUser,
+                        setFilter: this.setFilter
                     }),
                     _react2.default.createElement(
                         'div',
@@ -23271,22 +23291,28 @@ var Main = function (_React$Component) {
                                 latlng: this.state.latlng,
                                 place: this.state.newPlace,
                                 googleResults: this.state.googleResults,
-                                setResults: this.setResults
+                                setResults: this.setResults,
+                                notchResults: this.state.notchResults
                             }),
                             _react2.default.createElement(_Form2.default, {
                                 categories: categories,
+                                user: this.state.user,
                                 latlng: this.state.latlng,
+                                category: this.state.newCategory,
                                 place: this.state.newPlace,
+                                headline: this.state.newHeadline,
+                                summary: this.state.newSummary,
                                 existingPlace: this.state.existingPlace,
                                 setNotch: this.setNotch.bind(this),
                                 setTitle: this.setTitle.bind(this),
-                                newNotch: this.newNotch
+                                getNotches: this.getNotches
                             })
                         ),
                         _react2.default.createElement(
                             'div',
                             { id: 'content-bottom' },
                             _react2.default.createElement(_Notch2.default, {
+                                notchFilter: this.state.notchFilter,
                                 notchResults: this.state.notchResults
                             }),
                             _react2.default.createElement(_Google2.default, {
@@ -24229,16 +24255,13 @@ var Sidebar = function (_React$Component) {
         key: 'showMenu',
         value: function showMenu() {
             var categories = this.props.categories;
+            var that = this;
             return Object.keys(categories).map(function (key) {
                 var array = categories[key].map(function (index) {
                     return _react2.default.createElement(
                         'li',
-                        null,
-                        _react2.default.createElement(
-                            'a',
-                            { href: '#' },
-                            index
-                        )
+                        { className: 'category', onClick: that.props.setFilter, value: key + " | " + index },
+                        index
                     );
                 });
                 return _react2.default.createElement(
@@ -24271,11 +24294,13 @@ var Sidebar = function (_React$Component) {
                 _react2.default.createElement('hr', null),
                 _react2.default.createElement(_Login2.default, { id: 'login', user: this.props.user, setUser: this.props.setUser }),
                 _react2.default.createElement('hr', null),
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
-                    'h5',
+                    'h6',
                     null,
-                    'Find Notches'
+                    'Filter by Category'
                 ),
+                _react2.default.createElement('hr', null),
                 _react2.default.createElement(
                     'div',
                     { id: 'categories' },
@@ -24307,7 +24332,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(34);
+var _axios = __webpack_require__(26);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -24658,7 +24683,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(34);
+var _axios = __webpack_require__(26);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -24691,6 +24716,7 @@ var Map = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.initiateMap();
+            this.showNotches();
         }
     }, {
         key: 'componentDidUpdate',
@@ -24700,6 +24726,7 @@ var Map = function (_React$Component) {
             var newLng = this.props.latlng.lng;
             mymap.panTo(new L.LatLng(newLat, newLng));
             this.setMarker(newLat, newLng);
+            this.showNotches();
         }
     }, {
         key: 'initiateMap',
@@ -24708,7 +24735,7 @@ var Map = function (_React$Component) {
             console.log('Prop' + this.props.latlng.lng);
             var lat = this.props.latlng.lat;
             var lng = this.props.latlng.lng;
-            mymap = new L.map('mapid').setView([lat, lng], 8);
+            mymap = new L.map('mapid').setView([lat, lng], 10);
             mymap.doubleClickZoom.disable();
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -24724,7 +24751,7 @@ var Map = function (_React$Component) {
         value: function onMapClick(e) {
             var lat = e.latlng.lat.toFixed(7);
             var lng = e.latlng.lng.toFixed(7);
-            this.props.setLocation(lat, lng);
+            this.props.setLocation(lat, lng, false);
             this.setMarker(lat, lng);
             this.props.setPlace('My place', false);
         }
@@ -24732,10 +24759,6 @@ var Map = function (_React$Component) {
         key: 'setMarker',
         value: function setMarker(lat, lng) {
             mymap.removeLayer(marker);
-            // let icon = L.icon({
-            //     iconUrl: 'https://image.flaticon.com/icons/svg/66/66455.svg',
-            //     iconSize: [25, 85], // size of the icon
-            // })
             marker = new L.Marker([lat, lng]);
             if (this.props.latlng.city) {
                 var icon = new L.Icon({
@@ -24750,10 +24773,41 @@ var Map = function (_React$Component) {
             } else {
                 marker.bindTooltip(this.props.place, {
                     permanent: true,
-                    direction: 'right'
+                    direction: 'top'
                 });
             }
             mymap.addLayer(marker);
+        }
+    }, {
+        key: 'showNotches',
+        value: function showNotches() {
+            if (notches != '' && notches != undefined && notches != null) {
+                mymap.removeLayer(notches);
+            }
+            var notchResults = this.props.notchResults;
+            var markers = [];
+            if (notchResults[0].geometry == undefined) {
+                console.log('no notch results');
+                return;
+            } else {
+                for (var i = 0; i < notchResults.length; i++) {
+                    var coordinates = [notchResults[i].geometry.coordinates[1], notchResults[i].geometry.coordinates[0]];
+                    var icon = new L.Icon({
+                        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [20, 20]
+                    });
+                    var _marker = L.marker(coordinates, { icon: icon }).bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>');
+                    markers.push(_marker);
+                }
+                console.log(markers);
+                console.log('adding notch layer');
+                notches = L.layerGroup(markers);
+                mymap.addLayer(notches);
+            }
         }
     }, {
         key: 'render',
@@ -24773,6 +24827,7 @@ var mymap;
 var marker;
 var layer;
 var array;
+var notches;
 
 exports.default = Map;
 
@@ -24793,6 +24848,10 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(26);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24810,6 +24869,7 @@ var Form = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
         _this.options = _this.options.bind(_this);
+        _this.newNotch = _this.newNotch.bind(_this);
         return _this;
     }
 
@@ -24828,6 +24888,30 @@ var Form = function (_React$Component) {
                     );
                 });
             });
+        }
+    }, {
+        key: 'newNotch',
+        value: function newNotch() {
+            var notch = {
+                user: this.props.user,
+                lat: this.props.latlng.lat,
+                lng: this.props.latlng.lng,
+                category: this.props.category,
+                place: this.props.place,
+                headline: this.props.headline,
+                summary: this.props.summary
+            };
+            if (notch.user == null || notch.user === '' || notch.user == undefined) {
+                console.log('no user');
+                console.log(notch);
+                return;
+            } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
+                _axios2.default.post('/newnotch', notch).then(function (data) {
+                    console.log(data.data);
+                });
+            } else {
+                console.log('error');
+            }
         }
     }, {
         key: 'render',
@@ -24902,7 +24986,7 @@ var Form = function (_React$Component) {
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'button',
-                    { type: 'submit', className: 'btn btn-primary', onClick: this.props.newNotch },
+                    { type: 'submit', className: 'btn btn-primary', onClick: this.newNotch },
                     'Submit'
                 )
             );
@@ -24952,55 +25036,65 @@ var Notch = function (_React$Component) {
     }
 
     _createClass(Notch, [{
-        key: "showResults",
+        key: 'showResults',
         value: function showResults() {
+            console.log('notch results');
             console.log(this.props.notchResults);
             var results = this.props.notchResults;
-            return results.map(function (place) {
-                if (place.name) {
+            return results.map(function (notch) {
+                if (notch.properties == undefined || notch.properties == null) {
                     return _react2.default.createElement(
-                        "li",
-                        { className: "list-group-item list-group-item-action flex-column align-items-start" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "d-flex w-100 justify-content-between" },
-                            _react2.default.createElement(
-                                "h5",
-                                { className: "mb-1" },
-                                place.name
-                            ),
-                            _react2.default.createElement(
-                                "button",
-                                null,
-                                "Select"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "small",
-                            null,
-                            "Placeholder"
-                        )
+                        'li',
+                        { className: 'list-group-item' },
+                        notch
                     );
                 } else {
                     return _react2.default.createElement(
-                        "li",
-                        { className: "list-group-item" },
-                        place
+                        'li',
+                        { className: 'list-group-item list-group-item-action flex-column align-items-start' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'd-flex w-100 justify-content-between' },
+                            _react2.default.createElement(
+                                'h5',
+                                { className: 'mb-1' },
+                                notch.properties.place
+                            ),
+                            _react2.default.createElement(
+                                'button',
+                                null,
+                                'Select'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'small',
+                            null,
+                            notch.properties.headline
+                        )
                     );
                 }
             });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                "div",
-                { id: "notch" },
+                'div',
+                { id: 'notch' },
                 _react2.default.createElement(
-                    "h4",
+                    'h4',
                     null,
-                    "Nearby Notches"
+                    'Nearby Notches'
                 ),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Filters: [category: ',
+                    this.props.notchFilter.category,
+                    ']'
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('br', null),
                 this.showResults()
             );
         }
@@ -25028,7 +25122,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(34);
+var _axios = __webpack_require__(26);
 
 var _axios2 = _interopRequireDefault(_axios);
 
