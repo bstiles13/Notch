@@ -189,6 +189,20 @@ app.post('/getnotches', function (req, res) {
     })
 })
 
+app.post('/findone', function (req, res) {
+    console.log(req.body);
+    Notch.findById(req.body.id, function (err, data) {
+        if (err) {
+            console.log(err);
+            res.send('unsuccessful');
+        } else {
+            console.log('found one');
+            console.log(data);
+            res.send(data);
+        }
+    })
+})
+
 // Start server
 app.listen(port, function () {
     console.log('Server successful on port ' + port);

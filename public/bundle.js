@@ -3274,6 +3274,12 @@ module.exports = DOMLazyTree;
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(193);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-present, Facebook, Inc.
@@ -3287,7 +3293,7 @@ module.exports = DOMLazyTree;
 
 
 
-var EventPluginHub = __webpack_require__(23);
+var EventPluginHub = __webpack_require__(24);
 var EventPluginUtils = __webpack_require__(36);
 
 var accumulateInto = __webpack_require__(61);
@@ -3411,7 +3417,7 @@ module.exports = EventPropagators;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3691,7 +3697,7 @@ module.exports = EventPluginHub;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3755,7 +3761,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 module.exports = SyntheticUIEvent;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3804,12 +3810,6 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(193);
 
 /***/ }),
 /* 27 */
@@ -4379,7 +4379,7 @@ module.exports = TransactionImpl;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 var ViewportMetrics = __webpack_require__(68);
 
 var getEventModifierState = __webpack_require__(40);
@@ -6228,7 +6228,7 @@ module.exports = KeyEscapeUtils;
 var _prodInvariant = __webpack_require__(3);
 
 var ReactCurrentOwner = __webpack_require__(11);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(12);
 
@@ -9617,7 +9617,7 @@ var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMContainerInfo = __webpack_require__(182);
 var ReactDOMFeatureFlags = __webpack_require__(183);
 var ReactFeatureFlags = __webpack_require__(65);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(8);
 var ReactMarkupChecksum = __webpack_require__(184);
 var ReactReconciler = __webpack_require__(20);
@@ -13239,7 +13239,7 @@ module.exports = ARIADOMPropertyConfig;
 
 
 
-var EventPropagators = __webpack_require__(22);
+var EventPropagators = __webpack_require__(23);
 var ExecutionEnvironment = __webpack_require__(6);
 var FallbackCompositionState = __webpack_require__(111);
 var SyntheticCompositionEvent = __webpack_require__(112);
@@ -13811,8 +13811,8 @@ module.exports = SyntheticInputEvent;
 
 
 
-var EventPluginHub = __webpack_require__(23);
-var EventPropagators = __webpack_require__(22);
+var EventPluginHub = __webpack_require__(24);
+var EventPropagators = __webpack_require__(23);
 var ExecutionEnvironment = __webpack_require__(6);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactUpdates = __webpack_require__(12);
@@ -14868,7 +14868,7 @@ module.exports = DefaultEventPluginOrder;
 
 
 
-var EventPropagators = __webpack_require__(22);
+var EventPropagators = __webpack_require__(23);
 var ReactDOMComponentTree = __webpack_require__(5);
 var SyntheticMouseEvent = __webpack_require__(31);
 
@@ -15670,7 +15670,7 @@ var DOMLazyTree = __webpack_require__(21);
 var DOMNamespaces = __webpack_require__(42);
 var DOMProperty = __webpack_require__(15);
 var DOMPropertyOperations = __webpack_require__(72);
-var EventPluginHub = __webpack_require__(23);
+var EventPluginHub = __webpack_require__(24);
 var EventPluginRegistry = __webpack_require__(29);
 var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactDOMComponentFlags = __webpack_require__(60);
@@ -17240,7 +17240,7 @@ module.exports = quoteAttributeValueForBrowser;
 
 
 
-var EventPluginHub = __webpack_require__(23);
+var EventPluginHub = __webpack_require__(24);
 
 function runEventQueueInBatch(events) {
   EventPluginHub.enqueueEvents(events);
@@ -17973,7 +17973,7 @@ module.exports = ReactDOMTextarea;
 var _prodInvariant = __webpack_require__(3);
 
 var ReactComponentEnvironment = __webpack_require__(45);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(8);
 
 var ReactCurrentOwner = __webpack_require__(11);
@@ -18588,7 +18588,7 @@ var React = __webpack_require__(18);
 var ReactComponentEnvironment = __webpack_require__(45);
 var ReactCurrentOwner = __webpack_require__(11);
 var ReactErrorUtils = __webpack_require__(37);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactInstanceMap = __webpack_require__(26);
 var ReactInstrumentation = __webpack_require__(8);
 var ReactNodeTypes = __webpack_require__(76);
 var ReactReconciler = __webpack_require__(20);
@@ -20684,7 +20684,7 @@ module.exports = getUnboundedScrollPosition;
 
 
 var DOMProperty = __webpack_require__(15);
-var EventPluginHub = __webpack_require__(23);
+var EventPluginHub = __webpack_require__(24);
 var EventPluginUtils = __webpack_require__(36);
 var ReactComponentEnvironment = __webpack_require__(45);
 var ReactEmptyComponent = __webpack_require__(77);
@@ -21614,7 +21614,7 @@ module.exports = SVGDOMPropertyConfig;
 
 
 
-var EventPropagators = __webpack_require__(22);
+var EventPropagators = __webpack_require__(23);
 var ExecutionEnvironment = __webpack_require__(6);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactInputSelection = __webpack_require__(81);
@@ -21811,7 +21811,7 @@ module.exports = SelectEventPlugin;
 var _prodInvariant = __webpack_require__(3);
 
 var EventListener = __webpack_require__(80);
-var EventPropagators = __webpack_require__(22);
+var EventPropagators = __webpack_require__(23);
 var ReactDOMComponentTree = __webpack_require__(5);
 var SyntheticAnimationEvent = __webpack_require__(173);
 var SyntheticClipboardEvent = __webpack_require__(174);
@@ -21822,7 +21822,7 @@ var SyntheticMouseEvent = __webpack_require__(31);
 var SyntheticDragEvent = __webpack_require__(178);
 var SyntheticTouchEvent = __webpack_require__(179);
 var SyntheticTransitionEvent = __webpack_require__(180);
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 var SyntheticWheelEvent = __webpack_require__(181);
 
 var emptyFunction = __webpack_require__(10);
@@ -22126,7 +22126,7 @@ module.exports = SyntheticClipboardEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 
 /**
  * @interface FocusEvent
@@ -22167,7 +22167,7 @@ module.exports = SyntheticFocusEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 
 var getEventCharCode = __webpack_require__(51);
 var getEventKey = __webpack_require__(177);
@@ -22414,7 +22414,7 @@ module.exports = SyntheticDragEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(24);
+var SyntheticUIEvent = __webpack_require__(25);
 
 var getEventModifierState = __webpack_require__(40);
 
@@ -22754,7 +22754,7 @@ var _prodInvariant = __webpack_require__(3);
 
 var ReactCurrentOwner = __webpack_require__(11);
 var ReactDOMComponentTree = __webpack_require__(5);
-var ReactInstanceMap = __webpack_require__(25);
+var ReactInstanceMap = __webpack_require__(26);
 
 var getHostComponentFromComposite = __webpack_require__(84);
 var invariant = __webpack_require__(1);
@@ -23103,7 +23103,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(26);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -23163,7 +23163,8 @@ var Main = function (_React$Component) {
                 category: 'All'
             },
             googleResults: ['No results'],
-            notchResults: ['No results']
+            notchResults: ['No results'],
+            oneNotch: {}
         };
         _this.setUser = _this.setUser.bind(_this);
         _this.setTitle = _this.setTitle.bind(_this);
@@ -23172,6 +23173,7 @@ var Main = function (_React$Component) {
         _this.setResults = _this.setResults.bind(_this);
         _this.setFilter = _this.setFilter.bind(_this);
         _this.getNotches = _this.getNotches.bind(_this);
+        _this.findOne = _this.findOne.bind(_this);
         return _this;
     }
 
@@ -23264,6 +23266,13 @@ var Main = function (_React$Component) {
             });
         }
     }, {
+        key: 'findOne',
+        value: function findOne(notch) {
+            this.setState({
+                oneNotch: notch
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -23291,7 +23300,8 @@ var Main = function (_React$Component) {
                                 place: this.state.newPlace,
                                 googleResults: this.state.googleResults,
                                 setResults: this.setResults,
-                                notchResults: this.state.notchResults
+                                notchResults: this.state.notchResults,
+                                oneNotch: this.state.oneNotch
                             }),
                             _react2.default.createElement(_Form2.default, {
                                 categories: categories,
@@ -23313,7 +23323,8 @@ var Main = function (_React$Component) {
                             _react2.default.createElement(_Notch2.default, {
                                 notchFilter: this.state.notchFilter,
                                 notchResults: this.state.notchResults,
-                                setFilter: this.setFilter
+                                setFilter: this.setFilter,
+                                findOne: this.findOne
                             }),
                             _react2.default.createElement(_Google2.default, {
                                 setLocation: this.setLocation,
@@ -24295,17 +24306,72 @@ var Sidebar = function (_React$Component) {
                 _react2.default.createElement('hr', null),
                 _react2.default.createElement(_Login2.default, { id: 'login', user: this.props.user, setUser: this.props.setUser }),
                 _react2.default.createElement('hr', null),
+                _react2.default.createElement(
+                    'a',
+                    { href: '#exampleModal', 'data-toggle': 'modal', 'data-target': '#exampleModal' },
+                    'How It Works'
+                ),
                 _react2.default.createElement('br', null),
+                _react2.default.createElement('hr', null),
                 _react2.default.createElement(
                     'h6',
                     null,
                     'Filter by Category'
                 ),
-                _react2.default.createElement('hr', null),
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'div',
                     { id: 'categories' },
                     this.showMenu()
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'modal fade', id: 'exampleModal', tabindex: '-1', role: 'dialog', 'aria-labelledby': 'exampleModalLabel', 'aria-hidden': 'true' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'modal-dialog', role: 'document' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'modal-content' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'modal-header' },
+                                _react2.default.createElement(
+                                    'h5',
+                                    { className: 'modal-title', id: 'exampleModalLabel' },
+                                    'Creating a Notch'
+                                ),
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' },
+                                    _react2.default.createElement(
+                                        'span',
+                                        { 'aria-hidden': 'true' },
+                                        '\xD7'
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'modal-body' },
+                                'Test'
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'modal-footer' },
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'btn btn-secondary', 'data-dismiss': 'modal' },
+                                    'Close'
+                                ),
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'btn btn-primary' },
+                                    'Save changes'
+                                )
+                            )
+                        )
+                    )
                 )
             );
         }
@@ -24339,7 +24405,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(26);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -24541,7 +24607,7 @@ var Login = function (_React$Component) {
             if (this.state[type]) {
                 return _react2.default.createElement(
                     'div',
-                    { className: 'warning' },
+                    { className: 'login-warning' },
                     this.state.warning[type]
                 );
             }
@@ -24690,7 +24756,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(26);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -24712,7 +24778,9 @@ var Map = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            toggle: false
+        };
         _this.onMapClick = _this.onMapClick.bind(_this);
         _this.initiateMap = _this.initiateMap.bind(_this);
         _this.setMarker = _this.setMarker.bind(_this);
@@ -24728,12 +24796,17 @@ var Map = function (_React$Component) {
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
-            console.log('prev props: ', prevProps);
             var newLat = this.props.latlng.lat;
             var newLng = this.props.latlng.lng;
             mymap.panTo(new L.LatLng(newLat, newLng));
             this.setMarker(newLat, newLng);
             this.showNotches();
+            if (prevProps.oneNotch != this.props.oneNotch) {
+                console.log('SPOTLIGHT CHANGE');
+                this.setView();
+            } else {
+                console.log('NO SPOTLIGHT CHANGE');
+            }
         }
     }, {
         key: 'initiateMap',
@@ -24751,11 +24824,13 @@ var Map = function (_React$Component) {
                 accessToken: 'pk.eyJ1IjoiYnN0aWxlczEzIiwiYSI6ImNqNHZ4bnMweDBzN20ycXA4MGJodXltcjIifQ.mA6saUO0Ucgx9aOWYRaxqQ'
             }).addTo(mymap);
             marker = L.marker([lat, lng]).addTo(mymap);
+            var popup = L.popup().setLatLng([lat, lng]).setContent("Double click to move me!").openOn(mymap);
             mymap.on('dblclick', this.onMapClick);
         }
     }, {
         key: 'onMapClick',
         value: function onMapClick(e) {
+            this.setState({ toggle: true });
             var lat = e.latlng.lat.toFixed(7);
             var lng = e.latlng.lng.toFixed(7);
             this.props.setLocation(lat, lng, false);
@@ -24766,22 +24841,25 @@ var Map = function (_React$Component) {
         key: 'setMarker',
         value: function setMarker(lat, lng) {
             mymap.removeLayer(marker);
-            marker = new L.Marker([lat, lng]);
+            var icon = new L.Icon({
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
             if (this.props.latlng.city) {
-                var icon = new L.Icon({
-                    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                });
+                icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png';
                 marker = new L.marker([lat, lng], { icon: icon });
             } else {
-                marker.bindTooltip(this.props.place, {
-                    permanent: true,
-                    direction: 'top'
-                });
+                icon.options.iconUrl = 'http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png';
+                marker = new L.marker([lat, lng], { icon: icon });
+                if (this.state.toggle) {
+                    marker.bindTooltip(this.props.place, {
+                        permanent: true,
+                        direction: 'bottom'
+                    });
+                }
             }
             mymap.addLayer(marker);
         }
@@ -24800,13 +24878,34 @@ var Map = function (_React$Component) {
                 for (var i = 0; i < notchResults.length; i++) {
                     var coordinates = [notchResults[i].geometry.coordinates[1], notchResults[i].geometry.coordinates[0]];
                     var icon = new L.Icon({
-                        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
                         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
                         iconSize: [25, 41],
                         iconAnchor: [12, 41],
                         popupAnchor: [1, -34],
                         shadowSize: [20, 20]
                     });
+                    console.log("ICON");
+                    console.log(icon);
+                    switch (notchResults[i].properties.category_parent) {
+                        case "Outdoors":
+                            icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png';
+                            break;
+                        case "Sports":
+                            icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png';
+                            break;
+                        case "Shows":
+                            icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png';
+                            break;
+                        case "Art":
+                            icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-grey.png';
+                            break;
+                        case "Animals":
+                            icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png';
+                            break;
+                        case "Lifestyle":
+                            icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png';
+                            break;
+                    }
                     var _marker = L.marker(coordinates, { icon: icon }).bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>');
                     markers.push(_marker);
                 }
@@ -24815,6 +24914,17 @@ var Map = function (_React$Component) {
                 notches = L.layerGroup(markers);
                 mymap.addLayer(notches);
             }
+        }
+    }, {
+        key: 'setView',
+        value: function setView() {
+            var notch = this.props.oneNotch;
+            var lat = this.props.oneNotch.geometry.coordinates[1];
+            var lng = this.props.oneNotch.geometry.coordinates[0];
+            var content = this.props.oneNotch.properties.place;
+            mymap.setView([lat, lng], 12);
+            var popup = L.popup().setLatLng([lat + 0.01, lng]).setContent(content).openOn(mymap);
+            document.getElementById('mapid').scrollIntoView(true);
         }
     }, {
         key: 'render',
@@ -24855,7 +24965,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(26);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -24875,6 +24985,15 @@ var Form = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
+        _this.state = {
+            invalidUser: false,
+            invalidText: false,
+            warning: {
+                invalidUser: 'Sign in to create Notch',
+                invalidText: "Incomplete form field(s)"
+            },
+            success: false
+        };
         _this.options = _this.options.bind(_this);
         _this.newNotch = _this.newNotch.bind(_this);
         return _this;
@@ -24899,6 +25018,9 @@ var Form = function (_React$Component) {
     }, {
         key: 'newNotch',
         value: function newNotch() {
+            var _this2 = this;
+
+            this.clearStatuses();
             var notch = {
                 user: this.props.user,
                 lat: this.props.latlng.lat,
@@ -24911,13 +25033,53 @@ var Form = function (_React$Component) {
             if (notch.user == null || notch.user === '' || notch.user == undefined) {
                 console.log('no user');
                 console.log(notch);
-                return;
+                this.setState({
+                    invalidUser: true
+                });
             } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
                 _axios2.default.post('/newnotch', notch).then(function (data) {
                     console.log(data.data);
+                    _this2.setState({
+                        success: true
+                    });
                 });
             } else {
                 console.log('error');
+                this.setState({
+                    invalidText: true
+                });
+            }
+        }
+    }, {
+        key: 'clearStatuses',
+        value: function clearStatuses() {
+            this.setState({
+                invalidUser: false,
+                invalidText: false,
+                success: false
+            });
+        }
+    }, {
+        key: 'error',
+        value: function error(type) {
+            if (this.state[type]) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'form-warning' },
+                    this.state.warning[type]
+                );
+            }
+        }
+    }, {
+        key: 'success',
+        value: function success() {
+            if (this.state.success) {
+                return _react2.default.createElement(
+                    'span',
+                    { className: 'form-success' },
+                    'Success ',
+                    _react2.default.createElement('i', { className: 'fa fa-check', 'aria-hidden': 'true' })
+                );
             }
         }
     }, {
@@ -24991,11 +25153,14 @@ var Form = function (_React$Component) {
                     _react2.default.createElement('textarea', { className: 'form-control', id: 'summary', rows: '3', name: 'newSummary', onChange: this.props.setNotch })
                 ),
                 _react2.default.createElement('br', null),
+                this.error('invalidUser'),
+                this.error('invalidText'),
                 _react2.default.createElement(
                     'button',
                     { type: 'submit', className: 'btn btn-primary', onClick: this.newNotch },
                     'Submit'
-                )
+                ),
+                this.success()
             );
         }
     }]);
@@ -25022,6 +25187,10 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(22);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25043,11 +25212,26 @@ var Notch = function (_React$Component) {
     }
 
     _createClass(Notch, [{
+        key: 'getLocation',
+        value: function getLocation(event) {
+            var _this2 = this;
+
+            console.log(event.target.value);
+            var id = event.target.value;
+            _axios2.default.post('/findone', { id: id }).then(function (data) {
+                console.log(data.data);
+                _this2.props.findOne(data.data);
+            });
+        }
+    }, {
         key: 'showResults',
         value: function showResults() {
+            var _this3 = this;
+
             console.log('notch results');
             console.log(this.props.notchResults);
             var results = this.props.notchResults;
+            var i = 0;
             return results.map(function (notch) {
                 if (notch.properties == undefined || notch.properties == null) {
                     return _react2.default.createElement(
@@ -25069,7 +25253,7 @@ var Notch = function (_React$Component) {
                             ),
                             _react2.default.createElement(
                                 'button',
-                                { className: 'btn btn-sm' },
+                                { onClick: _this3.getLocation.bind(_this3), value: notch._id, className: 'btn btn-sm' },
                                 'Go'
                             )
                         ),
@@ -25096,7 +25280,8 @@ var Notch = function (_React$Component) {
                 _react2.default.createElement(
                     'span',
                     { className: 'description' },
-                    'All Notches (locations) created by users within 100 miles'
+                    'All Notches (locations) created by users within 100 miles of ',
+                    _react2.default.createElement('img', { id: 'person-icon', src: 'http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png' })
                 ),
                 _react2.default.createElement('hr', null),
                 _react2.default.createElement(
@@ -25137,7 +25322,7 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(26);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 

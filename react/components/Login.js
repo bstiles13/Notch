@@ -164,7 +164,7 @@ class Login extends React.Component {
 
     error(type) {
         if (this.state[type]) {
-            return (<div className='warning'>{this.state.warning[type]}</div>)
+            return (<div className='login-warning'>{this.state.warning[type]}</div>)
         }
     }
 

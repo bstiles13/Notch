@@ -27,15 +27,39 @@ class Sidebar extends React.Component {
     render() {
         return (
             <aside id='sidebar' className="menu">
-                <img id='logo' src={logo}/>
+                <img id='logo' src={logo} />
                 <hr />
                 <Login id='login' user={this.props.user} setUser={this.props.setUser} />
                 <hr />
+                <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal">
+                    How It Works
+                </a>
                 <br />
+                <hr />
                 <h6>Filter by Category</h6>
-                <hr />                
+                <br />
                 <div id='categories'>
                     {this.showMenu()}
+                </div>
+
+                <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Creating a Notch</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                Test
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </aside>
         )

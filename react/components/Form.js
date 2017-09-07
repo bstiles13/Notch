@@ -5,6 +5,15 @@ class Form extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            invalidUser: false,
+            invalidText: false,
+            warning: {
+                invalidUser: 'Sign in to create Notch',
+                invalidText: "Incomplete form field(s)"
+            },
+            success: false
+        }
         this.options = this.options.bind(this);
         this.newNotch = this.newNotch.bind(this);
     }
@@ -19,6 +28,7 @@ class Form extends React.Component {
     }
 
     newNotch() {
+        this.clearStatuses();
         let notch = {
             user: this.props.user,
             lat: this.props.latlng.lat,
@@ -31,13 +41,41 @@ class Form extends React.Component {
         if (notch.user == null || notch.user === '' || notch.user == undefined) {
             console.log('no user');
             console.log(notch);
-            return;
+            this.setState({
+                invalidUser: true
+            })
         } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
             axios.post('/newnotch', notch).then(data => {
                 console.log(data.data);
+                this.setState({
+                    success: true
+                })
             })
         } else {
             console.log('error');
+            this.setState({
+                invalidText: true
+            })
+        }
+    }
+
+    clearStatuses() {
+        this.setState({
+            invalidUser: false,
+            invalidText: false,
+            success: false
+        });
+    }
+
+    error(type) {
+        if (this.state[type]) {
+            return (<div className='form-warning'>{this.state.warning[type]}</div>)
+        }
+    }
+
+    success() {
+        if (this.state.success) {
+            return (<span className='form-success'>Success <i className="fa fa-check" aria-hidden="true"></i></span>)
         }
     }
 
@@ -68,7 +106,9 @@ class Form extends React.Component {
                     <textarea className="form-control" id="summary" rows="3" name="newSummary" onChange={this.props.setNotch}></textarea>
                 </div>
                 <br />
-                <button type="submit" className="btn btn-primary" onClick={this.newNotch}>Submit</button>
+                {this.error('invalidUser')}
+                {this.error('invalidText')}                
+                <button type="submit" className="btn btn-primary" onClick={this.newNotch}>Submit</button>{this.success()}
             </div>
         )
     }

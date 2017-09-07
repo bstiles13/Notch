@@ -29,7 +29,8 @@ class Main extends React.Component {
                 category: 'All'
             },
             googleResults: ['No results'],
-            notchResults: ['No results']
+            notchResults: ['No results'],
+            oneNotch: {}
         };
         this.setUser = this.setUser.bind(this);
         this.setTitle = this.setTitle.bind(this);
@@ -38,6 +39,7 @@ class Main extends React.Component {
         this.setResults = this.setResults.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.getNotches = this.getNotches.bind(this);
+        this.findOne = this.findOne.bind(this);
     }
 
     componentDidMount() {
@@ -121,6 +123,12 @@ class Main extends React.Component {
         })
     }
 
+    findOne(notch) {
+        this.setState({
+            oneNotch: notch
+        })
+    }
+
     render() {
         return (
             <div>
@@ -141,6 +149,7 @@ class Main extends React.Component {
                                 googleResults={this.state.googleResults}
                                 setResults={this.setResults}
                                 notchResults={this.state.notchResults}
+                                oneNotch={this.state.oneNotch}
                             />
                             <Form
                                 categories={categories}
@@ -161,6 +170,7 @@ class Main extends React.Component {
                                 notchFilter={this.state.notchFilter}
                                 notchResults={this.state.notchResults}
                                 setFilter={this.setFilter}
+                                findOne={this.findOne}
                             />
                             <Google
                                 setLocation={this.setLocation}

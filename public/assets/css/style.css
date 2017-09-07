@@ -64,9 +64,22 @@ html, body {
 #city {
   background-color: lightcyan; }
 
-.warning {
+.login-warning {
   color: red;
-  font-size: 11px; }
+  font-size: 11px;
+  font-weight: bold; }
+
+.form-warning {
+  color: red;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 3px; }
+
+.form-success {
+  color: #11B060;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 5px; }
 
 .login-button {
   margin-right: 10px; }
@@ -85,4 +98,11 @@ html, body {
 
 #google-logo {
   height: 30px;
+  width: auto; }
+
+.modal {
+  color: black; }
+
+#person-icon {
+  height: 15px;
   width: auto; }
