@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from './assets/logo.png';
 
 import Login from './Login';
 
@@ -26,7 +27,7 @@ class Sidebar extends React.Component {
     render() {
         return (
             <aside id='sidebar' className="menu">
-                <h3 id='logo'>Notch</h3>
+                <img id='logo' src={logo}/>
                 <hr />
                 <Login id='login' user={this.props.user} setUser={this.props.setUser} />
                 <hr />

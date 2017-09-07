@@ -184,5 +184,6 @@ var categories = {
     Sports: ['Recreational', 'Professional', 'Other'],
     Shows: ['Broadway', 'Comedy', 'Other'],
     Art: ['Museum', 'Gala', 'Other'],
-    Animals: ['Zoo', 'Aquarium', 'Nature Watching', 'Other']
+    Animals: ['Zoo', 'Aquarium', 'Nature Watching', 'Other'],
+    Lifestyle: ['Health', 'Yoga', 'Cosmetic', 'Spa', 'Other']
 }

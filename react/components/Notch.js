@@ -18,7 +18,7 @@ class Notch extends React.Component {
                     <li className="list-group-item list-group-item-action flex-column align-items-start">
                         <div className="d-flex w-100 justify-content-between">
                             <h5 className="mb-1">{notch.properties.place}</h5>
-                            <button>Select</button>
+                            <button className="btn btn-sm">Go</button>
                         </div>
                         <small>{notch.properties.headline}</small>
                     </li>
@@ -30,7 +30,9 @@ class Notch extends React.Component {
     render() {
         return (
             <div id='notch'>
-                <h4>Nearby Notches</h4>
+                <h4>User Notches</h4>
+                <span className="description">All Notches (locations) created by users within 100 miles</span>                
+                <hr/>
                 <span>Filters: [category: {this.props.notchFilter.category} <i onClick={this.props.setFilter} value={"All"} className="fa fa-times" aria-hidden="true"></i>]</span>
                 <br /><br />                
                 {this.showResults()}

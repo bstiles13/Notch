@@ -23111,19 +23111,19 @@ var _Sidebar = __webpack_require__(211);
 
 var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
-var _Map = __webpack_require__(213);
+var _Map = __webpack_require__(214);
 
 var _Map2 = _interopRequireDefault(_Map);
 
-var _Form = __webpack_require__(214);
+var _Form = __webpack_require__(215);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Notch = __webpack_require__(215);
+var _Notch = __webpack_require__(216);
 
 var _Notch2 = _interopRequireDefault(_Notch);
 
-var _Google = __webpack_require__(216);
+var _Google = __webpack_require__(217);
 
 var _Google2 = _interopRequireDefault(_Google);
 
@@ -23339,7 +23339,8 @@ var categories = {
     Sports: ['Recreational', 'Professional', 'Other'],
     Shows: ['Broadway', 'Comedy', 'Other'],
     Art: ['Museum', 'Gala', 'Other'],
-    Animals: ['Zoo', 'Aquarium', 'Nature Watching', 'Other']
+    Animals: ['Zoo', 'Aquarium', 'Nature Watching', 'Other'],
+    Lifestyle: ['Health', 'Yoga', 'Cosmetic', 'Spa', 'Other']
 };
 
 /***/ }),
@@ -24227,7 +24228,11 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Login = __webpack_require__(212);
+var _logo = __webpack_require__(212);
+
+var _logo2 = _interopRequireDefault(_logo);
+
+var _Login = __webpack_require__(213);
 
 var _Login2 = _interopRequireDefault(_Login);
 
@@ -24286,11 +24291,7 @@ var Sidebar = function (_React$Component) {
             return _react2.default.createElement(
                 'aside',
                 { id: 'sidebar', className: 'menu' },
-                _react2.default.createElement(
-                    'h3',
-                    { id: 'logo' },
-                    'Notch'
-                ),
+                _react2.default.createElement('img', { id: 'logo', src: _logo2.default }),
                 _react2.default.createElement('hr', null),
                 _react2.default.createElement(_Login2.default, { id: 'login', user: this.props.user, setUser: this.props.setUser }),
                 _react2.default.createElement('hr', null),
@@ -24317,6 +24318,12 @@ exports.default = Sidebar;
 
 /***/ }),
 /* 212 */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,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"
+
+/***/ }),
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24667,7 +24674,7 @@ var Login = function (_React$Component) {
 exports.default = Login;
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24832,7 +24839,7 @@ var notches;
 exports.default = Map;
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24999,7 +25006,7 @@ var Form = function (_React$Component) {
 exports.default = Form;
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25062,8 +25069,8 @@ var Notch = function (_React$Component) {
                             ),
                             _react2.default.createElement(
                                 'button',
-                                null,
-                                'Select'
+                                { className: 'btn btn-sm' },
+                                'Go'
                             )
                         ),
                         _react2.default.createElement(
@@ -25084,8 +25091,14 @@ var Notch = function (_React$Component) {
                 _react2.default.createElement(
                     'h4',
                     null,
-                    'Nearby Notches'
+                    'User Notches'
                 ),
+                _react2.default.createElement(
+                    'span',
+                    { className: 'description' },
+                    'All Notches (locations) created by users within 100 miles'
+                ),
+                _react2.default.createElement('hr', null),
                 _react2.default.createElement(
                     'span',
                     null,
@@ -25108,7 +25121,7 @@ var Notch = function (_React$Component) {
 exports.default = Notch;
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25288,7 +25301,7 @@ var Google = function (_React$Component) {
                             _react2.default.createElement(
                                 'button',
                                 { value: place.place_id, className: 'btn btn-sm', onClick: _this5.sendToMap.bind(_this5) },
-                                'Select'
+                                'Map It'
                             )
                         ),
                         _react2.default.createElement(
@@ -25363,8 +25376,15 @@ var Google = function (_React$Component) {
                 _react2.default.createElement(
                     'h4',
                     null,
-                    'Google'
+                    'Search\xA0\xA0',
+                    _react2.default.createElement('img', { id: 'google-logo', src: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Googlelogo.png' })
                 ),
+                _react2.default.createElement(
+                    'span',
+                    { className: 'description' },
+                    'Does it already exist? Save time with Google Places'
+                ),
+                _react2.default.createElement('hr', null),
                 _react2.default.createElement(
                     'div',
                     { id: 'search' },

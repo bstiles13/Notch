@@ -106,7 +106,7 @@ class Google extends React.Component {
                     <li className="list-group-item list-group-item-action flex-column align-items-start">
                         <div className="d-flex w-100 justify-content-between">
                             <h5 className="mb-1">{place.name}</h5>
-                            <button value={place.place_id} className="btn btn-sm" onClick={this.sendToMap.bind(this)}>Select</button>
+                            <button value={place.place_id} className="btn btn-sm" onClick={this.sendToMap.bind(this)}>Map It</button>
                         </div>
                         <small>{place.vicinity ? place.vicinity : place.types[0].replace("_", " ")}</small>
                     </li>
@@ -156,7 +156,9 @@ class Google extends React.Component {
     render() {
         return (
             <div id='google'>
-                <h4>Google</h4>
+                <h4>Search&nbsp;&nbsp;<img id='google-logo' src="https://upload.wikimedia.org/wikipedia/commons/3/30/Googlelogo.png"/></h4>
+                <span className="description">Does it already exist? Save time with Google Places</span>                                
+                <hr />
                 <div id='search'>
                     <div className="form-group search-child">
                         <label htmlFor="keyword">Keyword</label>
