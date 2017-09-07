@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Login extends React.Component {
@@ -175,6 +176,7 @@ class Login extends React.Component {
                     <div>Welcome back <span id="username">{this.props.user}</span>!</div>
                     <br />
                     <button type="button" className="btn btn-primary btn-sm login-button" onClick={this.logout.bind(this)}>Sign Out</button>
+                    <Link to='/profile'><button type="button" className="btn btn-sm btn-secondary">My Profile</button></Link>                    
                 </div>
             )
         } else if (this.state.register) {

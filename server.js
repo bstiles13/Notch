@@ -80,19 +80,19 @@ app.post('/placedetails', function (req, res) {
 
 // Receives and authenticates login information from existing users
 app.post('/existinguser', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     User.findOne({ 'username': req.body.username }, function (err, user) {
         if (err) {
             console.log(err);
             res.send('unsuccessful');
         } else if (user == null) {
-            console.log('no user');
+            // console.log('no user');
             res.send('unsuccessful');
         } else {
-            console.log(user);
+            // console.log(user);
             var savedHash = user.password;
             bcrypt.compare(req.body.password, savedHash, function (err, status) {
-                console.log(status);
+                // console.log(status);
                 status === true ? res.json('success') : res.json('unsuccessful');
             });
         }
@@ -101,13 +101,13 @@ app.post('/existinguser', function (req, res) {
 
 // Accepts login information from new users, checks if the username exists, and saves the user if unique
 app.post('/newuser', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     User.findOne({ 'username': req.body.username }, function (err, user) {
         if (err) {
             console.log(err);
             res.send('unsuccessful');
         } else if (user == null) {
-            console.log('no user');
+            // console.log('no user');
             bcrypt.genSalt(10, function (err, salt) {
                 bcrypt.hash(req.body.password1, salt, function (err, hash) {
                     var newUser = {
@@ -115,9 +115,9 @@ app.post('/newuser', function (req, res) {
                         password: hash,
                         zipcode: req.body.zipCode
                     }
-                    console.log(newUser);
+                    // console.log(newUser);
                     User.create(newUser).then(data => {
-                        console.log(data);
+                        // console.log(data);
                         res.send('success');
                     }).catch(err => {
                         console.log(err);
@@ -125,14 +125,14 @@ app.post('/newuser', function (req, res) {
                 });
             });
         } else {
-            console.log(user);
+            // console.log(user);
             res.send('unsuccessful');
         }
     });
 });
 
 app.post('/newnotch', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     let categories = req.body.category.split('|');
     let notch = {
         "geometry": {
@@ -147,9 +147,9 @@ app.post('/newnotch', function (req, res) {
             "summary": req.body.summary,
         }
     }
-    console.log(notch);
+    // console.log(notch);
     Notch.create(notch).then(data => {
-        console.log(data);
+        // console.log(data);
         res.send('success');
     }).catch(err => {
         console.log(err);
@@ -158,8 +158,8 @@ app.post('/newnotch', function (req, res) {
 })
 
 app.post('/getnotches', function (req, res) {
-    console.log(req.body);
-    console.log('finding notches');
+    // console.log(req.body);
+    // console.log('finding notches');
     let lng = req.body.lng;
     let lat = req.body.lat;
     if (req.body.category != 'All') {
@@ -181,8 +181,8 @@ app.post('/getnotches', function (req, res) {
         "properties.category_child": child
     }
     ).then(data => {
-        console.log('found notches');
-        console.log(data);
+        // console.log('found notches');
+        // console.log(data);
         res.send(data);
     }).catch(err => {
         console.log('Error: ' + err);
@@ -190,13 +190,26 @@ app.post('/getnotches', function (req, res) {
 })
 
 app.post('/findone', function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     Notch.findById(req.body.id, function (err, data) {
         if (err) {
             console.log(err);
             res.send('unsuccessful');
         } else {
-            console.log('found one');
+            // console.log('found one');
+            // console.log(data);
+            res.send(data);
+        }
+    })
+})
+
+app.post('/usernotches', function(req, res) {
+    console.log(req.body);
+    Notch.find({"properties.user": req.body.user}, function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('user notches');
             console.log(data);
             res.send(data);
         }
