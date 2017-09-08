@@ -1,7 +1,8 @@
-$color: floralwhite;
+$backgroundColor: floralwhite;
+$darkBlue: rgb(56, 63, 81);
 
 html, body {
-    background-color: $color;
+    background-color: $backgroundColor;
     width: 100%;
 }
 
@@ -23,7 +24,7 @@ html, body {
 
 #sidebar {
     flex: 1;
-    background-color: rgb(56, 63, 81);
+    background-color: $darkBlue;
     color: ivory;
 }
 
@@ -34,7 +35,7 @@ html, body {
 #content-top {
     display: flex;
     margin-bottom: 20px;
-    border-bottom: 2px solid rgb(56, 63, 81);    
+    border-bottom: 2px solid $darkBlue;    
 }
 
 #content-bottom {
@@ -140,7 +141,7 @@ html, body {
 }
 
 #profile-menu {
-    background-color: rgb(56, 63, 81);
+    background-color: $darkBlue;
     width: 100%;
     padding: 10px;
     margin-bottom: 50px;
