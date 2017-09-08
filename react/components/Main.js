@@ -30,7 +30,6 @@ class Main extends React.Component {
             },
             googleResults: ['No results'],
             notchResults: ['No results'],
-            focusNotch: false,
             oneNotch: {}
         };
         this.setUser = this.setUser.bind(this);
@@ -40,7 +39,6 @@ class Main extends React.Component {
         this.setResults = this.setResults.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.getNotches = this.getNotches.bind(this);
-        this.setFocus = this.setFocus.bind(this);
         this.findOne = this.findOne.bind(this);
     }
 
@@ -121,10 +119,6 @@ class Main extends React.Component {
         })
     }
 
-    setFocus() {
-        this.setState({focusNotch: true})
-    }
-
     findOne(notch) {
         this.setState({
             oneNotch: notch
@@ -151,7 +145,6 @@ class Main extends React.Component {
                                 googleResults={this.state.googleResults}
                                 setResults={this.setResults}
                                 notchResults={this.state.notchResults}
-                                focusNotch={this.state.focusNotch}
                                 oneNotch={this.state.oneNotch}
                             />
                             <Form
@@ -173,7 +166,6 @@ class Main extends React.Component {
                                 notchFilter={this.state.notchFilter}
                                 notchResults={this.state.notchResults}
                                 setFilter={this.setFilter}
-                                setFocus={this.setFocus}
                                 findOne={this.findOne}
                             />
                             <Google

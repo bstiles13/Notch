@@ -7,9 +7,6 @@ class Map extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            toggle: false
-        };
         this.onMapClick = this.onMapClick.bind(this);
         this.initiateMap = this.initiateMap.bind(this);
         this.setMarker = this.setMarker.bind(this);
@@ -18,6 +15,10 @@ class Map extends React.Component {
     componentDidMount() {
         this.initiateMap();
         this.showNotches();
+    }
+
+    componentDidUpdate() {
+        console.log(this.props.focusNotch);        
     }
 
     componentDidUpdate(prevProps) {
@@ -56,7 +57,6 @@ class Map extends React.Component {
     }
 
     onMapClick(e) {
-        this.setState({ toggle: true })
         var lat = (e.latlng.lat).toFixed(7);
         var lng = (e.latlng.lng).toFixed(7);
         this.props.setLocation(lat, lng, false);
@@ -79,15 +79,14 @@ class Map extends React.Component {
         } else {
             icon.options.iconUrl = 'http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png';     
             marker = new L.marker([lat, lng], { icon: icon });
-            if (this.state.toggle || this.props.focusNotch) {
                 marker.bindTooltip(this.props.place,
                     {
                         permanent: true,
                         direction: 'bottom',
                     })
-            }
         }
         mymap.addLayer(marker);
+        mymap.setView([lat, lng], 10);        
     }
 
     showNotches() {

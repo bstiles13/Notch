@@ -27732,7 +27732,6 @@ var Main = function (_React$Component) {
             },
             googleResults: ['No results'],
             notchResults: ['No results'],
-            focusNotch: false,
             oneNotch: {}
         };
         _this.setUser = _this.setUser.bind(_this);
@@ -27742,7 +27741,6 @@ var Main = function (_React$Component) {
         _this.setResults = _this.setResults.bind(_this);
         _this.setFilter = _this.setFilter.bind(_this);
         _this.getNotches = _this.getNotches.bind(_this);
-        _this.setFocus = _this.setFocus.bind(_this);
         _this.findOne = _this.findOne.bind(_this);
         return _this;
     }
@@ -27833,11 +27831,6 @@ var Main = function (_React$Component) {
             });
         }
     }, {
-        key: 'setFocus',
-        value: function setFocus() {
-            this.setState({ focusNotch: true });
-        }
-    }, {
         key: 'findOne',
         value: function findOne(notch) {
             this.setState({
@@ -27873,7 +27866,6 @@ var Main = function (_React$Component) {
                                 googleResults: this.state.googleResults,
                                 setResults: this.setResults,
                                 notchResults: this.state.notchResults,
-                                focusNotch: this.state.focusNotch,
                                 oneNotch: this.state.oneNotch
                             }),
                             _react2.default.createElement(_Form2.default, {
@@ -27897,7 +27889,6 @@ var Main = function (_React$Component) {
                                 notchFilter: this.state.notchFilter,
                                 notchResults: this.state.notchResults,
                                 setFilter: this.setFilter,
-                                setFocus: this.setFocus,
                                 findOne: this.findOne
                             }),
                             _react2.default.createElement(_Google2.default, {
@@ -29382,9 +29373,6 @@ var Map = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 
-        _this.state = {
-            toggle: false
-        };
         _this.onMapClick = _this.onMapClick.bind(_this);
         _this.initiateMap = _this.initiateMap.bind(_this);
         _this.setMarker = _this.setMarker.bind(_this);
@@ -29396,6 +29384,11 @@ var Map = function (_React$Component) {
         value: function componentDidMount() {
             this.initiateMap();
             this.showNotches();
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+            console.log(this.props.focusNotch);
         }
     }, {
         key: 'componentDidUpdate',
@@ -29434,7 +29427,6 @@ var Map = function (_React$Component) {
     }, {
         key: 'onMapClick',
         value: function onMapClick(e) {
-            this.setState({ toggle: true });
             var lat = e.latlng.lat.toFixed(7);
             var lng = e.latlng.lng.toFixed(7);
             this.props.setLocation(lat, lng, false);
@@ -29458,14 +29450,13 @@ var Map = function (_React$Component) {
             } else {
                 icon.options.iconUrl = 'http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png';
                 marker = new L.marker([lat, lng], { icon: icon });
-                if (this.state.toggle || this.props.focusNotch) {
-                    marker.bindTooltip(this.props.place, {
-                        permanent: true,
-                        direction: 'bottom'
-                    });
-                }
+                marker.bindTooltip(this.props.place, {
+                    permanent: true,
+                    direction: 'bottom'
+                });
             }
             mymap.addLayer(marker);
+            mymap.setView([lat, lng], 10);
         }
     }, {
         key: 'showNotches',
