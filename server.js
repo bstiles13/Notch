@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 var bcrypt = require('bcrypt');
 var routes = require('./controller/routes.js');
-var port = process.env.ENV || 8080;
+const PORT = process.env.PORT || 9000;
 
 // MongoDB configuration
 var mongoose = require('mongoose');
@@ -30,6 +30,6 @@ mongoose.connect(db, function (error) {
 });
 
 // Start server
-app.listen(port, function () {
+app.listen(PORT, function () {
     console.log('Server successful on port ' + port);
 })
