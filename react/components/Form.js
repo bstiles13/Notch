@@ -47,6 +47,7 @@ class Form extends React.Component {
                 this.setState({
                     success: true
                 })
+                this.props.getNotches();
             })
         } else {
             console.log('error');

@@ -29610,6 +29610,7 @@ var Form = function (_React$Component) {
                     _this2.setState({
                         success: true
                     });
+                    _this2.props.getNotches();
                 });
             } else {
                 console.log('error');
