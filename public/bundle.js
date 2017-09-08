@@ -29510,7 +29510,11 @@ var Map = function (_React$Component) {
                             icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png';
                             break;
                     }
-                    var _marker = L.marker(coordinates, { icon: icon }).bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>');
+                    var _marker = L.marker(coordinates, { icon: icon }).bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>').bindTooltip(notchResults[i].properties.place, {
+                        className: 'tooltip',
+                        permanent: true,
+                        direction: 'right'
+                    });
                     markers.push(_marker);
                 }
                 console.log(markers);

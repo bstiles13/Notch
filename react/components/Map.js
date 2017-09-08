@@ -77,7 +77,7 @@ class Map extends React.Component {
             icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png';
             marker = new L.marker([lat, lng], { icon: icon });
         } else {
-            icon.options.iconUrl = 'http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png';
+            icon.options.iconUrl = 'http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png';     
             marker = new L.marker([lat, lng], { icon: icon });
             if (this.state.toggle || this.props.focusNotch) {
                 marker.bindTooltip(this.props.place,
@@ -131,7 +131,14 @@ class Map extends React.Component {
                         icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png';
                         break;
                 }
-                let marker = L.marker(coordinates, { icon: icon }).bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>');
+                let marker = L.marker(coordinates, {icon: icon})
+                .bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>')
+                .bindTooltip(notchResults[i].properties.place, 
+                {
+                    className: 'tooltip',
+                    permanent: true, 
+                    direction: 'right',
+                });
                 markers.push(marker);
             }
             console.log(markers);
@@ -145,7 +152,7 @@ class Map extends React.Component {
         let notch = this.props.oneNotch;
         let lat = this.props.oneNotch.geometry.coordinates[1];
         let lng = this.props.oneNotch.geometry.coordinates[0];
-        let content = this.props.oneNotch.properties.place;        
+        let content = this.props.oneNotch.properties.place;
         mymap.setView([lat, lng], 12);
         var popup = L.popup()
             .setLatLng([lat + 0.01, lng])

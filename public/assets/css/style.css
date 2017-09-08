@@ -127,3 +127,11 @@ html, body {
   height: 22px;
   width: auto;
   margin-right: 10px; }
+
+.tooltip {
+  background-color: transparent;
+  border-style: none;
+  box-shadow: none;
+  font-size: 12px;
+  min-width: 150px;
+  max-width: 500px; }
