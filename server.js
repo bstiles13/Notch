@@ -31,5 +31,5 @@ mongoose.connect(db, function (error) {
 
 // Start server
 app.listen(PORT, function () {
-    console.log('Server successful on port ' + port);
+    console.log('Server successful on port ' + PORT);
 })
