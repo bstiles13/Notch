@@ -17,11 +17,34 @@ class Sidebar extends React.Component {
             var array = categories[key].map(function (index) {
                 return <li className="category" onClick={that.props.setFilter} value={key + " | " + index}>{index}</li>;
             })
-            return <div><p className="menu-label">{key}</p>
+            return <div><p className="menu-label">{that.showIcon(key)}{key}</p>
                 <ul className="menu-list category">
                     {array}
                 </ul></div>;
         });
+    }
+
+    showIcon(category) {
+        switch (category) {
+            case "Outdoors":
+                return (<img className='marker-icon' src='https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png' />);
+                break;
+            case "Sports":
+                return (<img className='marker-icon' src='https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png' />);
+                break;
+            case "Shows":
+                return (<img className='marker-icon' src='https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png' />);
+                break;
+            case "Art":
+                return (<img className='marker-icon' src='https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-grey.png' />);
+                break;
+            case "Animals":
+                return (<img className='marker-icon' src='https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png' />);
+                break;
+            case "Lifestyle":
+                return (<img className='marker-icon' src='https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png' />);
+                break;
+        }
     }
 
     render() {
@@ -52,7 +75,7 @@ class Sidebar extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                Test
+                                COMING SOON
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

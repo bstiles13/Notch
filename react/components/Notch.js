@@ -10,10 +10,21 @@ class Notch extends React.Component {
     getLocation(event) {
         console.log(event.target.value);
         let id = event.target.value;
-        axios.post('/findone', {id: id}).then(data => {
+        axios.post('/findone', { id: id }).then(data => {
             console.log(data.data);
             this.props.findOne(data.data);
+            this.props.setFocus();
         })
+    }
+
+    showFilter() {
+        if (this.props.notchFilter.category == 'All') {
+            return (<span>Filters: None</span>)
+        } else {
+            return (
+                <span>Filters: [category: {this.props.notchFilter.category} <i onClick={this.props.setFilter} value={"All"} className="fa fa-times" aria-hidden="true"></i>]</span>
+            )
+        }
     }
 
     showResults() {
@@ -42,9 +53,9 @@ class Notch extends React.Component {
         return (
             <div id='notch'>
                 <h4>User Notches</h4>
-                <span className="description">All Notches (locations) created by users within 100 miles of <img id='person-icon' src='http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png'/></span>
+                <span className="description">All Notches (locations) created by users within 100 miles of <img id='person-icon' src='http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png' /></span>
                 <hr />
-                <span>Filters: [category: {this.props.notchFilter.category} <i onClick={this.props.setFilter} value={"All"} className="fa fa-times" aria-hidden="true"></i>]</span>
+                {this.showFilter()}
                 <br /><br />
                 {this.showResults()}
             </div>

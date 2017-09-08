@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import logo from './assets/logo.png';
 
 class Profile extends React.Component {
 
@@ -43,6 +44,16 @@ class Profile extends React.Component {
         }
     }
 
+    deleteNotch(event) {
+        console.log(event.target.value);
+        axios.post('/deletenotch', {id: event.target.value}).then(data => {
+            let status = data.data;
+            if (status == 'success') {
+                this.getNotches();
+            }
+        })
+    }
+
     showNotches() {
         let notches = this.state.userNotches;
         console.log(notches);
@@ -53,7 +64,7 @@ class Profile extends React.Component {
                 return (
                     <li className="list-group-item justify-content-between">
                         {notch.properties.place}
-                    <span className="badge badge-default badge-pill">Delete</span>
+                        <button onClick={this.deleteNotch.bind(this)} value={notch._id} className="badge badge-default badge-pill delete">Delete</button>
                     </li>
                 )
             })
@@ -63,15 +74,19 @@ class Profile extends React.Component {
     render() {
         return (
             <div id='profile'>
-                <h3>{this.state.user}'s Profile</h3>
-                <hr />
-                <h5>Manage Notches:</h5>
-                <ul className="list-group">
-                    {this.showNotches()}
-                </ul>
-                <br />
-                <br />
-                <Link to='/'><button type="button" className="btn btn-danger">Back</button></Link>
+                <div id='profile-menu'>
+                    <Link to='/'><button type="button" className="btn btn-danger">Back</button></Link>
+                    <img id='logo' src={logo} />
+                    <span></span>
+                </div>
+                <div id='profile-content'>
+                    <h3>{this.state.user}'s Profile</h3>
+                    <hr />
+                    <h5>Manage Notches:</h5>
+                    <ul className="list-group">
+                        {this.showNotches()}
+                    </ul>
+                </div>
             </div>
         )
     }

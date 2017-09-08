@@ -139,9 +139,27 @@ html, body {
     width: auto;
 }
 
-#profile {
+#profile-menu {
+    background-color: rgb(56, 63, 81);
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-content {
     display: flex;
     flex-direction: column;
-    padding: 20px;
     align-items: center;
+}
+
+.delete {
+    margin-left: 20px;
+}
+
+.marker-icon {
+    height: 22px;
+    width: auto;
+    margin-right: 10px;
 }

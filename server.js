@@ -216,6 +216,17 @@ app.post('/usernotches', function(req, res) {
     })
 })
 
+app.post('/deletenotch', function(req, res) {
+    Notch.findByIdAndRemove(req.body.id, function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(data);
+            res.send('success');
+        }
+    })
+})
+
 // Start server
 app.listen(port, function () {
     console.log('Server successful on port ' + port);

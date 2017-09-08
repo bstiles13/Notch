@@ -79,7 +79,7 @@ class Map extends React.Component {
         } else {
             icon.options.iconUrl = 'http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png';
             marker = new L.marker([lat, lng], { icon: icon });
-            if (this.state.toggle) {
+            if (this.state.toggle || this.props.focusNotch) {
                 marker.bindTooltip(this.props.place,
                     {
                         permanent: true,
