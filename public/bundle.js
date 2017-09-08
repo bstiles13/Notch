@@ -29412,7 +29412,7 @@ var Map = function (_React$Component) {
             console.log('Prop' + this.props.latlng.lng);
             var lat = this.props.latlng.lat;
             var lng = this.props.latlng.lng;
-            mymap = new L.map('mapid').setView([lat, lng], 10);
+            mymap = new L.map('mapid').setView([lat, lng], 9);
             mymap.doubleClickZoom.disable();
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -29456,7 +29456,7 @@ var Map = function (_React$Component) {
                 });
             }
             mymap.addLayer(marker);
-            mymap.setView([lat, lng], 10);
+            mymap.setView([lat, lng]);
         }
     }, {
         key: 'showNotches',
