@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 var bcrypt = require('bcrypt');
 var routes = require('./controller/routes.js');
-var port = process.ENV || 8080;
+var port = process.env.ENV || 8080;
 
 // MongoDB configuration
 var mongoose = require('mongoose');
