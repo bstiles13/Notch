@@ -1,1 +1,5 @@
 # Notch
+
+The app is inspired by an unmapped hike to "Lake Xanadu" near Nederland, Colorado. My cousin recruited me for this off-trail adventure that he found in an old "Best Colorado Peaks" guidebook. It was incredible experience that included green meadows, streams and lakes, a plane wreck, and a peak seemingly above the world. I tried to show the location to a friend when I returned to civilization and, much to my surprise, Google had no idea what Lake Xanadu was. Google has always been Plan A, B, and C. I have never needed a Plan D. What is Plan D? How could I show someone the lake without having to study every blue little blob on the map? How many unmarked places are there? Throughout life we accumulate countless "Notches" on our belts but it's easy to forget what each notch means. So I wanted to create a place where people can preserve their Notches as they go. Hence, Notch.
+
+Notch is an app designed to save and share your memories and inspire you to make more. Think personal journal meets Google.
