@@ -56,6 +56,7 @@ class Login extends React.Component {
     }
 
     setRegister() {
+        this.clearWarnings();        
         let status = this.state.register;
         if (status) {
             this.setState({ register: false })
@@ -105,6 +106,8 @@ class Login extends React.Component {
         let newUser = this.state.newUser;
         if (newUser.password1 != newUser.password2) {
             this.setState({ invalidPassword: true });
+        } else if (newUser.username == '' || newUser.password1 == '') {
+            this.setState({ invalidText: true })            
         } else {
             // Make the HTTP request:
             axios.post('/newuser', newUser).then(data => {
@@ -146,7 +149,8 @@ class Login extends React.Component {
         this.setState({
             invalidUser: false,
             invalidName: false,
-            invalidPassword: false
+            invalidPassword: false,
+            invalidText: false
         });
     }
 

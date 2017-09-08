@@ -29063,6 +29063,7 @@ var Login = function (_React$Component) {
     }, {
         key: 'setRegister',
         value: function setRegister() {
+            this.clearWarnings();
             var status = this.state.register;
             if (status) {
                 this.setState({ register: false });
@@ -29120,6 +29121,8 @@ var Login = function (_React$Component) {
             var newUser = this.state.newUser;
             if (newUser.password1 != newUser.password2) {
                 this.setState({ invalidPassword: true });
+            } else if (newUser.username == '' || newUser.password1 == '') {
+                this.setState({ invalidText: true });
             } else {
                 // Make the HTTP request:
                 _axios2.default.post('/newuser', newUser).then(function (data) {
@@ -29166,7 +29169,8 @@ var Login = function (_React$Component) {
             this.setState({
                 invalidUser: false,
                 invalidName: false,
-                invalidPassword: false
+                invalidPassword: false,
+                invalidText: false
             });
         }
     }, {
