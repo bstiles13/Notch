@@ -97,17 +97,13 @@ class Main extends React.Component {
 
 
     getNotches() {
-        console.log('notch request received');
         let scope = {
             lat: this.state.latlng.lat,
             lng: this.state.latlng.lng,
             category: this.state.notchFilter.category
         }
         axios.post('/getnotches', scope).then(data => {
-            console.log('got notches');
-            console.log(data.data);
             if (data.data == '' || data.data == []) {
-                console.log('notches out of range');
                 this.setState({
                     notchResults: ['No results']
                 })

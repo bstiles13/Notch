@@ -27809,17 +27809,13 @@ var Main = function (_React$Component) {
         value: function getNotches() {
             var _this2 = this;
 
-            console.log('notch request received');
             var scope = {
                 lat: this.state.latlng.lat,
                 lng: this.state.latlng.lng,
                 category: this.state.notchFilter.category
             };
             _axios2.default.post('/getnotches', scope).then(function (data) {
-                console.log('got notches');
-                console.log(data.data);
                 if (data.data == '' || data.data == []) {
-                    console.log('notches out of range');
                     _this2.setState({
                         notchResults: ['No results']
                     });
@@ -28916,7 +28912,7 @@ var Sidebar = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'modal fade', id: 'exampleModal', tabindex: '-1', role: 'dialog', 'aria-labelledby': 'exampleModalLabel', 'aria-hidden': 'true' },
+                    { className: 'modal fade', id: 'exampleModal', tabIndex: '-1', role: 'dialog', 'aria-labelledby': 'exampleModalLabel', 'aria-hidden': 'true' },
                     _react2.default.createElement(
                         'div',
                         { className: 'modal-dialog', role: 'document' },
@@ -29051,17 +29047,9 @@ var Login = function (_React$Component) {
             this.checkUser();
         }
     }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            console.log(this.state.existingUser);
-            console.log(this.state.newUser);
-            console.log(this.state.loggedIn);
-        }
-    }, {
         key: 'checkUser',
         value: function checkUser() {
             var local = localStorage.getItem('notchUser');
-            console.log('local user: ' + local);
             if (local != null && local != 'null' && local != undefined) {
                 // this.setState({ user: local });
                 this.props.setUser(local);
@@ -29094,7 +29082,6 @@ var Login = function (_React$Component) {
     }, {
         key: 'setNewUser',
         value: function setNewUser(event) {
-            console.log('new user');
             var user = this.state.newUser;
             user[event.target.name] = event.target.value;
             this.setState({
@@ -29115,11 +29102,8 @@ var Login = function (_React$Component) {
                 // Make the HTTP request:
                 _axios2.default.post('/existinguser', existingUser).then(function (data) {
                     // Read the result field from the JSON response.
-                    console.log(data.data);
-                    console.log('existing login response');
                     var result = data.data;
                     if (result == 'success') {
-                        console.log('logging in');
                         _this2.loggedIn(existingUser.username);
                     } else {
                         _this2.setState({ invalidUser: true });
@@ -29140,7 +29124,6 @@ var Login = function (_React$Component) {
                 // Make the HTTP request:
                 _axios2.default.post('/newuser', newUser).then(function (data) {
                     // Read the result field from the JSON response.
-                    console.log('new login response');
                     var result = data.data;
                     if (result == 'success') {
                         _this3.loggedIn(newUser.username);
@@ -29155,7 +29138,6 @@ var Login = function (_React$Component) {
     }, {
         key: 'loggedIn',
         value: function loggedIn(user) {
-            console.log('received login');
             localStorage.setItem('notchUser', user);
             this.checkUser();
 
@@ -29387,11 +29369,6 @@ var Map = function (_React$Component) {
         }
     }, {
         key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            console.log(this.props.focusNotch);
-        }
-    }, {
-        key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
             var newLat = this.props.latlng.lat;
             var newLng = this.props.latlng.lng;
@@ -29399,17 +29376,12 @@ var Map = function (_React$Component) {
             this.setMarker(newLat, newLng);
             this.showNotches();
             if (prevProps.oneNotch != this.props.oneNotch) {
-                console.log('SPOTLIGHT CHANGE');
                 this.setView();
-            } else {
-                console.log('NO SPOTLIGHT CHANGE');
             }
         }
     }, {
         key: 'initiateMap',
         value: function initiateMap() {
-            console.log('Prop' + this.props.latlng.lat);
-            console.log('Prop' + this.props.latlng.lng);
             var lat = this.props.latlng.lat;
             var lng = this.props.latlng.lng;
             mymap = new L.map('mapid').setView([lat, lng], 9);
@@ -29479,8 +29451,6 @@ var Map = function (_React$Component) {
                         popupAnchor: [1, -34],
                         shadowSize: [20, 20]
                     });
-                    console.log("ICON");
-                    console.log(icon);
                     switch (notchResults[i].properties.category_parent) {
                         case "Outdoors":
                             icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png';
@@ -29501,15 +29471,13 @@ var Map = function (_React$Component) {
                             icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png';
                             break;
                     }
-                    var _marker = L.marker(coordinates, { icon: icon }).bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>').bindTooltip(notchResults[i].properties.place, {
+                    var _marker = L.marker(coordinates, { icon: icon }).bindPopup('<h4>' + notchResults[i].properties.place + '</h4><span>by ' + notchResults[i].properties.user + '</span><hr/><b>' + notchResults[i].properties.headline + '</b><br/><p>' + notchResults[i].properties.summary + '</p>').bindTooltip(notchResults[i].properties.place, {
                         className: 'tooltip',
                         permanent: true,
                         direction: 'right'
                     });
                     markers.push(_marker);
                 }
-                console.log(markers);
-                console.log('adding notch layer');
                 notches = L.layerGroup(markers);
                 mymap.addLayer(notches);
             }
@@ -29630,14 +29598,11 @@ var Form = function (_React$Component) {
                 summary: this.props.summary
             };
             if (notch.user == null || notch.user === '' || notch.user == undefined) {
-                console.log('no user');
-                console.log(notch);
                 this.setState({
                     invalidUser: true
                 });
             } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
                 _axios2.default.post('/newnotch', notch).then(function (data) {
-                    console.log(data.data);
                     _this2.setState({
                         success: true
                     });
@@ -29815,10 +29780,8 @@ var Notch = function (_React$Component) {
         value: function getLocation(event) {
             var _this2 = this;
 
-            console.log(event.target.value);
             var id = event.target.value;
             _axios2.default.post('/findone', { id: id }).then(function (data) {
-                console.log(data.data);
                 _this2.props.findOne(data.data);
                 _this2.props.setFocus();
             });
@@ -29849,8 +29812,6 @@ var Notch = function (_React$Component) {
         value: function showResults() {
             var _this3 = this;
 
-            console.log('notch results');
-            console.log(this.props.notchResults);
             var results = this.props.notchResults;
             var i = 0;
             return results.map(function (notch) {
@@ -29974,15 +29935,6 @@ var Google = function (_React$Component) {
     }
 
     _createClass(Google, [{
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            console.log(this.state.searchTerm);
-            console.log(this.state.city);
-            console.log(this.state.cityId);
-            console.log(this.state.longitude);
-            console.log(this.state.latitude);
-        }
-    }, {
         key: 'setPlace',
         value: function setPlace(event) {
             if (event.key == 'Enter') {
@@ -30023,7 +29975,6 @@ var Google = function (_React$Component) {
             _axios2.default.post('/getcoordinates', { id: id }).then(function (data) {
                 var lat = data.data.lat.toFixed(7);
                 var lng = data.data.lng.toFixed(7);
-                console.log(lat + " " + lng);
                 _this3.setState({
                     latitude: lat,
                     longitude: lng
@@ -30043,7 +29994,6 @@ var Google = function (_React$Component) {
                 // console.log(results);
                 _this4.props.setResults(results);
                 _this4.placeDetails(id, true);
-                console.log('success');
             });
         }
     }, {
@@ -30081,7 +30031,6 @@ var Google = function (_React$Component) {
         value: function showResults() {
             var _this5 = this;
 
-            console.log(this.props.googleResults);
             var results = this.props.googleResults;
             return results.map(function (place) {
                 if (place.name) {
@@ -30144,7 +30093,6 @@ var Google = function (_React$Component) {
     }, {
         key: 'sendToMap',
         value: function sendToMap(event) {
-            console.log(event.target.value);
             var id = event.target.value;
             this.placeDetails(id, false);
         }
@@ -30154,13 +30102,10 @@ var Google = function (_React$Component) {
             var _this6 = this;
 
             _axios2.default.post('/placedetails', { id: id }).then(function (data) {
-                console.log(data.data.result);
                 var location = data.data.result.geometry.location;
                 var lat = location.lat;
                 var lng = location.lng;
                 var place = data.data.result.name;
-                console.log(lat);
-                console.log(lng);
                 _this6.props.setLocation(lat, lng, city);
                 _this6.props.setPlace(place, true);
             });
@@ -30282,12 +30227,6 @@ var Profile = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.checkUser();
-            console.log(this.state);
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            console.log(this.state);
         }
     }, {
         key: 'checkUser',
@@ -30307,8 +30246,6 @@ var Profile = function (_React$Component) {
             // return (<div>Test</div>)
             if (this.state.loggedIn) {
                 _axios2.default.post('/usernotches', { user: this.state.user }).then(function (data) {
-                    console.log('User has notches');
-                    console.log(data.data);
                     var notches = data.data;
                     _this2.setState({ userNotches: notches });
                 });
@@ -30319,7 +30256,6 @@ var Profile = function (_React$Component) {
         value: function deleteNotch(event) {
             var _this3 = this;
 
-            console.log(event.target.value);
             _axios2.default.post('/deletenotch', { id: event.target.value }).then(function (data) {
                 var status = data.data;
                 if (status == 'success') {
@@ -30333,7 +30269,6 @@ var Profile = function (_React$Component) {
             var _this4 = this;
 
             var notches = this.state.userNotches;
-            console.log(notches);
             if (notches.length === 0) {
                 return _react2.default.createElement(
                     'li',

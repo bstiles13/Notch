@@ -8,10 +8,8 @@ class Notch extends React.Component {
     }
 
     getLocation(event) {
-        console.log(event.target.value);
         let id = event.target.value;
         axios.post('/findone', { id: id }).then(data => {
-            console.log(data.data);
             this.props.findOne(data.data);
             this.props.setFocus();
         })
@@ -28,8 +26,6 @@ class Notch extends React.Component {
     }
 
     showResults() {
-        console.log('notch results')
-        console.log(this.props.notchResults);
         let results = this.props.notchResults;
         let i = 0;
         return results.map(notch => {

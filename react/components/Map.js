@@ -17,10 +17,6 @@ class Map extends React.Component {
         this.showNotches();
     }
 
-    componentDidUpdate() {
-        console.log(this.props.focusNotch);        
-    }
-
     componentDidUpdate(prevProps) {
         let newLat = this.props.latlng.lat;
         let newLng = this.props.latlng.lng;
@@ -28,16 +24,11 @@ class Map extends React.Component {
         this.setMarker(newLat, newLng)
         this.showNotches();
         if (prevProps.oneNotch != this.props.oneNotch) {
-            console.log('SPOTLIGHT CHANGE');
             this.setView();
-        } else {
-            console.log('NO SPOTLIGHT CHANGE');
         }
     }
 
     initiateMap() {
-        console.log('Prop' + this.props.latlng.lat);
-        console.log('Prop' + this.props.latlng.lng);
         let lat = this.props.latlng.lat;
         let lng = this.props.latlng.lng;
         mymap = new L.map('mapid').setView([lat, lng], 9);
@@ -108,8 +99,6 @@ class Map extends React.Component {
                     popupAnchor: [1, -34],
                     shadowSize: [20, 20]
                 });
-                console.log("ICON");
-                console.log(icon);
                 switch (notchResults[i].properties.category_parent) {
                     case "Outdoors":
                         icon.options.iconUrl = 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png';
@@ -131,7 +120,7 @@ class Map extends React.Component {
                         break;
                 }
                 let marker = L.marker(coordinates, {icon: icon})
-                .bindPopup('<div className="list-group-item list-group-item-action flex-column align-items-start"><div className="d-flex w-100 justify-content-between"><h5 className="mb-1">' + notchResults[i].properties.place + '</h5></div><p class="mb-1">' + notchResults[i].properties.headline + '</p><small>' + notchResults[i].properties.summary + '</small></div>')
+                .bindPopup('<h4>' + notchResults[i].properties.place + '</h4><span>by ' + notchResults[i].properties.user + '</span><hr/><b>' + notchResults[i].properties.headline + '</b><br/><p>' + notchResults[i].properties.summary + '</p>')
                 .bindTooltip(notchResults[i].properties.place, 
                 {
                     className: 'tooltip',
@@ -140,8 +129,6 @@ class Map extends React.Component {
                 });
                 markers.push(marker);
             }
-            console.log(markers);
-            console.log('adding notch layer');
             notches = L.layerGroup(markers);
             mymap.addLayer(notches);
         }

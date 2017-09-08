@@ -20,14 +20,6 @@ class Google extends React.Component {
         this.showAutocomplete = this.showAutocomplete.bind(this);
     }
 
-    componentDidUpdate() {
-        console.log(this.state.searchTerm);
-        console.log(this.state.city);
-        console.log(this.state.cityId);
-        console.log(this.state.longitude);
-        console.log(this.state.latitude);
-    }
-
     setPlace(event) {
         if (event.key == 'Enter') {
             let searchTerm = event.target.value;
@@ -61,7 +53,6 @@ class Google extends React.Component {
         axios.post('/getcoordinates', { id: id }).then(data => {
             let lat = (data.data.lat).toFixed(7);
             let lng = (data.data.lng).toFixed(7);
-            console.log(lat + " " + lng);
             this.setState({
                 latitude: lat,
                 longitude: lng
@@ -78,7 +69,6 @@ class Google extends React.Component {
             // console.log(results);
             this.props.setResults(results);
             this.placeDetails(id, true);
-            console.log('success');
         })
     }
 
@@ -98,7 +88,6 @@ class Google extends React.Component {
     }
 
     showResults() {
-        console.log(this.props.googleResults);
         let results = this.props.googleResults;
         return results.map(place => {
             if (place.name) {
@@ -134,20 +123,16 @@ class Google extends React.Component {
     }
 
     sendToMap(event) {
-        console.log(event.target.value);
         let id = event.target.value;
         this.placeDetails(id, false);
     }
 
     placeDetails(id, city) {
         axios.post('/placedetails', { id: id }).then(data => {
-            console.log(data.data.result)
             let location = data.data.result.geometry.location;
             let lat = location.lat;
             let lng = location.lng;
             let place = data.data.result.name;
-            console.log(lat);
-            console.log(lng);
             this.props.setLocation(lat, lng, city);
             this.props.setPlace(place, true);
         })

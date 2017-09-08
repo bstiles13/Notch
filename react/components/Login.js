@@ -42,15 +42,8 @@ class Login extends React.Component {
         this.checkUser();
     }
 
-    componentDidUpdate() {
-        console.log(this.state.existingUser);
-        console.log(this.state.newUser);
-        console.log(this.state.loggedIn);
-    }
-
     checkUser() {
         var local = localStorage.getItem('notchUser');
-        console.log('local user: ' + local);
         if (local != null && local != 'null' && local != undefined) {
             // this.setState({ user: local });
             this.props.setUser(local);
@@ -80,7 +73,6 @@ class Login extends React.Component {
     }
 
     setNewUser(event) {
-        console.log('new user');
         let user = this.state.newUser;
         user[event.target.name] = event.target.value;
         this.setState({
@@ -98,11 +90,8 @@ class Login extends React.Component {
             // Make the HTTP request:
             axios.post('/existinguser', existingUser).then(data => {
                 // Read the result field from the JSON response.
-                console.log(data.data);
-                console.log('existing login response');
                 let result = data.data;
                 if (result == 'success') {
-                    console.log('logging in');
                     this.loggedIn(existingUser.username);
                 } else {
                     this.setState({ invalidUser: true })
@@ -120,7 +109,6 @@ class Login extends React.Component {
             // Make the HTTP request:
             axios.post('/newuser', newUser).then(data => {
                 // Read the result field from the JSON response.
-                console.log('new login response');
                 let result = data.data;
                 if (result == 'success') {
                     this.loggedIn(newUser.username);
@@ -132,7 +120,6 @@ class Login extends React.Component {
     }
 
     loggedIn(user) {
-        console.log('received login');
         localStorage.setItem('notchUser', user);
         this.checkUser();
 

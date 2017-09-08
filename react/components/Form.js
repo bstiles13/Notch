@@ -39,14 +39,11 @@ class Form extends React.Component {
             summary: this.props.summary
         }
         if (notch.user == null || notch.user === '' || notch.user == undefined) {
-            console.log('no user');
-            console.log(notch);
             this.setState({
                 invalidUser: true
             })
         } else if (notch.category != '' && notch.place != '' && notch.headline != '' && notch.summary != '') {
             axios.post('/newnotch', notch).then(data => {
-                console.log(data.data);
                 this.setState({
                     success: true
                 })

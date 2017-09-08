@@ -16,11 +16,6 @@ class Profile extends React.Component {
 
     componentDidMount() {
         this.checkUser();
-        console.log(this.state);
-    }
-
-    componentDidUpdate() {
-        console.log(this.state);
     }
 
     checkUser() {
@@ -36,8 +31,6 @@ class Profile extends React.Component {
         // return (<div>Test</div>)
         if (this.state.loggedIn) {
             axios.post('/usernotches', { user: this.state.user }).then(data => {
-                console.log('User has notches');
-                console.log(data.data);
                 let notches = data.data;
                 this.setState({ userNotches: notches });
             })
@@ -45,7 +38,6 @@ class Profile extends React.Component {
     }
 
     deleteNotch(event) {
-        console.log(event.target.value);
         axios.post('/deletenotch', {id: event.target.value}).then(data => {
             let status = data.data;
             if (status == 'success') {
@@ -56,7 +48,6 @@ class Profile extends React.Component {
 
     showNotches() {
         let notches = this.state.userNotches;
-        console.log(notches);
         if (notches.length === 0) {
             return (<li>No notches</li>)
         } else {
