@@ -29397,7 +29397,7 @@ var Map = function (_React$Component) {
                 accessToken: 'pk.eyJ1IjoiYnN0aWxlczEzIiwiYSI6ImNqNHZ4bnMweDBzN20ycXA4MGJodXltcjIifQ.mA6saUO0Ucgx9aOWYRaxqQ'
             }).addTo(mymap);
             marker = L.marker([lat, lng]).addTo(mymap);
-            var popup = L.popup().setLatLng([lat, lng]).setContent("Double click to move me!").openOn(mymap);
+            var popup = L.popup().setLatLng([lat, lng]).setContent("Double click to move your <br/><img id='person-icon' src='http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png' /> and share an experience!").openOn(mymap);
             mymap.on('dblclick', this.onMapClick);
         }
     }, {

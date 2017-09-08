@@ -42,7 +42,7 @@ class Map extends React.Component {
         marker = L.marker([lat, lng]).addTo(mymap);
         var popup = L.popup()
             .setLatLng([lat, lng])
-            .setContent("Double click to move me!")
+            .setContent("Double click to move your <br/><img id='person-icon' src='http://www.clker.com/cliparts/3/u/P/P/q/W/walking-icon-hi.png' /> and share an experience!")
             .openOn(mymap);
         mymap.on('dblclick', this.onMapClick);
     }
