@@ -80,7 +80,7 @@ class Form extends React.Component {
     render() {
         return (
             <div id='form'>
-                <h2>Add a notch</h2>
+                <h2>Add a Notch</h2>
                 <div className="form-group">
                     <label htmlFor="exampleSelect1">Category</label>
                     <select className="form-control" id="exampleSelect1" name="newCategory" onChange={this.props.setNotch}>
@@ -106,7 +106,7 @@ class Form extends React.Component {
                 <br />
                 {this.error('invalidUser')}
                 {this.error('invalidText')}                
-                <button type="submit" className="btn btn-primary" onClick={this.newNotch}>Submit</button>{this.success()}
+                <button type="submit" className="btn btn-primary" onClick={this.newNotch}>Create</button>{this.success()}
             </div>
         )
     }

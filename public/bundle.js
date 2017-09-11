@@ -29660,7 +29660,7 @@ var Form = function (_React$Component) {
                 _react2.default.createElement(
                     'h2',
                     null,
-                    'Add a notch'
+                    'Add a Notch'
                 ),
                 _react2.default.createElement(
                     'div',
@@ -29727,7 +29727,7 @@ var Form = function (_React$Component) {
                 _react2.default.createElement(
                     'button',
                     { type: 'submit', className: 'btn btn-primary', onClick: this.newNotch },
-                    'Submit'
+                    'Create'
                 ),
                 this.success()
             );
