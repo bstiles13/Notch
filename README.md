@@ -5,7 +5,7 @@ The app is inspired by an unmapped hike to "Lake Xanadu" near Nederland, Colorad
 Personal journal meets Google. Notch is a single-page app designed to save, map, and share memories ("notches" on the belt) and inspire users to make more. React, Sass and Leaflet drive the frontend. Node, MongoDB, bcrypt and Google Places API handle the backend.
 
 ## Map
-Map displays user-made Notches within 100 miles of your marker. You may move your marker at any time by double-clicking anywhere on the map. Notches are color-coordinated by category.
+Map displays user-made Notches within 100 miles of your marker. You may move your marker at any time by double-clicking a location on the map. Notches are color-coordinated by category. Categories and color keys are displayd on the left sidebar.
 
 ![map](https://github.com/bstiles13/Notch/blob/master/public/assets/images/screenshots/intro.png)
 
