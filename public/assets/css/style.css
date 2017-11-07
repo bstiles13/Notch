@@ -135,3 +135,8 @@ html, body {
   font-size: 12px;
   min-width: 150px;
   max-width: 500px; }
+
+.signature {
+  display: flex;
+  justify-content: space-between;
+}
